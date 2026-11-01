@@ -1,0 +1,10 @@
+# Per-user pack contents are never part of this repository.
+/personal/
+
+# Local Python/test and editor outputs.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.DS_Store

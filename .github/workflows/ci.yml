@@ -1,0 +1,16 @@
+name: pack checks
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  packs:
+    name: pack checks (scaffold)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Placeholder until pack checks are relocated
+        run: |
+          echo "Pack CI scaffold is active. Add focused pack tests and manifest/import checks as packs move here."
