@@ -82,7 +82,9 @@ def test_install_each_pack(pack_id, pack_test_root):
                               env=env, cwd=REPO).stdout)
     assert any(row.get("id") == pack_id and Path(row.get("root", "/")).resolve() == installed.resolve()
                for row in _rows(listing)), f"{pack_id} not discovered from selected root: {listing!r}"
-    tests = installed / "tests"
+    tests = REPO / "tests" / "packs" / pack_id
     assert tests.is_dir() and any(tests.rglob("test_*.py")), f"No pack-owned tests for {pack_id}"
+    env["ASTRID_PACKS_PATH"] = str(packs)
+    env["ASTRID_INSTALLED_PACK_ROOT"] = str(installed)
     _run([str(python), "-m", "pytest", "--collect-only", "-q", "-p", "no:cacheprovider",
           str(tests)], env=env, cwd=REPO)

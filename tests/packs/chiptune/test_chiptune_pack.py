@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import wave
 import zipfile
@@ -17,7 +18,7 @@ from astrid.packs.chiptune.actions.compose import run as compose_run
 from astrid.packs.chiptune.actions.sfx import run as sfx_run
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-PACK_ROOT = REPO_ROOT / "astrid" / "packs" / "chiptune"
+PACK_ROOT = Path(os.environ.get("ASTRID_INSTALLED_PACK_ROOT", REPO_ROOT / "chiptune"))
 SR = 48_000
 SFX_KINDS = ("stamp", "flip", "blip", "whoosh", "chime", "error", "coin", "typewriter_tick", "wipe", "thud")
 KEYWORD = re.compile(r"^[a-z0-9][a-z0-9_-]*$")

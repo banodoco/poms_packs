@@ -10,7 +10,6 @@ poms_packs/
 │   ├── actions/
 │   ├── shared/
 │   ├── resources/       # when needed
-│   └── tests/           # pack-owned tests
 └── .github/workflows/   # repository CI
 ```
 
@@ -18,9 +17,8 @@ The folder basename and `pack.yaml`'s `id` must match. The Python import
 identity is `astrid.packs.<pack-id>`; packs are not installed as separate
 Python distributions. A pack imports its own modules through that identity,
 uses public Astrid APIs, and declares other pack dependencies in
-`dependencies.packs`. Keep pack-specific tests and fixtures in the pack;
-cross-pack integration tests belong under repository-level
-`tests/integration/`.
+`dependencies.packs`. Pack-specific development tests live under `tests/packs/<pack-id>/`;
+cross-pack integration tests belong under `tests/integration/`.
 
 ## PIN
 
@@ -70,4 +68,4 @@ ASTRID_AGENT_PYTHON=/path/to/python /path/to/python -m pytest -q \
 ```
 
 This source-checkout smoke is separate from the final installed-wheel journey.
-Missing packs, dependencies, or pack-owned tests fail the corresponding case.
+Missing packs, dependencies, or pack-specific tests fail the corresponding case.
