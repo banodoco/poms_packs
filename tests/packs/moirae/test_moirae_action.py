@@ -46,3 +46,32 @@ def test_failed_renderer_propagates_status_without_result(monkeypatch, tmp_path)
     assert action.main([str(tmp_path / "screenplay.yaml"), "-o", str(tmp_path / "render")]) == 7
     assert not (tmp_path / "manifest.json").exists()
     assert not (tmp_path / "render").exists()
+
+
+def test_selected_installed_pack_is_visible_to_agent_index():
+    """The real discovery surfaces must use the selected installed collection."""
+    import subprocess
+
+    root = Path(os.environ["ASTRID_INSTALLED_PACK_ROOT"]).resolve()
+    assert (root / "PIN").is_file()
+    env = os.environ.copy()
+    env["ASTRID_PACKS_PATH"] = str(root.parent)
+    binary = os.environ["ASTRID_AGENT_BIN"]
+    index = subprocess.run([binary, "packs", "agent-index", "--pack-id", "moirae", "--json"],
+                           env=env, text=True, capture_output=True, check=True)
+    entry = json.loads(index.stdout)
+    assert entry is not None, "agent-index omitted selected installed moirae"
+    assert entry["pack_id"] == "moirae"
+    assert "moirae.moirae" in entry["normal_entrypoints"]
+
+
+def test_selected_installed_pack_skill_role():
+    import subprocess
+
+    root = Path(os.environ["ASTRID_INSTALLED_PACK_ROOT"]).resolve()
+    env = os.environ.copy()
+    env["ASTRID_PACKS_PATH"] = str(root.parent)
+    result = subprocess.run([os.environ["ASTRID_AGENT_BIN"], "skills", "list", "--json"],
+                            env=env, text=True, capture_output=True, check=True)
+    skills = json.loads(result.stdout)["packs"]
+    assert any(row["pack_id"] == "moirae" and row["role"] == "main" for row in skills)
