@@ -7,11 +7,9 @@ top-level directory named for its pack id:
 poms_packs/
 ├── <pack-id>/
 │   ├── pack.yaml
-│   ├── PIN
 │   ├── actions/
 │   ├── shared/
 │   ├── resources/       # when needed
-│   └── tests/           # pack-owned tests
 └── .github/workflows/   # repository CI
 ```
 
@@ -19,14 +17,13 @@ The folder basename and `pack.yaml`'s `id` must match. The Python import
 identity is `astrid.packs.<pack-id>`; packs are not installed as separate
 Python distributions. A pack imports its own modules through that identity,
 uses public Astrid APIs, and declares other pack dependencies in
-`dependencies.packs`. Keep pack-specific tests and fixtures in the pack;
-cross-pack integration tests belong under repository-level
-`tests/integration/`.
+`dependencies.packs`. Pack-specific development tests live under `tests/packs/<pack-id>/`;
+cross-pack integration tests belong under `tests/integration/`.
 
 ## PIN
 
-Every pack has a root-level `PIN` containing one newline-terminated JSON
-object. It records install provenance and is distinct from the Git tree id.
+The installer writes a root-level `PIN` in each installed copy containing one
+newline-terminated JSON object. Source packs in this repository do not commit PIN files. It records install provenance and is distinct from the Git tree id.
 The `digest` is the `pack-tree-v1` source digest; the root `PIN` itself is
 excluded from that digest. Never put credentials or other secrets in a PIN.
 
@@ -54,3 +51,21 @@ entry point. It is intentionally a placeholder while the pack folders and
 their focused checks are being moved here. Add each pack's focused tests and
 the shared manifest/import checks as those checks become available; do not
 replace them with a full-suite run.
+
+## Installation proof
+
+The integration test uses the real `astrid packs add` transaction against this
+repository's committed HEAD in an isolated home and selected collection root.
+Run it with `ASTRID_AGENT_BIN` pointing to the Agent executable and
+`ASTRID_AGENT_PYTHON` to the Python environment with its locked dependencies.
+The Agent must no longer ship the moved packs, and the host must provision the
+required locked dependencies. For example:
+
+```sh
+ASTRID_POMS_ROOT="$PWD" ASTRID_AGENT_BIN=/path/to/astrid \
+ASTRID_AGENT_PYTHON=/path/to/python /path/to/python -m pytest -q \
+  tests/integration/test_install_each_pack.py
+```
+
+This source-checkout smoke is separate from the final installed-wheel journey.
+Missing packs, dependencies, or pack-specific tests fail the corresponding case.
