@@ -9,7 +9,7 @@ from typing import Any
 import pytest
 from PIL import Image
 
-from astrid.core.contracts.errors import AstridError
+from astrid.pack_api import AstridError
 from astrid.packs.understanding.actions.visual_understand import run as visual_understand
 
 
