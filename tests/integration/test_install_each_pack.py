@@ -46,13 +46,9 @@ def _rows(value):
             yield from _rows(child)
 
 
-@pytest.mark.parametrize("pack_id", PACK_IDS)
-def test_install_each_pack(pack_id, pack_test_root):
-    source = REPO / pack_id
-    assert (source / "pack.yaml").is_file(), f"Pack has not yet been migrated: {pack_id}"
-    assert not (source / "PIN").exists(), "PIN belongs to the installed copy"
+def _install_chain(pack_id, pack_test_root):
+    """Install pack_id and its dependencies.packs (depth first) from this checkout into a fresh home and packs root."""
     binary = Path(os.environ["ASTRID_AGENT_BIN"]).resolve()
-    python = Path(os.environ.get("ASTRID_AGENT_PYTHON", sys.executable)).absolute()
     revision = _run(["git", "rev-parse", "HEAD"], env=os.environ.copy(), cwd=REPO).stdout.strip()
     assert len(revision) == 40
     home, temp, packs = (pack_test_root / name for name in ("home", "tmp", "packs"))
@@ -81,6 +77,16 @@ def test_install_each_pack(pack_id, pack_test_root):
         installed_ids.add(current)
 
     install(pack_id)
+    return binary, revision, packs, env
+
+
+@pytest.mark.parametrize("pack_id", PACK_IDS)
+def test_install_each_pack(pack_id, pack_test_root):
+    """Installing the pack from this checkout writes its PIN and the pack is discovered from the selected root."""
+    source = REPO / pack_id
+    assert (source / "pack.yaml").is_file(), f"Pack has not yet been migrated: {pack_id}"
+    assert not (source / "PIN").exists(), "PIN belongs to the installed copy"
+    binary, revision, packs, env = _install_chain(pack_id, pack_test_root)
     installed = packs / pack_id
     assert (installed / "pack.yaml").is_file()
     pin = json.loads((installed / "PIN").read_text())
@@ -89,12 +95,18 @@ def test_install_each_pack(pack_id, pack_test_root):
                               env=env, cwd=REPO).stdout)
     assert any(row.get("id") == pack_id and Path(row.get("root", "/")).resolve() == installed.resolve()
                for row in _rows(listing)), f"{pack_id} not discovered from selected root: {listing!r}"
+
+
+@pytest.mark.parametrize("pack_id", PACK_IDS)
+def test_pack_tests_collect(pack_id, pack_test_root):
+    """The pack's own tests (tests/<id>) collect with no errors against the installed pack."""
     tests = REPO / "tests" / pack_id
     assert tests.is_dir() and any(tests.rglob("test_*.py")), f"No pack-owned tests for {pack_id}"
+    _binary, _revision, packs, env = _install_chain(pack_id, pack_test_root)
     env["ASTRID_PACKS_PATH"] = str(packs)
-    env["ASTRID_INSTALLED_PACK_ROOT"] = str(installed)
-    _run([str(python), "-m", "pytest", "--collect-only", "-q", "-p", "no:cacheprovider",
-          str(tests)], env=env, cwd=REPO)
+    env["ASTRID_INSTALLED_PACK_ROOT"] = str(packs / pack_id)
+    _run([str(Path(os.environ.get("ASTRID_AGENT_PYTHON", sys.executable)).absolute()), "-m", "pytest",
+          "--collect-only", "-q", "-p", "no:cacheprovider", str(tests)], env=env, cwd=REPO)
 
 
 def test_deferred_packs_are_named_and_still_present():
