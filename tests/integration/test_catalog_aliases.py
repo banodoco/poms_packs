@@ -9,7 +9,7 @@ from types import SimpleNamespace
 import pytest
 
 os.environ.setdefault("ASTRID_INTERNAL_INVOCATION", "1")
-from astrid.core.generation.backends.fal import FalBackend
+from astrid.pack_api import FalBackend
 from astrid.packs.fal.actions.h3_video import run as h3
 from astrid.packs.fal.actions.fal_foley import run as foley
 from astrid.packs.seedance_local.actions.reference_video import run as seedance

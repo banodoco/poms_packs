@@ -19,9 +19,9 @@ from pathlib import Path
 import pytest
 
 from astrid.core.experiments.state import (
-    init_experiment_review_state,
     make_initial_experiment_review_state,
 )
+from astrid.pack_api import init_experiment_review_state
 from astrid.packs.editorial.actions.human_review.run import (
     _parse_mounts,
     make_handler_class,

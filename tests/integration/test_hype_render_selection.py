@@ -5,7 +5,8 @@ from __future__ import annotations
 from pathlib import Path
 import wave
 
-from astrid.core.execution.executor.registry import ExecutorRegistry, load_default_registry
+from astrid.pack_api import load_default_registry
+from astrid.core.execution.executor.registry import ExecutorRegistry
 from astrid.packs.video_editing.actions.hype import entrypoint as hype
 
 

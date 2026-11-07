@@ -14,10 +14,9 @@ from PIL import Image, ImageDraw
 from astrid.core.timeline.cuts import (
     cut_sample_time,
     find_cut,
-    occurrences_from_bundle,
     occurrences_from_snapshot,
-    picture_cuts,
 )
+from astrid.pack_api import occurrences_from_bundle, picture_cuts
 from astrid.packs.rendering.actions.timeline_visualize import composed_frame
 from astrid.packs.rendering.actions.timeline_visualize.filmstrip_cards import plan_filmstrip
 from astrid.packs.rendering.actions.timeline_visualize.filmstrip_execution import execute_filmstrip

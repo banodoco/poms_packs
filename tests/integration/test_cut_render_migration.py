@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 from astrid.core import timeline
-from astrid.core.contracts.errors import AstridError
+from astrid.pack_api import AstridError
 from astrid.packs.training.actions.pool_merge import run as pool_merge
 from astrid.packs.video_editing.actions.cut import resume as cut_resume
 from astrid.packs.video_editing.actions.cut import run as cut_run
