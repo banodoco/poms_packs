@@ -19,14 +19,8 @@ PACK_IDS = (
     "blender", "capture", "foley", "media", "moirae", "discord_local",
     "seedance_local", "chiptune", "music", "editorial",
     "iteration", "stream_content", "video_editing", "astrid_motion",
-    "fal", "pixel", "typed_timeline", "understanding",
+    "fal", "pixel", "typed_timeline", "understanding", "youtube",
 )
-# A named, reasoned deferral from the install gate (lead ruling, 19:12Z). The pack stays in the repo with its tests.
-# Its upload action imports the private banodoco_social package (a sibling workspace checkout), which the strict
-# import scan refuses for an ordinary install. Unblock: publish banodoco-social, or rewrite upload against its HTTP endpoint.
-DEFERRED = {
-    "youtube": "upload imports the private banodoco_social package; the import scan refuses it (see the PK-16 ledger)",
-}
 REPO = Path(os.environ.get("ASTRID_POMS_ROOT", Path(__file__).resolve().parents[2])).resolve()
 
 
@@ -108,11 +102,3 @@ def test_pack_tests_collect(pack_id, pack_test_root):
     _run([str(Path(os.environ.get("ASTRID_AGENT_PYTHON", sys.executable)).absolute()), "-m", "pytest",
           "--collect-only", "-q", "-p", "no:cacheprovider", str(tests)], env=env, cwd=REPO)
 
-
-def test_deferred_packs_are_named_and_still_present():
-    """The gate is every pack in PACK_IDS plus the named deferrals; nothing is silently skipped."""
-    assert set(PACK_IDS).isdisjoint(DEFERRED)
-    for pack_id, reason in DEFERRED.items():
-        assert reason.strip(), f"deferral of {pack_id} needs a reason"
-        assert (REPO / pack_id / "pack.yaml").is_file(), f"deferred pack {pack_id} must stay in the repo"
-        assert (REPO / "tests" / pack_id).is_dir(), f"deferred pack {pack_id} keeps its tests"

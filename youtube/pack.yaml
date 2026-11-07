@@ -10,46 +10,29 @@ support: core
 visibility: visible
 permissions:
   - id: subprocess
-    reason: Runs yt-dlp for audio acquisition and upload scripts.
+    reason: Runs yt-dlp for audio acquisition.
   - id: network
-    reason: Downloads YouTube audio and uploads via Zapier social integration.
+    reason: Downloads YouTube media through the host-managed youtube-media broker.
   - id: project_files
-    reason: Reads video files for upload and writes downloaded audio.
-  - id: environment
-    reason: Reads YouTube and social API credentials.
-description: Acquire YouTube media (audio MP3 / video MP4 via yt-dlp) and publish finished videos to YouTube.
+    reason: Writes downloaded audio and video.
+description: Acquire YouTube media (audio MP3 / video MP4 via yt-dlp).
 keywords:
 - youtube
 - yt-dlp
 - download
 - audio
-- upload
-- publish
 - mp3
-- zapier
 capabilities:
 - download_youtube_audio
 - download_youtube_video
-- upload_youtube_video
 agent:
-  purpose: Choose this pack to fetch a YouTube video's audio or video (by search query or URL) for downstream use, or to publish a finished video to YouTube.
-  do_not_use_for: Do not use to edit or render the video itself (use video_editing) or to analyze its content (use understanding); this pack only ingests and publishes.
+  purpose: Choose this pack to fetch a YouTube video's audio or video (by search query or URL) for downstream use.
+  do_not_use_for: Do not use to edit, render, or analyze the video itself (use video_editing or understanding); this pack only ingests.
   normal_entrypoints:
   - youtube.youtube_audio
-  - youtube.upload
 documentation:
   kind: skill
   path: docs/SKILL.md
-extensions:
-  astrid:
-    output_result_exemptions:
-      actions:
-        upload:
-          reasons:
-          - paid
-          - external-escape-hatch
-          note: Uploads finished video to YouTube via Zapier integration requiring paid
-            API access.
 actions:
   youtube_audio:
     name: YouTube Audio
@@ -146,81 +129,6 @@ actions:
         path: actions/youtube_audio/run.py
       - kind: documentation
         path: actions/youtube_audio/STAGE.md
-  upload:
-    name: Upload to YouTube
-    version: "1.0"
-    short_description: Upload a finished video to YouTube via the shared banodoco-social Zapier integration.
-    description: Publishes a reachable video URL through the shared banodoco-social YouTube publisher and returns its JSON result.
-    keywords:
-      - youtube
-      - upload
-      - video
-      - publish
-      - social
-      - zapier
-    invocation:
-      kind: python
-      path: actions/upload/run.py
-      function: run
-    inputs:
-      - name: video_url
-        type: string
-        required: true
-        description: Reachable HTTP(S) URL for the finished video.
-      - name: title
-        type: string
-        required: true
-        description: YouTube video title.
-      - name: description
-        type: string
-        required: true
-        description: YouTube video description.
-      - name: tag
-        type: string
-        required: false
-        description: YouTube tag; may be repeated or supplied as a list.
-      - name: tags
-        type: string
-        required: false
-        description: Comma-separated YouTube tags; may be repeated or supplied as a list.
-      - name: privacy_status
-        type: string
-        required: false
-        default: private
-        description: private, unlisted, or public.
-      - name: playlist_id
-        type: string
-        required: false
-        description: Optional YouTube playlist ID.
-      - name: made_for_kids
-        type: boolean
-        required: false
-        default: false
-        description: Mark the video as made for kids.
-    outputs:
-      type: object
-      description: The JSON result returned by the shared YouTube publisher; no file artifact is produced.
-    isolation:
-      mode: subprocess
-    metadata:
-      backend: banodoco-social
-      callable_module: astrid.packs.youtube.actions.upload.src.social_publish
-      callable_name: publish_youtube_video
-      requires_reachable_video_url: true
-      runtime_entrypoint: run
-      runtime_file: actions/upload/run.py
-      runtime_module: astrid.packs.youtube.actions.upload.run
-    resources:
-      - kind: implementation
-        path: actions/upload/__init__.py
-      - kind: implementation
-        path: actions/upload/run.py
-      - kind: implementation
-        path: actions/upload/src/__init__.py
-      - kind: implementation
-        path: actions/upload/src/social_publish.py
-      - kind: documentation
-        path: actions/upload/STAGE.md
 resources:
   - kind: documentation
     path: docs/SKILL.md
