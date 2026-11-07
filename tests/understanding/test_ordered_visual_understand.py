@@ -10,7 +10,7 @@ import pytest
 from PIL import Image
 
 from astrid.pack_api import AstridError
-from astrid.packs.understanding.actions.visual_understand import run as visual_understand
+from astrid.packs.understanding.actions.visual_understand.src import visual_understand
 
 
 ANSWER_SCHEMA = {

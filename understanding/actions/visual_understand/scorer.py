@@ -11,7 +11,7 @@ from decimal import Decimal, InvalidOperation
 from typing import Any
 
 from astrid.pack_api import AstridError
-from .run import OrderedImageEvidence, _parse_ordered_answers
+from .src.visual_understand import OrderedImageEvidence, _parse_ordered_answers
 
 SESSION_PASS_THRESHOLD = 0.95
 REQUIRED_SESSION_COUNT = 3

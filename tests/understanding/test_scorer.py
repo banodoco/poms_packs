@@ -1,4 +1,4 @@
-from astrid.packs.understanding.actions.visual_understand.run import OrderedImageEvidence
+from astrid.packs.understanding.actions.visual_understand.src.visual_understand import OrderedImageEvidence
 from astrid.packs.understanding.actions.visual_understand.scorer import (
     AnswerSpec,
     aggregate_sessions,
