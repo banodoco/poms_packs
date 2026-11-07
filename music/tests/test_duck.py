@@ -12,9 +12,9 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from astrid.core.contracts.errors import AstridError
-from astrid.core.foundation.hash import sha256_file
-from astrid.core.pack.entrypoint import canonical_runtime_entrypoint
+from astrid.pack_api import AstridError
+from astrid.pack_api import sha256_file
+from astrid.pack_api import canonical_runtime_entrypoint
 from astrid.packs.music.actions.duck._audio import (
     integrated,
     load_audio,
