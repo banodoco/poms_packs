@@ -9,8 +9,8 @@ from typing import Any
 
 import pytest
 
-from astrid.packs.iteration.actions.experiment_import.run import main as import_main
-from astrid.packs.iteration.actions.experiment_prepare.run import (
+from astrid.packs.iteration.actions.experiment_import.src.experiment_import import main as import_main
+from astrid.packs.iteration.actions.experiment_prepare.src.experiment_prepare import (
     main as prepare_main,
 )
 
@@ -482,7 +482,7 @@ class TestSlugCollisionResolution:
 
 # ── Gate-G3: non-destructive COW materialization ───────────────────────────
 
-from astrid.packs.iteration.actions.experiment_import import run as import_run  # noqa: E402
+from astrid.packs.iteration.actions.experiment_import.src import experiment_import as import_run  # noqa: E402
 
 
 class TestCloneNonDestructive:

@@ -6,10 +6,10 @@ import hashlib
 import json
 from pathlib import Path
 
-from astrid.packs.iteration.actions.experiment_prepare.run import (
+from astrid.packs.iteration.actions.experiment_prepare.src.experiment_prepare import (
     main as prepare_main,
 )
-from astrid.packs.iteration.actions.experiment_review.run import (
+from astrid.packs.iteration.actions.experiment_review.src.experiment_review import (
     _build_html,
     _esc,
     _is_audio,
@@ -17,7 +17,7 @@ from astrid.packs.iteration.actions.experiment_review.run import (
     _is_video,
     _render_media_tag,
 )
-from astrid.packs.iteration.actions.experiment_review.run import (
+from astrid.packs.iteration.actions.experiment_review.src.experiment_review import (
     main as review_main,
 )
 
