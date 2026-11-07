@@ -10,6 +10,7 @@ dependencies:
   packs:
     - editorial
     - iteration
+    - rendering
 status: active
 domain: media
 stability: stable
