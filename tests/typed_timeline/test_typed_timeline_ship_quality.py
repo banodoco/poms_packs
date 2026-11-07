@@ -19,7 +19,7 @@ from astrid.packs.typed_timeline.common import load_admitted_rows
 from astrid.packs.typed_timeline.mapper import TypedDataTimelineMapper
 from astrid.packs.typed_timeline.prompts import prompts_for_manifest
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[2]
 RUNAWAY_RELEASE_FIXTURE_ROOT = Path(__file__).resolve().parent / "fixtures" / "runaway_release"
 MANIFEST = RUNAWAY_RELEASE_FIXTURE_ROOT / "timing-manifest.json"
 AUDIO_REACTIVE = RUNAWAY_RELEASE_FIXTURE_ROOT / "audio-reactive-v1.json"
