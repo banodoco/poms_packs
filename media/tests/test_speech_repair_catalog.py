@@ -69,7 +69,7 @@ def test_missing_speech_url_refuses_before_download(tmp_path, monkeypatch, name)
 
 @pytest.mark.parametrize("name", ["lava-sr", "deepfilternet3"])
 def test_non_https_speech_output_refuses_before_network(tmp_path, monkeypatch, name):
-    from astrid.core.contracts.errors import AstridValueError
+    from astrid.pack_api import AstridValueError
     source = tmp_path / "input.wav"
     source.write_bytes(b"speech")
     monkeypatch.setattr(fal, "default_client", Client)
