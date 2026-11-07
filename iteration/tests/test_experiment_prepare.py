@@ -589,7 +589,7 @@ class TestExperimentPrepareRegression:
 
 class TestGateG3ManifestPin:
     def test_tampered_source_manifest_fails_closed(self, tmp_path):
-        from astrid.core.foundation.hash import sha256_file
+        from astrid.pack_api import sha256_file
 
         runs_dir = tmp_path / "runs"
         run_id = "00123456789ABCDEFGHJKMNPQR"

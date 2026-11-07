@@ -595,7 +595,7 @@ class TestMaterializationTruthfulness:
             },
         )
         # Learn the synthetic run_id from a dry derivation so we can pre-seed dst.
-        from astrid.core.experiments.ids import derive_ulid
+        from astrid.pack_api import derive_ulid
         run_id = derive_ulid(f"{root.name}/sub-1")
         out = tmp_path / "out"
         dst = out / "runs" / run_id / "video.mp4"
