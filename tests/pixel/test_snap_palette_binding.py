@@ -10,7 +10,7 @@ import yaml
 from astrid.core.contracts.binding import expand_command
 from astrid.packs.pixel.actions.snap import run as snap_run
 
-PACK_YAML = Path(__file__).resolve().parents[3] / "astrid" / "packs" / "pixel" / "pack.yaml"
+PACK_YAML = Path(__file__).resolve().parents[2] / "pixel" / "pack.yaml"
 PALETTE = ["#25241F", "#ED6B23", "#FFFFFF"]
 
 

@@ -11,7 +11,7 @@ import pytest
 from astrid.pack_api import AstridError
 from astrid.core.pack.canonical import validate_canonical_pack
 
-PACK_ROOT = Path(__file__).resolve().parents[3] / "astrid" / "packs" / "fal"
+PACK_ROOT = Path(__file__).resolve().parents[2] / "fal"
 
 
 class _FakeClient:

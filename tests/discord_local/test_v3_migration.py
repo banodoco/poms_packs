@@ -8,7 +8,7 @@ import pytest
 from astrid.core.pack.canonical import validate_canonical_pack
 
 
-PACK_ROOT = Path(__file__).resolve().parents[3] / "astrid" / "packs" / "discord_local"
+PACK_ROOT = Path(__file__).resolve().parents[2] / "discord_local"
 
 
 def test_discord_local_pack_uses_v3_action_and_one_authored_skill() -> None:

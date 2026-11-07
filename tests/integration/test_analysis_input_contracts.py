@@ -13,7 +13,7 @@ from astrid.packs.video_editing.actions.hype.config import STEP_ORDER
 
 
 def test_graph_does_not_schedule_video_cut_and_hype_order_is_preserved():
-    manifest = yaml.safe_load((Path(__file__).resolve().parents[3] / "editorial" / "pack.yaml").read_text())
+    manifest = yaml.safe_load((Path(__file__).resolve().parents[2] / "editorial" / "pack.yaml").read_text())
     for name in ("refine", "editor_review", "validate"):
         assert "video_editing.cut" not in manifest["actions"][name]["graph"]["depends_on"]
     assert [step for step in STEP_ORDER if step in {"cut", "refine", "render", "editor_review", "validate"}] == [

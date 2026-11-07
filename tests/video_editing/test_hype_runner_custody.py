@@ -17,7 +17,7 @@ def _callback(args):
 
 
 def test_hype_resources_and_shared_callback_worker(tmp_path):
-    pack_root = Path(__file__).resolve().parents[3] / "video_editing"
+    pack_root = Path(__file__).resolve().parents[2] / "video_editing"
     manifest = yaml.safe_load((pack_root / "pack.yaml").read_text())
     hype = manifest["actions"]["hype"]
     for resource in hype["resources"]:

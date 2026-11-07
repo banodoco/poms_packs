@@ -132,7 +132,7 @@ def test_strip_v3_repeat_mapping_binds_ordered_file_frames_to_real_parser(tmp_pa
     from astrid.core.execution.executor.actions import action_executor_definition
     from astrid.core.contracts.binding import expand_command
 
-    root = Path(__file__).resolve().parents[3] / 'astrid' / 'packs' / 'pixel'
+    root = Path(__file__).resolve().parents[2] / 'pixel'
     declaration = yaml.safe_load((root / 'pack.yaml').read_text(encoding='utf-8'))
     admitted = load_pack_manifest(root / 'pack.yaml')
     definition = action_executor_definition(admitted, 'strip', declaration['actions']['strip'])

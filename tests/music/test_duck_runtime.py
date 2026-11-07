@@ -21,7 +21,7 @@ from astrid.sdk import AstridClient, observe_task_invocation
 from astrid.sdk.timeline import Checkout
 
 pytestmark = pytest.mark.integration
-PACK = Path(__file__).resolve().parents[3] / "astrid" / "packs" / "music"
+PACK = Path(__file__).resolve().parents[2] / "music"
 
 
 def _write_audio(path: Path, *, voice: bool = False) -> Path:

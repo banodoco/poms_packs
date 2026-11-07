@@ -11,7 +11,7 @@ from astrid.packs.video_editing.actions.hype import entrypoint as hype
 
 
 def _args(tmp_path: Path):
-    video = Path(__file__).resolve().parents[2] / "fixtures" / "reshape" / "hype_regression" / "main.mp4"
+    video = Path(__file__).resolve().parents[1] / "fixtures" / "reshape" / "hype_regression" / "main.mp4"
     brief = tmp_path / "brief.md"
     brief.write_text("A short launch film.\n", encoding="utf-8")
     audio = tmp_path / "voice.wav"

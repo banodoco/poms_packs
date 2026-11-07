@@ -14,7 +14,7 @@ from astrid.core.pack.canonical import validate_canonical_pack
 from astrid.packs.fal.actions.h3_video import run
 
 
-PACK_ROOT = Path(__file__).resolve().parents[3] / "astrid" / "packs" / "fal"
+PACK_ROOT = Path(__file__).resolve().parents[2] / "fal"
 
 
 class FakeHttpClient:

@@ -20,7 +20,7 @@ from astrid.core.pack.discovery import DiscoveredPack
 from astrid.core.pack.loader import load_pack_manifest
 from astrid.packs.fal.actions.fal_foley import run
 
-PACK_ROOT = Path(__file__).resolve().parents[3] / "astrid" / "packs" / "fal"
+PACK_ROOT = Path(__file__).resolve().parents[2] / "fal"
 
 
 def _action() -> dict[str, object]:

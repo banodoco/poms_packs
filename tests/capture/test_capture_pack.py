@@ -15,7 +15,7 @@ from astrid.pack_api import AstridError
 from astrid.packs.capture.actions.web_page import run as capture_run
 
 
-PACK_ROOT = Path(__file__).resolve().parents[3] / "astrid" / "packs" / "capture"
+PACK_ROOT = Path(__file__).resolve().parents[2] / "capture"
 
 
 REMOTION = Path(__file__).resolve().parents[3] / "remotion"
