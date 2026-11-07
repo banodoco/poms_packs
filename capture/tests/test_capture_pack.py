@@ -11,7 +11,7 @@ import yaml
 
 os.environ.setdefault("ASTRID_INTERNAL_INVOCATION", "1")
 
-from astrid.core.contracts.errors import AstridError
+from astrid.pack_api import AstridError
 from astrid.packs.capture.actions.web_page import run as capture_run
 
 
