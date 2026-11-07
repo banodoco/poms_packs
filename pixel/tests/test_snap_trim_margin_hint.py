@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from astrid.core.contracts.errors import AstridError
+from astrid.pack_api import AstridError
 from astrid.packs.pixel.actions import _common as px
 
 MAGENTA = (255, 0, 255)

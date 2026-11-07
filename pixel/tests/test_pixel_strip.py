@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 from PIL import Image
 
-from astrid.core.contracts.errors import AstridError
+from astrid.pack_api import AstridError
 from astrid.packs.pixel.actions.strip import run as strip_run
 
 
