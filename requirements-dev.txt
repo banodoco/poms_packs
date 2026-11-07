@@ -1,0 +1,5 @@
+# Test-only dependencies for the repo-level pack tests (tests/<id>, tests/integration).
+# Pack directories declare only runtime requirements in pack.yaml.
+pytest
+PyYAML>=6.0
+jsonschema>=4.0
