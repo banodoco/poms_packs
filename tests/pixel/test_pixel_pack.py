@@ -14,8 +14,8 @@ from astrid.packs.pixel.actions import _common as px
 from astrid.packs.pixel.actions.cutout.src import cutout as cutout_run
 from astrid.packs.pixel.actions.snap.src import snap as snap_run
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
-PACK_ROOT = REPO_ROOT / "astrid" / "packs" / "pixel"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+PACK_ROOT = REPO_ROOT / "pixel"
 MAGENTA = (255, 0, 255)
 OUTLINE = (0x25, 0x24, 0x1F)
 BODY = (0xED, 0x6B, 0x23)

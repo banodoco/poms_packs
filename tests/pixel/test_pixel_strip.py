@@ -114,8 +114,8 @@ def test_strip_cli_writes_image_metadata_and_result_manifest(tmp_path: Path, mon
     from astrid.core.element.registry import load_default_registry
     from astrid.core.pack.loader import load_pack_manifest
 
-    repo_root = Path(__file__).resolve().parents[3]
-    admitted = tuple(load_pack_manifest(repo_root / "astrid" / "packs" / name / "pack.yaml")
+    repo_root = Path(__file__).resolve().parents[2]
+    admitted = tuple(load_pack_manifest(repo_root / name / "pack.yaml")
                      for name in ("astrid_motion", "rendering"))
     with mock.patch.object(registry_module, "discover_packs", return_value=admitted):
         registry = load_default_registry(project_root=tmp_path / "empty-project")
