@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from astrid.packs.youtube.actions.youtube_audio import run as youtube_audio
+from astrid.packs.youtube.actions.youtube_audio.src import youtube_audio
 
 
 class YoutubeAudioMainTests(unittest.TestCase):
