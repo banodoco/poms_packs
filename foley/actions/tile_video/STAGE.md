@@ -22,15 +22,6 @@ result = sdk.invoke(
 )
 ```
 
-Internal runner invocation (not a public entrypoint):
-
-```bash
-ASTRID_INTERNAL_INVOCATION=1 python3 -m astrid.packs.foley.actions.tile_video.run \
-  --video path/to/source.mp4 \
-  --out runs/tile_video/example \
-  --grid 4x4 --overlap 0.25 --trim 15
-```
-
 Manifest shape (`tiles.json`):
 
 ```jsonc

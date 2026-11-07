@@ -22,14 +22,14 @@ result = sdk.invoke(
 )
 ```
 
-## Internal runner CLI (not a public entrypoint)
+## Internal runner flags (not a public entrypoint)
 
 The flexible HTTP flags below are retained for Astrid's internal runner and
-debugging. Direct module invocation is rejected unless the internal invocation
-marker is set; public callers should use the SDK shape above.
+debugging. They are not a public invocation path; public callers use the SDK
+shape above and the runtime supplies these flags.
 
 ```
-ASTRID_INTERNAL_INVOCATION=1 python3 -m astrid.packs.editorial.actions.human_review.run \
+# runner flags, supplied by the Astrid runtime; not a command to run
   --html <path>                    # file or dir; served at /
   --data <path>                    # JSON file, served at /data.json (read-only)
   --serve /prefix=<dir>            # repeatable; direct static mount

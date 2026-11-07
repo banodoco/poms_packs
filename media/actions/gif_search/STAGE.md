@@ -47,12 +47,16 @@ result = sdk.invoke(
 )
 ```
 
-For direct runtime testing:
+For a direct test of the query alone, use the SDK:
 
-```bash
-ASTRID_INTERNAL_INVOCATION=1 python3 -m astrid.packs.media.actions.gif_search.run \
-  --query "dramatic zoom" \
-  --out runs/gifs/dramatic-zoom
+```python
+import astrid.sdk as sdk
+result = sdk.invoke(
+    "media.gif_search",
+    kind="action",
+    project="demo",
+    inputs={"query": "dramatic zoom"},
+)
 ```
 
 ## Dependencies

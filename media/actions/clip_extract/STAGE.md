@@ -57,14 +57,6 @@ with `client.tasks.list_managed_outputs(result.kernel_task_id)`; the SDK does
 not accept a caller-selected `output` path in `inputs`. See the
 [pack guide](../../docs/SKILL.md) for the complete example.
 
-For a local implementation test only, use `ASTRID_INTERNAL_INVOCATION`; this
-path accepts local file paths and is not the public SDK input contract:
-
-```bash
-ASTRID_INTERNAL_INVOCATION=1 python3 -m astrid.packs.media.actions.clip_extract.run \
-  --input source.mp4 --start 10 --dur 5 --output runs/my_clip/clip.mp4
-```
-
 ## Dependencies
 
 - ffmpeg (system binary)
