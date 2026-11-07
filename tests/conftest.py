@@ -1,16 +1,8 @@
-"""Persistent, project-local isolation for external pack installation tests."""
-from pathlib import Path
-import os
-import tempfile
-
+"""Shared fixtures for the repo-level pack tests."""
 import pytest
 
 
 @pytest.fixture
-def pack_test_root():
-    root = Path(os.environ.get(
-        "ASTRID_PACK_TEST_TMP",
-        "/mnt/work/ai/apps/astrid-work/.otto/runs/astrid-continuation-2026-11-05/tmp/b5h",
-    )).resolve()
-    root.mkdir(parents=True, exist_ok=True)
-    return Path(tempfile.mkdtemp(prefix="install-", dir=root))
+def pack_test_root(tmp_path):
+    """A fresh per-test root for installing packs (home, tmp and packs directories are created by the test)."""
+    return tmp_path
