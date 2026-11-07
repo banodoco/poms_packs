@@ -17,9 +17,9 @@ from astrid.core.timeline.cuts import find_cut
 from astrid.packs.rendering.actions.timeline_visualize.composed_frame import CaptureSceneLabels
 from astrid.packs.rendering.actions.timeline_visualize.layers import builtin
 from astrid.packs.rendering.actions.timeline_visualize.motion import model, sheet
-from tests.packs.astrid_motion import test_presenter_crop_equivalence as crop_helpers
-from tests.packs.astrid_motion.test_presenter_crop_equivalence import png_crop, public_box
-from tests.packs.astrid_motion.test_presenter_scene_capability import (
+from tests.astrid_motion import test_presenter_crop_equivalence as crop_helpers
+from tests.astrid_motion.test_presenter_crop_equivalence import png_crop, public_box
+from tests.astrid_motion.test_presenter_scene_capability import (
     presenter_query as _presenter_query,
 )
 
