@@ -12,7 +12,7 @@ import pytest
 
 os.environ.setdefault("ASTRID_INTERNAL_INVOCATION", "1")
 
-from astrid.core.contracts.errors import AstridError  # noqa: E402
+from astrid.pack_api import AstridError  # noqa: E402
 from astrid.packs.chiptune.actions import _midi  # noqa: E402
 from astrid.packs.chiptune.actions import _synth as syn  # noqa: E402
 from astrid.packs.chiptune.actions.midi import run  # noqa: E402
