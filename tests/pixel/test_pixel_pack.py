@@ -11,8 +11,8 @@ from PIL import Image
 from astrid.pack_api import AstridError
 from astrid.core.pack.validate import validate_pack
 from astrid.packs.pixel.actions import _common as px
-from astrid.packs.pixel.actions.cutout import run as cutout_run
-from astrid.packs.pixel.actions.snap import run as snap_run
+from astrid.packs.pixel.actions.cutout.src import cutout as cutout_run
+from astrid.packs.pixel.actions.snap.src import snap as snap_run
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PACK_ROOT = REPO_ROOT / "astrid" / "packs" / "pixel"
@@ -389,5 +389,5 @@ def test_every_manifest_default_parses_as_the_runtime_passes_it(name: str) -> No
     for extra in command.get("input_args", ()):
         if extra["input"] == "frame":  # strip's repeatable frames come from input_args
             argv += [extra["flag"], "a", extra["flag"], "b"]
-    parser = importlib.import_module(f"astrid.packs.pixel.actions.{name}.run").build_parser()
+    parser = importlib.import_module(f"astrid.packs.pixel.actions.{name}.src.{name}").build_parser()
     parser.parse_args(argv)

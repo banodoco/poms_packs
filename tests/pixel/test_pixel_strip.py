@@ -8,7 +8,7 @@ import pytest
 from PIL import Image
 
 from astrid.pack_api import AstridError
-from astrid.packs.pixel.actions.strip import run as strip_run
+from astrid.packs.pixel.actions.strip.src import strip as strip_run
 
 
 def _frame(width: int, height: int, colour: tuple[int, int, int]) -> np.ndarray:

@@ -10,7 +10,7 @@ from PIL import Image, ImageFilter
 from astrid.core._shared.result_manifest import harvest_staged_outputs
 from astrid.pack_api import AstridError
 from astrid.packs.pixel.actions import _common as px
-from astrid.packs.pixel.actions.sprites import run as sprites_run
+from astrid.packs.pixel.actions.sprites.src import sprites as sprites_run
 
 
 def _jittered_sheet() -> np.ndarray:
