@@ -21,7 +21,7 @@ from typing import Any
 
 import pytest
 
-from astrid.core.contracts.errors import AstridError
+from astrid.pack_api import AstridError
 from astrid.packs.blender import deploy, render_core
 
 PACK_DIR = Path(deploy.__file__).resolve().parent
