@@ -8,7 +8,7 @@ import pytest
 
 os.environ.setdefault("ASTRID_INTERNAL_INVOCATION", "1")
 from astrid.core.generation.backends import fal
-from astrid.packs.media.actions.speech_repair_lavasr import run
+from astrid.packs.media.actions.speech_repair_lavasr.src import speech_repair_lavasr as run
 
 
 class Client:
