@@ -7,7 +7,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from astrid.core.contracts.errors import AstridError
+from astrid.pack_api import AstridError
 from astrid.packs.fal.actions.sprite_upscale import upscale
 from astrid.packs.fal.actions.sprite_upscale import run as sprite_upscale_run
 

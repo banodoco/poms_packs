@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from astrid.core.contracts.errors import AstridError
+from astrid.pack_api import AstridError
 from astrid.core.pack.canonical import validate_canonical_pack
 
 PACK_ROOT = Path(__file__).resolve().parents[3] / "astrid" / "packs" / "fal"
