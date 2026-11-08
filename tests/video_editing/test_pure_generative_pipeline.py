@@ -1,3 +1,9 @@
+import os
+
+# The guarded pool_merge entrypoint refuses direct execution unless this is set.
+# Set it before any astrid import so each file runs alone, not only in the full suite.
+os.environ.setdefault("ASTRID_INTERNAL_INVOCATION", "1")
+
 import argparse
 import json
 import tempfile

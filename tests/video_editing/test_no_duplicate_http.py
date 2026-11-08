@@ -6,6 +6,12 @@ and that migrated packs (logo_ideas, fal_foley) can be dry-run without errors.
 
 from __future__ import annotations
 
+import os
+
+# Guarded entrypoints refuse direct execution unless this is set. Set it before any
+# astrid import so this file runs alone, not only in the full suite.
+os.environ.setdefault("ASTRID_INTERNAL_INVOCATION", "1")
+
 import subprocess
 import sys
 from pathlib import Path
@@ -70,6 +76,11 @@ ALLOWLIST_URLLIB = {
     # media.gif_search: GIPHY search API + GIF download through an injected
     # urllib.request.urlopen (legitimate third-party media HTTP)
     "media/actions/gif_search/run.py",
+    # PK-16 moved these implementations to src/*.py; each keeps its run.py exemption.
+    "understanding/actions/visual_understand/src/visual_understand.py",
+    "understanding/actions/audio_understand/src/audio_understand.py",
+    "editorial/actions/script_pipeline/src/script_pipeline.py",
+    "media/actions/gif_search/src/gif_search.py",
 }
 
 
@@ -80,7 +91,10 @@ def test_no_urllib_in_pack_run_py() -> None:
     packs_dir = repo_root
     violations: list[str] = []
 
-    for py_file in packs_dir.rglob("run.py"):
+    # Pack implementations live in run.py and, since PK-16, in actions/<x>/src/*.py.
+    # Scan both so a new urlopen in any src module is caught.
+    candidates = [*packs_dir.rglob("run.py"), *packs_dir.rglob("src/*.py")]
+    for py_file in candidates:
         rel = str(py_file.relative_to(repo_root))
         if rel in ALLOWLIST_URLLIB:
             continue
