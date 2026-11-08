@@ -1,8 +1,10 @@
 """Unavailable thumbnail generation is declared and fails with its stable code."""
 
 import argparse
+from pathlib import Path
 
 import pytest
+import yaml
 
 from astrid.pack_api import AstridError
 from astrid.packs.video_editing.actions.thumbnail_maker.src.thumbnail_maker import (
@@ -31,6 +33,18 @@ def test_generate_thumbnails_raises():
     with pytest.raises(AstridError) as exc_info:
         _exec_generate_thumbnails(_dummy_args())
     assert exc_info.value.code == "generation_action_unavailable"
+
+
+def test_thumbnail_action_declaration_is_shared_and_unavailable():
+    from astrid.core.generation.availability import action_availability
+
+    declaration = yaml.safe_load(
+        (Path(__file__).resolve().parents[2] / "video_editing" / "pack.yaml").read_text(encoding="utf-8")
+    )["extensions"]["astrid"]["generation_availability"]
+    record = action_availability("video_editing.thumbnail_maker")
+    assert record["available"] is False
+    assert record["error"]["code"] == "generation_action_unavailable"
+    assert declaration["actions"]["video_editing.thumbnail_maker"] == record
 
 
 def test_thumbnail_public_action_refuses_before_creating_output(tmp_path, capsys):
