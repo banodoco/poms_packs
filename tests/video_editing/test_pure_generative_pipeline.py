@@ -188,7 +188,7 @@ class PureGenerativePipelineTest(unittest.TestCase):
         timeline.save_pool(pool, pool_path)
         timeline.save_arrangement(arrangement, arrangement_path, {entry["id"] for entry in pool["entries"]})
         brief_path.write_text("Make a quote card.\n", encoding="utf-8")
-        theme_path = Path(__file__).resolve().parents[1] / "examples" / "themes" / "ados-paris-2026" / "theme.json"
+        theme_path = Path(__file__).resolve().parent / "fixtures" / "themes" / "ados-paris-2026" / "theme.json"
 
         result = cut.main(
             [

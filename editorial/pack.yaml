@@ -12,7 +12,7 @@ dependencies:
     - "referencing>=0.30"
     - "Pillow"
     - "scenedetect==0.6.4"
-    - "opencv-python-headless>=4.9.0.80,<4.10"
+    - "opencv-python-headless>=4.9.0.80,<6"
     - "PyYAML>=6.0"
   packs: [rendering]
 status: active
