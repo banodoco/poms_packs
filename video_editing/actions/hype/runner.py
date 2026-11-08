@@ -244,7 +244,7 @@ def _invalidate_downstream_sentinels(brief_out: Path) -> None:
         (brief_out / name).unlink(missing_ok=True)
 
 def _run_revise(args: argparse.Namespace, prior_arrangement: Path, editor_notes: Path) -> int:
-    from astrid.packs.video_editing.actions.hype import entrypoint as run_mod
+    from astrid.packs.video_editing.actions.hype.src import hype as run_mod
 
     from .steps import (  # late import to avoid circular dependency
         Step,
@@ -284,7 +284,7 @@ def _run_revise(args: argparse.Namespace, prior_arrangement: Path, editor_notes:
 
 
 def _run_steps_once(steps: list[Step], args: argparse.Namespace) -> int:
-    from astrid.packs.video_editing.actions.hype import entrypoint as run_mod
+    from astrid.packs.video_editing.actions.hype.src import hype as run_mod
     from_index = STEP_ORDER.index(args.from_step) if getattr(args, "from_step", None) else None
     for step in steps:
         if step.name in {"refine", "render", "editor_review"} and not args.render:

@@ -123,7 +123,7 @@ def test_emit_plan_json_writes_valid_json(tmp_path: Path) -> None:
 
 def test_pack_run_started_log_is_non_task_audit_log(tmp_path: Path) -> None:
     """The thumbnail route has no retired pack-side audit writer."""
-    from astrid.packs.video_editing.actions.thumbnail_maker import run as thumbnail_maker_run
+    from astrid.packs.video_editing.actions.thumbnail_maker.src import thumbnail_maker as thumbnail_maker_run
 
     source = Path(thumbnail_maker_run.__file__).read_text(encoding="utf-8")
     assert "_append_pack_run_started" not in source
@@ -181,7 +181,7 @@ def test_consumes_populated() -> None:
 def test_old_build_plan_not_accessible() -> None:
     """The old ``build_plan(args, layout, video_resolution)`` is removed
     from the thumbnail_maker run module."""
-    from astrid.packs.video_editing.actions.thumbnail_maker import run as tm_run
+    from astrid.packs.video_editing.actions.thumbnail_maker.src import thumbnail_maker as tm_run
 
     # The old build_plan should not exist as a callable attribute
     # (plan_template.build_plan_v2 is the replacement)

@@ -7,7 +7,7 @@ import wave
 
 from astrid.pack_api import load_default_registry
 from astrid.core.execution.executor.registry import ExecutorRegistry
-from astrid.packs.video_editing.actions.hype import entrypoint as hype
+from astrid.packs.video_editing.actions.hype.src import hype
 
 
 def _args(tmp_path: Path):
