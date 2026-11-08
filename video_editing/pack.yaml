@@ -1787,9 +1787,3 @@ resources:
   path: shared/runtime_orchestration.py
 - kind: support
   path: shared/result_receipts.py
-ui:
-  video-editor:
-    type: tool
-    entry: ui/video-editor/entry.json
-    target: astrid
-    compatibility: {host: '1'}
