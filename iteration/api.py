@@ -2,12 +2,11 @@
 
 from astrid.pack_api import canonical_runtime_entrypoint
 
-with canonical_runtime_entrypoint("iteration.assemble"):
-    from astrid.packs.iteration.actions.assemble.run import (
-        AssembleError,
-        assemble_iteration,
-        build_parser as build_assemble_parser,
-    )
+from astrid.packs.iteration.actions.assemble.src.assemble import (
+    AssembleError,
+    assemble_iteration,
+    build_parser as build_assemble_parser,
+)
 
 with canonical_runtime_entrypoint("iteration.experiment_prepare"):
     from astrid.packs.iteration.actions.experiment_prepare.run import (
