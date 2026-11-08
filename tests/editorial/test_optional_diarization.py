@@ -6,7 +6,7 @@ import pytest
 
 def test_diarization_is_optional_and_missing_dependency_refuses_before_work(monkeypatch, tmp_path):
     monkeypatch.setenv("ASTRID_INTERNAL_INVOCATION", "1")
-    transcribe = importlib.import_module("astrid.packs.editorial.actions.transcribe.run")
+    transcribe = importlib.import_module("astrid.packs.editorial.actions.transcribe.src.transcribe")
     original_import = builtins.__import__
 
     def missing_pyannote(name, *args, **kwargs):
@@ -25,7 +25,7 @@ def test_diarization_is_optional_and_missing_dependency_refuses_before_work(monk
 @pytest.mark.parametrize("version,valid", [(None, False), ("3.0.1", False), ("4.0.0", False), ("3.1.1", True)])
 def test_requested_mode_qualifies_selected_interpreter_before_effects(monkeypatch, version, valid):
     monkeypatch.setenv("ASTRID_INTERNAL_INVOCATION", "1")
-    transcribe = importlib.import_module("astrid.packs.editorial.actions.transcribe.run")
+    transcribe = importlib.import_module("astrid.packs.editorial.actions.transcribe.src.transcribe")
     def installed(name):
         assert name == "pyannote-audio"
         if version is None:
@@ -43,6 +43,6 @@ def test_requested_mode_qualifies_selected_interpreter_before_effects(monkeypatc
 
 def test_base_mode_does_not_query_optional_distribution(monkeypatch):
     monkeypatch.setenv("ASTRID_INTERNAL_INVOCATION", "1")
-    transcribe = importlib.import_module("astrid.packs.editorial.actions.transcribe.run")
+    transcribe = importlib.import_module("astrid.packs.editorial.actions.transcribe.src.transcribe")
     monkeypatch.setattr(transcribe.metadata, "version", lambda *_: pytest.fail("optional lookup"))
     transcribe.qualify_diarization(None)

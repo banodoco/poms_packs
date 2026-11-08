@@ -1,5 +1,5 @@
 """Boundary candidates action package."""
 
-from .run import main
+from .src.boundary_candidates import main
 
 __all__ = ["main"]
