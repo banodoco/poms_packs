@@ -6,8 +6,8 @@ from pathlib import Path
 import pytest
 import yaml
 
-from astrid.packs.editorial.actions.editor_review import run as review
-from astrid.packs.editorial.actions.refine import run as refine
+from astrid.packs.editorial.actions.editor_review.src import editor_review as review
+from astrid.packs.editorial.actions.refine.src import refine
 from astrid.packs.editorial.actions.validate import run as validate
 from astrid.packs.video_editing.actions.hype.config import STEP_ORDER
 
