@@ -29,7 +29,7 @@ _PRESERVED_REGISTRY_FIELDS = (
 
 def _lookup_probe_asset():
     """Keep the established test/adapter seam through the run facade."""
-    run_module = sys.modules.get("astrid.packs.video_editing.actions.cut.run")
+    run_module = sys.modules.get("astrid.packs.video_editing.actions.cut.src.cut")
     if run_module is not None:
         return run_module.probe_asset
     from .probe import probe_asset
