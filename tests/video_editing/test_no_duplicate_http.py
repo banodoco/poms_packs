@@ -63,11 +63,9 @@ def test_no_duplicate_defs_in_packs() -> None:
 
 ALLOWLIST_URLLIB = {
     # Migrated in Sprint 01 — still uses urllib for OpenAI API (not fal)
-    "generation/actions/generate_image_openai/run.py",
     # Pre-existing packs NOT migrated this sprint (grandfathered):
     "understanding/actions/visual_understand/run.py",
     "understanding/actions/audio_understand/run.py",
-    "training/actions/search_loras/run.py",
     # seinfeld/script_pipeline was generalized into builtin/script_pipeline (builtin-training epic)
     "editorial/actions/script_pipeline/run.py",
     # blender.render: downloads mesh assets from remote URLs (urlretrieve) and
