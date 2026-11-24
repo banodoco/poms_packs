@@ -1,0 +1,22 @@
+import type {Bounds, Cell, Point, Tissue} from '../organism';
+import type {ColorSettings, resolveStyle} from '../style';
+import type {Reveal, Direction, CrawlStyle} from '../deck/motion';
+import type {MediaSettings} from '../media';
+export type Rect=Bounds; // normalized in authored input; pixel bounds in resolved frame plan
+export type Motion={transitionDuration?:number;transitionSpeed?:number;restJitter?:number;restSpeed?:number;organismFlow?:number;organismIntensity?:number;organismSpread?:number;organismPixelSize?:number;edgeReveal?:boolean;randomness?:number;pixelSize?:number;crawlStyle?:CrawlStyle;seed?:number;stagger?:number;direction?:Exclude<Direction,'alternate'>;compositionScale?:number};
+export type Item={kind:'image'|'video'|'text';asset?:string;text?:string;subtitle?:string;fit?:'cover'|'contain';sourceStart?:number;sourceEnd?:number;aspect?:number;scale?:number};
+export type Placement={id:string;media?:string;rect?:Rect;scale?:number};
+export type Pose={at:number;name?:string;layout:string;items:(string|Placement)[];behaviour?:string;scale?:number;transition?:string|{type?:string;duration?:number;speed?:number;stagger?:number;direction?:Motion['direction'];edgeReveal?:boolean};motion?:Motion};
+export type Accent={at:number;duration?:number;effect:string;target:string;to?:string;intensity?:number};
+export type Composition=ColorSettings&MediaSettings&Motion&{version:1;items:Record<string,Item>;behaviour?:string;defaults?:Motion&{behaviour?:string};safeArea?:Rect;poses:Pose[];accents?:Accent[]};
+export type LayoutContext={items:{id:string;aspect:number}[];area:Rect;canvasAspect:number};
+export type LayoutFn=(ctx:LayoutContext)=>Rect[];
+export type Cargo={id:string;media:string;content:Item;rect:Rect;seed:number;since:number;key:string;order:number};
+export type ResolvedPose={at:number;start:number;name:string;items:Cargo[];behaviour:string;motion:Required<Motion>;transition:string;index:number};
+export type Compiled={input:Composition;fps:number;width:number;height:number;frames:number;poses:ResolvedPose[];accents:(Accent&{start:number;end:number})[];warnings:string[]};
+export type Layer={id:string;key:string;content:Item;box:Bounds;sourceFrame:number;reveal:Reveal;front:Cell[];z:number};
+export type FramePlan={frame:number;layers:Layer[];back:Cell[];overlay:Cell[];palette:ReturnType<typeof resolveStyle>;tile:number};
+export type BehaviourContext={tissue:Tissue;box:Bounds;root:Point;frame:number;fps:number;seed:number;idSeed:number;effort:number;strength:number;movement:Point;growth:number;flow:number;spread:number};
+export type Behaviour={draw:(c:BehaviourContext)=>void;root?:boolean};
+export type AccentContext={tissue:Tissue;target:Bounds;to?:Bounds;progress:number;frame:number;fps:number;seed:number;intensity:number};
+export type AccentFn=(c:AccentContext)=>void;

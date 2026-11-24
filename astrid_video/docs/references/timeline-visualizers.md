@@ -1,0 +1,22 @@
+# Timeline assembly and player visualization
+
+Two visual elements share one deterministic timeline model and an editorial surface. They explain how source materials become an edit; they do not edit or reconstruct the host timeline. The source timeline is supplied by the agent from real project facts, and each player refers to an actual rendered output (or separately rendered track selection). Never imply that an independently supplied video matches these tracks unless it has been verified.
+
+- `timeline-assembly`: cards wait above a proportional time ruler, are carried by the existing swimming colony, and settle into their actual track positions. After the last arrival, the source video player(s) appear and the playhead begins moving.
+- `timeline-player-visualizer`: the assembled tracks are visible immediately with one to three synchronized video players above them. Active blocks and the playhead show the source time. Compare versions or show intermediate versus final outputs, provided their times align.
+
+## Authoring contract
+
+Set `timelineDuration` in seconds. Supply 1–8 `tracks` in desired top-to-bottom display order; each has unique `id`, `label`, optional `kind` and color. `clips` (1–16) have unique `id`, `track`, `at`, `duration`, `label` and `kind` (`image`, `video`, `label`). Image/video clips refer to a media `asset` slot; video has optional `sourceStart` seconds. Labels are semantic descriptions only (for example narration, a title or an effect); do not draw a fake waveform. Clips within a track may touch but not overlap. Use additional tracks to represent simultaneous components. The top-level `mediaBindings` map selects actual project registry keys. `__astridMedia` is host-owned, never authored. Arbitrary project media requires the generic binding support tracked in astrid-dev #1870; no native support is claimed here. A declared immutable pack asset may also resolve through `__astridAssets`. The built-in label-only defaults work without media; they do not masquerade as a real video player.
+
+Supply `players` with 1–3 entries `{id, label, asset, sourceStart?, tracks?}`. Each `asset` is an actual rendered **video** with duration sufficient for `timelineDuration`. `tracks` optionally describes the actual source track subset for the player; it does not filter or composite the media. An empty list is an assembly-only or label-only visual. These are visual players, not interactive UI widgets. Their audio is muted: narration/sound belongs on the real surrounding Astrid timeline.
+
+`assemblySeconds` determines the last automatic arrival, and `travelSeconds` independently controls each transfer. Optional per-clip `arrival` overrides the arrival time. Use a clip hold longer than the last arrival plus 0.24 seconds; leave enough time to watch the cut. `playbackRate` controls source playback independently of assembly; it applies to the player(s), playhead and active track highlighting together. Playback freezes on the last source frame rather than looping or silently playing past verified media duration. The visible time ruler is proportional, not a decorative layout. `organismIntensity: 0` turns off the cells; `organismFlow`, `organismSpread`, `pixelSize` and `seed` control the existing swarm. `theme` is day/night. Use `showTimecodes: false` for a simpler explanatory graphic. No jitter after docking: the track positions are precise.
+
+## Use it well
+
+Show a small number of meaningful tracks at once. Label real creative ingredients, not arbitrary UI noise. Let the cards be readable before moving; don't start playback until the viewer has understood what assembled. Reserve the pool for material and the lower ruler for timeline geometry. Don't invent timings, layer membership or source-to-output correspondence. For side-by-side comparisons render each actual version at the same source clock. Use a normal Astrid timeline render for final compositing, not a nested screenshot of an editor. Inspect moving frames, arrival boundaries, the first playback frame and a cut boundary. On small screens, reduce track count and clip labels. For native integration follow [the host guide](native-integration.md).
+
+## Examples
+
+See [assembly](example-timeline-assembly.yaml) and [two players](example-timeline-player.yaml). Both describe the same six-second generated demo edit, with three tracks and six clips. Slots in these examples must be bound to the corresponding real media; the preview generator creates matching picture-only/final-cut sources.

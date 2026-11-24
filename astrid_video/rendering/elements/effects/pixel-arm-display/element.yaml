@@ -1,0 +1,270 @@
+schema_version: 1
+id: pixel-arm-display
+kind: effect
+pack_id: astrid_video
+short_description: Flowing pixel currents lift and hold a group of media cards.
+description: A shared, porous pixel colony gathers into temporary streams that lift
+  and support each media card behind its surface. Cards remain independently laid
+  out and readable. Audio is muted; mix separately.
+keywords:
+- presentation
+- limbs
+- pixel
+- remotion
+- astrid-video
+metadata:
+  label: Pixel Arm Display
+  whenToUse: Lift several reference images or video results into a readable tableau
+    for comparison or emphasis.
+  clipTypeAliases:
+  - pixel-arm-display
+  role: card
+  geometry:
+    full_frame: true
+  sourceClosureSha256: sha256:9aca6879180cf17021026226d8e2068d19fcfec078beb8eba5db38ad1abd0364
+defaults:
+  theme: day
+  seed: 17
+  direction: bottom-to-top
+  fit: cover
+  edgeReveal: false
+  restJitter: 0.18
+  arrivalSeconds: 1.15
+  staggerSeconds: 0.18
+  organismIntensity: 0.9
+  organismPixelSize: 3
+  showCounter: false
+  randomness: 0.7
+  pixelSize: 16
+  sparkDensity: 0.1
+  crawlStyle: ragged
+  organismSpread: 0.62
+  organismFlow: 1
+schema:
+  type: object
+  additionalProperties: false
+  properties:
+    theme:
+      type: string
+      enum:
+      - day
+      - night
+      description: Editorial day or night palette. Explicit colour overrides take
+        precedence.
+    pixelSize:
+      type: number
+      minimum: 8
+      maximum: 100
+    seed:
+      type: integer
+    background:
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    accent:
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    frameColor:
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    showCounter:
+      type: boolean
+    fit:
+      type: string
+      enum:
+      - cover
+      - contain
+    direction:
+      type: string
+      enum:
+      - left-to-right
+      - right-to-left
+      - top-to-bottom
+      - bottom-to-top
+      - alternate
+    directions:
+      type: array
+      description: Optional per-transition directions for incoming cards. directions[0]
+        controls the second card reveal, directions[1] the third, and so on.
+      items:
+        type: string
+        enum:
+        - left-to-right
+        - right-to-left
+        - top-to-bottom
+        - bottom-to-top
+        - alternate
+    crawlStyle:
+      type: string
+      enum:
+      - clean
+      - ragged
+      - noisy
+      - chunky
+      description: Default pixel-front texture. Chunky uses larger tiles, noisy uses
+        finer and more scattered teeth.
+    crawlStyles:
+      type: array
+      description: Optional texture per incoming card after the first; absent entries
+        use crawlStyle.
+      items:
+        type: string
+        enum:
+        - clean
+        - ragged
+        - noisy
+        - chunky
+    sparkDensity:
+      type: number
+      minimum: 0
+      maximum: 0.5
+    randomness:
+      type: number
+      minimum: 0
+      maximum: 1.5
+      description: Zero is a straight pixel front; higher values increase spatial
+        irregularity without unrevealing pixels.
+    organismIntensity:
+      type: number
+      minimum: 0
+      maximum: 1
+      description: Density of the living support; zero removes it.
+    organismPixelSize:
+      type: number
+      minimum: 3
+      maximum: 18
+      description: Square living pixels on a 720px short edge; fine cells default
+        to 3.
+    arrivalSeconds:
+      type: number
+      minimum: 0
+      maximum: 1.8
+      description: First card arrival in carry mode or each arrival in hold mode.
+        Capped by available frames.
+    staggerSeconds:
+      type: number
+      minimum: 0
+      maximum: 1.2
+      description: Delay between tableau arrivals in hold mode.
+    cards:
+      type: array
+      minItems: 1
+      description: One to eight ordered declared pack asset keys; one connected arm
+        per item. Prefer two to four for legibility.
+      items:
+        type: object
+        additionalProperties: false
+        required:
+        - asset
+        - kind
+        properties:
+          asset:
+            type: string
+            minLength: 1
+          kind:
+            type: string
+            enum:
+            - image
+            - video
+          sourceStart:
+            type: number
+            minimum: 0
+          label:
+            type: string
+          fit:
+            type: string
+            enum:
+            - cover
+            - contain
+            description: Per-card fit in living modes.
+          layout:
+            type: object
+            additionalProperties: false
+            required:
+            - x
+            - y
+            - width
+            - height
+            description: Final normalized canvas rectangle. x and y are top-left;
+              width and height are independent canvas fractions. Must fit in the canvas.
+              Used by carry and hold modes.
+            properties:
+              x:
+                type: number
+                minimum: 0
+                maximum: 1
+              y:
+                type: number
+                minimum: 0
+                maximum: 1
+              width:
+                type: number
+                minimum: 0.035
+                maximum: 1
+              height:
+                type: number
+                minimum: 0.035
+                maximum: 1
+          grip:
+            type: number
+            minimum: 0.12
+            maximum: 0.88
+            description: Horizontal fraction of the card where the invisible flow
+              guide enters the concealed colony; no literal hand.
+      maxItems: 8
+    restJitter:
+      type: number
+      minimum: 0
+      maximum: 1
+      description: Rest-only cargo drift, 0–1. Zero keeps all cards exactly still.
+        The final held frame returns to target.
+    edgeReveal:
+      type: boolean
+      description: False lifts intact media from outside the frame. True also enables
+        the living pixel-edge reveal during the lift.
+    armRoot:
+      type: object
+      additionalProperties: false
+      required:
+      - x
+      - y
+      description: Normalized root position for the shared organism. Defaults to bottom
+        center.
+      properties:
+        x:
+          type: number
+          minimum: 0
+          maximum: 1
+        y:
+          type: number
+          minimum: 0
+          maximum: 1
+    organismSpread:
+      type: number
+      minimum: 0
+      maximum: 1
+      description: Width and porosity of the flowing pixel streams and the diffuse
+        support around each card.
+    organismFlow:
+      type: number
+      minimum: 0
+      maximum: 2
+      description: Internal swimming speed; zero freezes collective flow independently
+        of card motion.
+    mediaBindings:
+      type: object
+      maxProperties: 128
+      description: Logical media slot to existing authorized timeline registry key.
+        Requires native managed-element-media host support. No paths, URLs or bytes.
+      propertyNames:
+        pattern: ^[A-Za-z0-9][A-Za-z0-9_.-]{0,95}$
+      additionalProperties:
+        type: string
+        minLength: 1
+        maxLength: 256
+assets:
+  room: assets/room.png
+  storyboard: assets/storyboard.png
+  landscape: assets/landscape.png
+runtime:
+  adapter: remotion
+dependencies: {}

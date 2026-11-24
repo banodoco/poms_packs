@@ -1,0 +1,11 @@
+{
+  "presentation":"hold", "organism":"tendrils", "theme":"day",
+  "organismIntensity":0.9, "organismPixelSize":7, "arrivalSeconds":1.1, "staggerSeconds":0.38,
+  "seed":47, "randomness":0.83, "pixelSize":13, "sparkDensity":0.06,
+  "direction":"bottom-to-top", "directions":["bottom-to-top","right-to-left"],
+  "crawlStyle":"ragged", "cards":[
+    {"asset":"room","kind":"image","layout":{"x":0.055,"y":0.22,"width":0.27,"height":0.27}},
+    {"asset":"storyboard","kind":"image","layout":{"x":0.34,"y":0.09,"width":0.32,"height":0.32}},
+    {"asset":"landscape","kind":"image","layout":{"x":0.69,"y":0.27,"width":0.255,"height":0.255}}
+  ]
+}

@@ -1,0 +1,82 @@
+schema_version: 1
+id: pixel-network
+kind: effect
+pack_id: astrid_video
+short_description: Animated dependency diagram in the Astrid visual language.
+description: Reveals one to eight named conceptual inputs and connects them into one
+  output. Frame-local entrance with a readable settled state. No asset bindings required;
+  this is an explanatory schematic, not live workflow UI.
+keywords:
+- diagram
+- network
+- workflow
+- pixel
+- astrid-video
+metadata:
+  label: Astrid Pixel Network
+  whenToUse: Explain multiple interconnected problems or capabilities that contribute
+    to a single result.
+  clipTypeAliases:
+  - astrid-video-pixel-network
+  role: x-diagram
+  geometry:
+    full_frame: true
+  text: title
+  sourceClosureSha256: sha256:3d9528b3a34afc20c6cb10f03d549e140a9fcce380448e0b4a8f5678e4457bed
+defaults:
+  theme: day
+  heading: The interconnected problems
+  nodes:
+  - Story
+  - Script
+  - Characters
+  - Video
+  - Audio
+  - Editing
+  output: One coherent scene
+  buildSeconds: 1.8
+  showGrid: false
+schema:
+  type: object
+  additionalProperties: false
+  properties:
+    theme:
+      type: string
+      enum:
+      - day
+      - night
+      description: Editorial day or night palette. Explicit colour overrides take
+        precedence.
+    heading:
+      type: string
+      maxLength: 65
+    nodes:
+      type: array
+      minItems: 1
+      maxItems: 8
+      items:
+        type: string
+        minLength: 1
+        maxLength: 32
+    output:
+      type: string
+      minLength: 1
+      maxLength: 42
+    buildSeconds:
+      type: number
+      minimum: 0
+      maximum: 6
+    showGrid:
+      type: boolean
+    background:
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    foreground:
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    accent:
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+runtime:
+  adapter: remotion
+dependencies: {}

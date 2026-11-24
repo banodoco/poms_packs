@@ -1,0 +1,236 @@
+schema_version: 1
+id: timeline-player-visualizer
+kind: effect
+pack_id: astrid_video
+short_description: Astrid Timeline Player Visualizer
+description: One to three synchronized supplied video previews above variable timeline
+  tracks, with a shared source clock and active clip highlights.
+keywords:
+- timeline
+- editorial
+- motion
+- astrid-video
+- player
+metadata:
+  label: Astrid Timeline Player Visualizer
+  whenToUse: One to three synchronized supplied video previews above variable timeline
+    tracks, with a shared source clock and active clip highlights.
+  geometry:
+    full_frame: true
+  sourceClosureSha256: sha256:9fbf6ab3ca3c70f00e8bc27faff7d66413986f379414ea1ec04b29a0342512c9
+defaults:
+  theme: day
+  title: Inside the edit.
+  eyebrow: ASTRID / EDITING
+  timelineDuration: 6
+  tracks:
+  - id: fx
+    label: Graphics
+    kind: graphics
+  - id: picture
+    label: Picture
+    kind: picture
+  - id: audio
+    label: Sound
+    kind: audio
+  clips:
+  - id: title
+    track: fx
+    at: 1
+    duration: 2
+    label: Title
+    kind: label
+  - id: shot-a
+    track: picture
+    at: 0
+    duration: 3
+    label: Opening
+    kind: label
+  - id: shot-b
+    track: picture
+    at: 3
+    duration: 3
+    label: Result
+    kind: label
+  - id: audio
+    track: audio
+    at: 0
+    duration: 6
+    label: Narration
+    kind: label
+  players: []
+  playbackRate: 1
+  pixelSize: 2.4
+  organismIntensity: 0.78
+  organismFlow: 1
+  organismSpread: 0.6
+  seed: 47
+  showTimecodes: true
+  mediaBindings: {}
+schema:
+  type: object
+  additionalProperties: false
+  properties:
+    theme:
+      type: string
+      enum:
+      - day
+      - night
+    title: &id001
+      type: string
+      minLength: 1
+      maxLength: 100
+    eyebrow: *id001
+    timelineDuration:
+      type: number
+      minimum: 0.25
+      maximum: 3600
+      description: Length of the depicted source timeline in seconds, independent
+        of effect duration.
+    tracks:
+      type: array
+      minItems: 1
+      maxItems: 8
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          id: &id002
+            type: string
+            pattern: ^[A-Za-z0-9_-]{1,64}$
+          label: *id001
+          kind:
+            type: string
+            enum:
+            - picture
+            - graphics
+            - audio
+            - other
+          color: &id003
+            type: string
+            pattern: ^#[0-9a-fA-F]{6}$
+        required:
+        - id
+        - label
+    clips:
+      type: array
+      minItems: 1
+      maxItems: 16
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          id: *id002
+          track: *id002
+          at:
+            type: number
+            minimum: 0
+            maximum: 3600
+          duration:
+            type: number
+            minimum: 0.001
+            maximum: 3600
+          label: *id001
+          kind:
+            type: string
+            enum:
+            - image
+            - video
+            - label
+          asset: *id002
+          sourceStart:
+            type: number
+            minimum: 0
+            maximum: 3600
+          arrival:
+            type: number
+            minimum: 0
+            maximum: 120
+          color: *id003
+        required:
+        - id
+        - track
+        - at
+        - duration
+        - label
+        - kind
+        allOf:
+        - if:
+            properties:
+              kind:
+                enum:
+                - image
+                - video
+          then:
+            required:
+            - asset
+    players:
+      type: array
+      maxItems: 3
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          id: *id002
+          label: *id001
+          asset: *id002
+          sourceStart:
+            type: number
+            minimum: 0
+            maximum: 3600
+          tracks:
+            type: array
+            uniqueItems: true
+            maxItems: 8
+            items: *id002
+        required:
+        - id
+        - label
+        - asset
+    playbackRate:
+      type: number
+      minimum: 0.1
+      maximum: 4
+      description: Source timeline seconds per effect second.
+    pixelSize:
+      type: number
+      minimum: 1
+      maximum: 12
+      description: Square cell size at 1280×720, scaled to canvas.
+    organismIntensity:
+      type: number
+      minimum: 0
+      maximum: 1
+    organismFlow:
+      type: number
+      minimum: 0
+      maximum: 3
+    organismSpread:
+      type: number
+      minimum: 0
+      maximum: 1
+    seed:
+      type: integer
+      minimum: -2147483648
+      maximum: 2147483647
+    showTimecodes:
+      type: boolean
+    mediaBindings:
+      type: object
+      maxProperties: 32
+      propertyNames: *id002
+      additionalProperties:
+        type: string
+        minLength: 1
+        maxLength: 512
+    foreground: *id003
+    accent: *id003
+    frameColor: *id003
+    background: *id003
+  required:
+  - timelineDuration
+  - tracks
+  - clips
+runtime:
+  adapter: remotion
+dependencies: {}

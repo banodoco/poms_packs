@@ -1,0 +1,17 @@
+{
+  "schema":{"properties":{"mediaBindings":{"type":"object"}}},
+  "registry":{"shot-a":{"type":"image/png","src":"https://resolved.example/shot-a","file":"https://resolved.example/shot-a"},"shot-b":{"type":"video/mp4","duration":2.5,"src":"https://resolved.example/shot-b","file":"https://resolved.example/shot-b"},"audio":{"type":"audio/wav","src":"https://resolved.example/audio","file":"https://resolved.example/audio"},"no-duration":{"type":"video","src":"https://resolved.example/no-duration","file":"https://resolved.example/no-duration"}},
+  "cases":[
+    {"name":"no media","params":{"theme":"day"}},
+    {"name":"mixed media and duplicate source","params":{"mediaBindings":{"hero":"shot-a","preview":"shot-b","detail":"shot-a"},"restJitter":0.2}},
+    {"name":"empty map","params":{"mediaBindings":{}}},
+    {"name":"unbound registry key","params":{"mediaBindings":{"hero":"another-project"}},"error":true},
+    {"name":"raw URL cannot resolve","params":{"mediaBindings":{"hero":"https://untrusted.example/image"}},"error":true},
+    {"name":"forged projection","params":{"__astridMedia":{"hero":{"src":"https://untrusted.example"}}},"error":true},
+    {"name":"wrong modality","params":{"mediaBindings":{"hero":"audio"}},"error":true},
+    {"name":"missing video duration","params":{"mediaBindings":{"hero":"no-duration"}},"error":true},
+    {"name":"malformed map","params":{"mediaBindings":["shot-a"]},"error":true},
+    {"name":"prototype key","params":{"mediaBindings":{"constructor":"shot-a"}},"error":true},
+    {"name":"undeclared capability","params":{"mediaBindings":{"hero":"shot-a"}},"schema":{},"error":true}
+  ]
+}

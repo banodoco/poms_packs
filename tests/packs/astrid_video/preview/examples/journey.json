@@ -1,0 +1,145 @@
+{
+  "duration": 12,
+  "composition": {
+    "version": 1,
+    "theme": "day",
+    "items": {
+      "room": {
+        "kind": "image",
+        "asset": "room"
+      },
+      "story": {
+        "kind": "image",
+        "asset": "storyboard"
+      },
+      "mink": {
+        "kind": "image",
+        "asset": "mink"
+      },
+      "portal": {
+        "kind": "video",
+        "asset": "portal",
+        "sourceEnd": 2.4
+      },
+      "land": {
+        "kind": "image",
+        "asset": "landscape"
+      },
+      "ascent": {
+        "kind": "video",
+        "asset": "ascent",
+        "sourceEnd": 2.4
+      },
+      "label": {
+        "kind": "text",
+        "text": "A world of possibilities.",
+        "subtitle": "Open models, working together.",
+        "aspect": 1.6
+      },
+      "script": {
+        "kind": "text",
+        "text": "Story & script",
+        "subtitle": "Find the sequence first.",
+        "aspect": 1.55
+      }
+    },
+    "poses": [
+      {
+        "at": 0.9,
+        "name": "One reference",
+        "layout": "hero",
+        "items": [
+          "room"
+        ]
+      },
+      {
+        "at": 3.1,
+        "name": "Three references",
+        "layout": "centre-emphasis",
+        "items": [
+          "story",
+          "room",
+          "mink"
+        ],
+        "behaviour": "present",
+        "transition": {
+          "duration": 0.9,
+          "direction": "bottom-to-top"
+        }
+      },
+      {
+        "at": 5.6,
+        "name": "Exchange for results",
+        "layout": "centre-emphasis",
+        "items": [
+          "land",
+          "portal",
+          "ascent"
+        ],
+        "transition": {
+          "type": "exchange",
+          "duration": 1.05,
+          "direction": "bottom-to-top"
+        },
+        "behaviour": "present"
+      },
+      {
+        "at": 8.2,
+        "name": "Five pieces",
+        "layout": "grid",
+        "items": [
+          "land",
+          "portal",
+          "ascent",
+          "script",
+          "mink"
+        ],
+        "behaviour": "present",
+        "transition": {
+          "duration": 1,
+          "direction": "left-to-right"
+        }
+      },
+      {
+        "at": 10.8,
+        "name": "Focus on the result",
+        "layout": "hero",
+        "items": [
+          "portal"
+        ],
+        "behaviour": "carry",
+        "transition": {
+          "duration": 1.1,
+          "direction": "right-to-left"
+        }
+      }
+    ],
+    "accents": [
+      {
+        "at": 3.3,
+        "duration": 0.7,
+        "effect": "pixel-pulse",
+        "target": "room"
+      },
+      {
+        "at": 8.4,
+        "duration": 0.85,
+        "effect": "pixel-connect",
+        "target": "script",
+        "to": "portal"
+      },
+      {
+        "at": 11.1,
+        "duration": 0.65,
+        "effect": "pixel-underline",
+        "target": "portal"
+      }
+    ],
+    "behaviour": "carry",
+    "direction": "bottom-to-top",
+    "transitionDuration": 0.85,
+    "restJitter": 0.18,
+    "restSpeed": 0.6,
+    "organismFlow": 1.05
+  }
+}

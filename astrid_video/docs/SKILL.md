@@ -1,0 +1,32 @@
+---
+name: astrid-video
+description: Make recognisably Astrid creative explainers, product demonstrations and films with reusable editorial compositions and pixel-based effects.
+---
+
+# Astrid Video
+
+**Sophisticated editorial design. Playful pixelated physics.** The content is slick; the magic is pixelated. **The mink inhabits the world; the pixels operate the world.** Treat the pixels as adaptive living tissue that acts on content: gather, carry, grip, reveal, connect and rest. A colony is a whole living body hidden behind its load, not a border around it. Treat the mink and crisp pixel effects as inhabitants of a contemporary, beautifully composed world, not a filter on the content. The viewer should understand the work even if every decorative animation is removed.
+
+Start with the [one-page visual grammar](references/visual-grammar.png) and [mink character sheet](references/mink-character-guide.jpg). Use the owner's supplied art and actual creative evidence. Follow [visual language](references/visual-language.md) and [motion language](references/motion-language.md) and [living pixels](references/living-pixels.md) for every composition. The creator owns taste, narrative and feedback; the agent handles implementation through Astrid.
+
+## Choose the next workflow
+
+- Directing a video or revising a sequence: [Directing Astrid videos](skills/directing-astrid-videos/SKILL.md).
+- Authoring timed destinations with existing layouts, behaviours and accents: [Choreographing Astrid compositions](skills/choreographing-astrid-compositions/SKILL.md).
+- Building or refining a reusable effect: [Designing Astrid effects](skills/designing-astrid-effects/SKILL.md).
+- Reviewing a rough cut, effect or finished edit: [Reviewing Astrid videos](skills/reviewing-astrid-videos/SKILL.md).
+
+Use [composition recipes](references/composition-recipes.md) to pick layouts and the [effect catalogue](references/effect-catalogue.md) for actual parameters and admission. Prefer composing existing elements over writing another effect. Read the [mink reference](references/mink-character.md) before any mascot use. This pack currently declares `pixel-card-shuffle`, `pixel-arm-display`, `chapter-card`, `pixel-network`, `living-composition`, `timeline-assembly`, and `timeline-player-visualizer`; other recipes are design targets, not installed effects.
+
+For an edit explanation, choose [timeline assembly or player visualization](references/timeline-visualizers.md): moving source cards settle into their true time ranges, or synchronized actual video outputs play above their component tracks.
+
+## Native usage
+
+Read [native integration](references/native-integration.md) before the first use. Prefer the dedicated admitted `astrid_video` collection and exact native element refs; use top-level scalar settings for routine creative changes. Resolve actual project media through the host, not source copies. The proposed generic media-slot projection is a required host feature, not available by virtue of this pack alone.
+
+## Normal loop
+
+1. Understand the material and creative intent; choose the narrative beats and a static composition that makes each beat clear.
+2. Select a restrained palette and type hierarchy. Animate the change, not the entire canvas; preserve the fidelity of media, interface and main copy.
+3. Create a low-fidelity edit, get feedback, then refine real shots and motions. Use deterministic clip-relative settings, actual admitted element refs, and Astrid's supported timeline/media tools.
+4. Review the settled and transitional frames, sound, small-screen readability and export. Only claim saved edits, admission or render results when the actual host confirms them.

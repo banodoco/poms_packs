@@ -1,0 +1,248 @@
+schema_version: 1
+id: timeline-assembly
+kind: effect
+pack_id: astrid_video
+short_description: Astrid Timeline Assembly
+description: Living pixels carry media cards into proportional time ranges on variable
+  timeline tracks, then a supplied rendered video plays above the completed edit.
+keywords:
+- timeline
+- editorial
+- motion
+- astrid-video
+- player
+metadata:
+  label: Astrid Timeline Assembly
+  whenToUse: Living pixels carry media cards into proportional time ranges on variable
+    timeline tracks, then a supplied rendered video plays above the completed edit.
+  geometry:
+    full_frame: true
+  sourceClosureSha256: sha256:99496fd9b1355e2adf1f2e664f4aa2a8b99159834ae8767484799ca967eb3b2f
+defaults:
+  theme: day
+  title: The edit takes shape.
+  eyebrow: ASTRID / EDITING
+  timelineDuration: 6
+  tracks:
+  - id: fx
+    label: Graphics
+    kind: graphics
+  - id: picture
+    label: Picture
+    kind: picture
+  - id: audio
+    label: Sound
+    kind: audio
+  clips:
+  - id: title
+    track: fx
+    at: 1
+    duration: 2
+    label: Title
+    kind: label
+  - id: shot-a
+    track: picture
+    at: 0
+    duration: 3
+    label: Opening
+    kind: label
+  - id: shot-b
+    track: picture
+    at: 3
+    duration: 3
+    label: Result
+    kind: label
+  - id: audio
+    track: audio
+    at: 0
+    duration: 6
+    label: Narration
+    kind: label
+  players: []
+  playbackRate: 1
+  pixelSize: 2.4
+  organismIntensity: 0.78
+  organismFlow: 1
+  organismSpread: 0.6
+  seed: 47
+  showTimecodes: true
+  mediaBindings: {}
+  assemblySeconds: 3.2
+  travelSeconds: 0.85
+schema:
+  type: object
+  additionalProperties: false
+  properties:
+    theme:
+      type: string
+      enum:
+      - day
+      - night
+    title: &id001
+      type: string
+      minLength: 1
+      maxLength: 100
+    eyebrow: *id001
+    timelineDuration:
+      type: number
+      minimum: 0.25
+      maximum: 3600
+      description: Length of the depicted source timeline in seconds, independent
+        of effect duration.
+    tracks:
+      type: array
+      minItems: 1
+      maxItems: 8
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          id: &id002
+            type: string
+            pattern: ^[A-Za-z0-9_-]{1,64}$
+          label: *id001
+          kind:
+            type: string
+            enum:
+            - picture
+            - graphics
+            - audio
+            - other
+          color: &id003
+            type: string
+            pattern: ^#[0-9a-fA-F]{6}$
+        required:
+        - id
+        - label
+    clips:
+      type: array
+      minItems: 1
+      maxItems: 16
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          id: *id002
+          track: *id002
+          at:
+            type: number
+            minimum: 0
+            maximum: 3600
+          duration:
+            type: number
+            minimum: 0.001
+            maximum: 3600
+          label: *id001
+          kind:
+            type: string
+            enum:
+            - image
+            - video
+            - label
+          asset: *id002
+          sourceStart:
+            type: number
+            minimum: 0
+            maximum: 3600
+          arrival:
+            type: number
+            minimum: 0
+            maximum: 120
+          color: *id003
+        required:
+        - id
+        - track
+        - at
+        - duration
+        - label
+        - kind
+        allOf:
+        - if:
+            properties:
+              kind:
+                enum:
+                - image
+                - video
+          then:
+            required:
+            - asset
+    players:
+      type: array
+      maxItems: 3
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          id: *id002
+          label: *id001
+          asset: *id002
+          sourceStart:
+            type: number
+            minimum: 0
+            maximum: 3600
+          tracks:
+            type: array
+            uniqueItems: true
+            maxItems: 8
+            items: *id002
+        required:
+        - id
+        - label
+        - asset
+    playbackRate:
+      type: number
+      minimum: 0.1
+      maximum: 4
+      description: Source timeline seconds per effect second.
+    pixelSize:
+      type: number
+      minimum: 1
+      maximum: 12
+      description: Square cell size at 1280×720, scaled to canvas.
+    organismIntensity:
+      type: number
+      minimum: 0
+      maximum: 1
+    organismFlow:
+      type: number
+      minimum: 0
+      maximum: 3
+    organismSpread:
+      type: number
+      minimum: 0
+      maximum: 1
+    seed:
+      type: integer
+      minimum: -2147483648
+      maximum: 2147483647
+    showTimecodes:
+      type: boolean
+    mediaBindings:
+      type: object
+      maxProperties: 32
+      propertyNames: *id002
+      additionalProperties:
+        type: string
+        minLength: 1
+        maxLength: 512
+    foreground: *id003
+    accent: *id003
+    frameColor: *id003
+    background: *id003
+    assemblySeconds:
+      type: number
+      minimum: 0.3
+      maximum: 120
+      description: Last automatic arrival, in effect-local seconds.
+    travelSeconds:
+      type: number
+      minimum: 0.1
+      maximum: 10
+      description: Duration of each card transfer.
+  required:
+  - timelineDuration
+  - tracks
+  - clips
+runtime:
+  adapter: remotion
+dependencies: {}

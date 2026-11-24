@@ -1,0 +1,92 @@
+mode: play
+duration: 6
+params:
+  theme: day
+  eyebrow: ASTRID / EDITING
+  timelineDuration: 6
+  tracks:
+  - id: inset
+    label: Inset
+    kind: graphics
+    color: '#D7BDB2'
+  - id: graphics
+    label: Titles
+    kind: graphics
+    color: '#DFC29B'
+  - id: picture
+    label: Picture
+    kind: picture
+    color: '#B6C9B0'
+  clips:
+  - id: room
+    track: picture
+    at: 0
+    duration: 1.75
+    label: Opening shot
+    kind: image
+    asset: room
+  - id: opening
+    track: graphics
+    at: 0
+    duration: 1.75
+    label: Opening title
+    kind: image
+    asset: opening
+  - id: portal
+    track: picture
+    at: 1.75
+    duration: 2.125
+    label: Portal
+    kind: video
+    asset: portal
+  - id: mink
+    track: inset
+    at: 2.5
+    duration: 1.375
+    label: Mink inset
+    kind: image
+    asset: mink
+  - id: ascent
+    track: picture
+    at: 3.875
+    duration: 2.125
+    label: Ascent
+    kind: video
+    asset: ascent
+  - id: ending
+    track: graphics
+    at: 3.875
+    duration: 2.125
+    label: Closing title
+    kind: image
+    asset: ending
+  mediaBindings:
+    room: demo-room
+    opening: demo-opening
+    portal: demo-portal
+    mink: demo-mink
+    ascent: demo-ascent
+    ending: demo-ending
+    picture-only: demo-picture-only
+    final-cut: demo-final-cut
+  playbackRate: 1
+  pixelSize: 2.4
+  organismIntensity: 0.82
+  organismFlow: 1.1
+  organismSpread: 0.65
+  seed: 47
+  showTimecodes: true
+  title: One cut. Three layers.
+  players:
+  - id: base
+    label: Picture only
+    asset: picture-only
+    tracks:
+    - picture
+  - id: final
+    label: Final cut
+    asset: final-cut
+    tracks:
+    - inset
+    - graphics
+    - picture
