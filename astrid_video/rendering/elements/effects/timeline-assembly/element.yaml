@@ -17,7 +17,7 @@ metadata:
     timeline tracks, then a supplied rendered video plays above the completed edit.
   geometry:
     full_frame: true
-  sourceClosureSha256: sha256:99496fd9b1355e2adf1f2e664f4aa2a8b99159834ae8767484799ca967eb3b2f
+  sourceClosureSha256: sha256:d7b6f776e038417c8b35eec51ad12310abef2cd1d987a0dc8cb39ec43e028201
 defaults:
   theme: day
   title: The edit takes shape.

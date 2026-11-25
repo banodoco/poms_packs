@@ -1,0 +1,3 @@
+const fs=require('node:fs');const {compileActivity,activityFrame}=require('./shared/activity/model.js');const {compileMink,minkFrame,spriteBox}=require('./shared/mink/model.js');
+const ex=JSON.parse(fs.readFileSync(process.argv[2],'utf8')),width=+process.argv[3],height=+process.argv[4],fps=+process.argv[5],frames=Math.round(ex.duration*fps),minkOnly=process.argv[6]==='mink';
+const c=minkOnly?compileMink(ex.params,frames,fps):compileActivity(ex.params,width,height,fps,frames);console.log(JSON.stringify({...c,width,height,minkOnly}));for(let i=0;i<frames;i++){const f=minkOnly?{frame:i,t:i/fps,mink:minkFrame(c,i)}:activityFrame(c,i);console.log(JSON.stringify({...f,minkBox:f.mink?spriteBox(f.mink,width,height):undefined}));}

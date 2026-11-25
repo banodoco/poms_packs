@@ -17,7 +17,7 @@ metadata:
     tracks, with a shared source clock and active clip highlights.
   geometry:
     full_frame: true
-  sourceClosureSha256: sha256:9fbf6ab3ca3c70f00e8bc27faff7d66413986f379414ea1ec04b29a0342512c9
+  sourceClosureSha256: sha256:b4b7963fa0f45152713fd6178256f2ce4f4147ed4ca3c6b2e65bd15bf50b9e0b
 defaults:
   theme: day
   title: Inside the edit.

@@ -48,7 +48,7 @@ class SourceTests(unittest.TestCase):
             self.assertEqual((dest/'pack.yaml').read_text(),'old')
     def test_receipt_scope_and_completeness(self):
         entries=[{'descriptor':{'packId':install.PACK,'id':i,'kind':'effect','revision':'host-returned-test-revision'},'authoring':{'status':'admitted'}} for i in sorted(install.EFFECTS)]
-        self.assertEqual(len(install.refs({'elements':entries})),7)
+        self.assertEqual(len(install.refs({'elements':entries})),9)
         with self.assertRaises(RuntimeError):install.refs({'elements':entries[:-1]})
         entries[0]['descriptor']['packId']='wrong'
         with self.assertRaises(RuntimeError):install.refs({'elements':entries})

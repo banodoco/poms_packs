@@ -23,3 +23,7 @@ For living media effects, check that an intact slide with reveal disabled still 
 ## Review a destination-driven sequence
 
 Inspect the resolved storyboard and exact arrival/transition timing before motion; confirm the user's requested content, relative scale and priorities. Inspect transition frames and the actual motion preview for crossings, continuity, support and readability. Check retained media source time, target-attached accents, zero jitter, and any requested intact/reveal mode. Review actual host output separately from standalone samples.
+
+## Agent and mascot review
+
+Check that activity represents real events and actual associated outputs, that the terminal does not compete with the work, and that handoffs keep stable media identities. For the mink check its character silhouette, both forepaws where visible, fixed anchor, coherent gaze, run/settle/wave continuity, intentional occlusion and restraint. Route placement feedback to [performing with the mink](../performing-with-astrid-mink/SKILL.md); asset anatomy or pose feedback to [creating mink animations](../creating-mink-animations/SKILL.md).

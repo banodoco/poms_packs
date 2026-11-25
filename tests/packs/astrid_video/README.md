@@ -1,20 +1,24 @@
-# Astrid Video v0.12.0 — Timeline visualizers
+# Astrid Video v0.14 — corrected mink performance and composable skills
 
-A native-integration candidate for Astrid’s general video-production pack. Builds on v0.10’s Living Composition engine and adds native scalar parameter controls, guarded project-pack installation, preparation/inspection tools, a source-closure revision fingerprint and a common media-slot consumer. Previous effects remain available. v0.12 adds two shared-model timeline visualization elements. The user authors visual destinations; the program choreographs movement.
+v0.14 retains the nine effects from v0.13 and the original running cycle, refines the wave/idle/settle sprite family so both forepaws read clearly, and fixes the pose origin across the wave. Three focused skills make the creative workflow composable: [perform with the mink](astrid_video/docs/skills/performing-with-astrid-mink/SKILL.md), [create mink animations](astrid_video/docs/skills/creating-mink-animations/SKILL.md), and [show agent work](astrid_video/docs/skills/showing-agent-work/SKILL.md). Start with the [root skill](astrid_video/docs/SKILL.md); direct the story, choose a composition, apply a performance, create an asset only if needed. Keep actual technical contracts in the references.
 
-## Timeline assembly and synchronized players
+The new wave is a pixel-level refinement of the exact existing Plan 84 presenting sprite, not a new generative character. The running sheet is unchanged; new poses remain candidates for creator review. The attempted image generation returned an infographic, not registered transparent cells, so it was not used in the runtime assets. Agent at Work keeps its accepted layout and model. Native Astrid admission/editor/export remain outstanding (#1870 for general media projection).
 
-The [timeline visualization contract](astrid_video/docs/references/timeline-visualizers.md) describes `timeline-assembly` and `timeline-player-visualizer`. Supply actual track and clip metadata, media slots, and independently rendered video outputs. Up to eight tracks and three players are supported. The first effect carries items into precise timeline slots; the second immediately plays one or more video outputs with a synchronized playhead and active-track highlights. These are non-interactive explanatory visual elements; they never write the host timeline.
+---
 
-```sh
-tsc --target es2020 --module commonjs --strict --rootDir astrid_video --outDir preview astrid_video/shared/timeline/model.ts
-python preview/make_timeline_examples.py
-node preview/test-timeline.cjs
-python preview/render_timeline.py preview/timeline-assembly.json review/assembly.mp4 1280 720 24
-python preview/render_timeline.py preview/timeline-player.json review/players.mp4 1280 720 24
-```
+# Astrid Video v0.13 — Agent at Work and Mink Performer
 
-The source edit is actually composed from the depicted source clips, so both preview players have truthful component timing. The standalone preview does not prove native Astrid export or generic managed-media support.
+v0.13 extends the previous seven effects with two reusable effects: `mink-performer` (frame-driven sprite cues, aligned source strips, transparent overlay) and `agent-at-work` (terminal-style event replay, flexible text/image/video cards or timeline assembly with a continuous full-screen handoff). The existing v0.12 timeline engine is reused, not replaced. Read `astrid_video/docs/references/mink-performance.md` and `agent-at-work.md` for authoring, source provenance, adding sprites and actual limitations.
+
+The original runner strip is byte-identical to Astrid App. The wave and settle are initial hand-adjusted/procedural candidate poses derived from the Plan 84 juggler strip, not final generated character animation. The first image-generation attempt produced a concept board, not production cells; it was not used in the pack. Peek/jump are positional staging of existing poses, not new sprite cycles. The activity examples are authored illustrative replays of an actual synthetic demo edit. Native Astrid admission/editor/export remain unverified and arbitrary project-media bindings still depend on #1870.
+
+Reproduce locally: `tsc --target es2020 --module commonjs --strict --rootDir astrid_video --outDir preview astrid_video/shared/activity/model.ts astrid_video/shared/mink/model.ts`; `node preview/test-activity.cjs`; `python tools/test_mink_assets.py`; `python preview/render_activity.py preview/mink-performance.json <output.mp4> 1280 720 24`; substitute `preview/agent-at-work.json` or `preview/agent-cards.json` for the other examples. Use `tools/import_mink_sheet.py` to align an additional candidate sprite sheet before adding it to the registry.
+
+---
+
+# Astrid Video v0.11.0 — Native integration candidate
+
+A native-integration candidate for Astrid’s general video-production pack. Builds on v0.10’s Living Composition engine and adds native scalar parameter controls, guarded project-pack installation, preparation/inspection tools, a source-closure revision fingerprint and a common media-slot consumer. Previous effects remain available. The user authors visual destinations; the program choreographs movement.
 
 ## Start here
 

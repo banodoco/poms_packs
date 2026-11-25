@@ -1,4 +1,4 @@
-# Native Astrid use — integration candidate v0.11
+# Native Astrid use — integration candidate
 
 This is an ordinary V3 rendering-elements pack. Use the authenticated local Astrid installation and its documented project-pack interface; do not install a new renderer, write timeline JSON to a local database, embed JSX in timeline documents, copy managed footage into executable source or paste resolved URLs into saved settings.
 
@@ -33,7 +33,7 @@ The integration reference in the distribution provides tested worker/browser res
 
 ## Native acceptance
 
-1. Install in a disposable test project, get five exact admitted refs; preserve a pre-existing user pack and verify failed source edits cannot replace its prior admission.
+1. Install in a disposable test project, get all nine exact admitted refs; preserve a pre-existing user pack and verify failed source edits cannot replace its prior admission.
 2. Place the asset-free Living Composition through the supported exact-head route and set `native-smoke.yaml` parameters using its actual saved clip. Obtain the accepted `new_head`. Inspect the editor at destination arrivals and during changes. Change scale, transition speed and rest/flow using the native inspector, confirm durable head and preserved arrival times; reload and inspect again.
 3. Run the normal native visualize/render path on the exact saved revision. Compare actual destination and midpoint frames to editor preview, in landscape and portrait. Check font loading, clip-local clocks, performance, transparency, and media readiness. No claim of native success from the standalone compositor.
 4. Once the generic host binding is implemented, use real project-managed stills and a video with source ranges; test missing/cross-project refs, removal/pruning, occurrence expansion, reuse of the same asset in several slots, export/import to another authorized realm, and exact native preview/worker export. Replace media and timing without readmitting source. Check old pinned revisions and copy/export retain the correct media closure.

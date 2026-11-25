@@ -1,14 +1,14 @@
 schema_version: 3
 id: astrid_video
 name: Astrid Video
-version: 0.12.0
+version: 0.14.0
 status: active
 domain: media
 stability: experimental
 support: project
 visibility: visible
-description: Reusable editorial video elements and deterministic living-pixel choreography
-  for Astrid.
+description: Reusable editorial video elements, living-pixel choreography, agent activity
+  and frame-driven mascot performance for Astrid.
 permissions:
 - id: project_files
   reason: Provides declared demo media and consumes project-owned media through Astrid
@@ -91,6 +91,34 @@ rendering:
     resources:
     - kind: implementation
       path: rendering/elements/effects/timeline-player-visualizer/component.tsx
+  effects/mink-performer:
+    type: element
+    path: rendering/elements/effects/mink-performer/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/mink-performer/component.tsx
+    - kind: asset
+      path: rendering/elements/effects/mink-performer/assets/run.png
+    - kind: asset
+      path: rendering/elements/effects/mink-performer/assets/idle.png
+    - kind: asset
+      path: rendering/elements/effects/mink-performer/assets/wave.png
+    - kind: asset
+      path: rendering/elements/effects/mink-performer/assets/settle.png
+  effects/agent-at-work:
+    type: element
+    path: rendering/elements/effects/agent-at-work/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/agent-at-work/component.tsx
+    - kind: asset
+      path: rendering/elements/effects/agent-at-work/assets/run.png
+    - kind: asset
+      path: rendering/elements/effects/agent-at-work/assets/idle.png
+    - kind: asset
+      path: rendering/elements/effects/agent-at-work/assets/wave.png
+    - kind: asset
+      path: rendering/elements/effects/agent-at-work/assets/settle.png
 resources:
 - kind: shared
   path: shared/style.ts
@@ -184,3 +212,33 @@ resources:
   path: docs/references/example-timeline-assembly.yaml
 - kind: reference
   path: docs/references/example-timeline-player.yaml
+- kind: reference
+  path: rendering/elements/effects/mink-performer/assets/runner-original.png
+- kind: reference
+  path: rendering/elements/effects/mink-performer/assets/juggler-original.png
+- kind: reference
+  path: rendering/elements/effects/mink-performer/assets/sprite-registry.json
+- kind: shared
+  path: shared/mink/model.ts
+- kind: shared
+  path: shared/mink/view.tsx
+- kind: shared
+  path: shared/activity/model.ts
+- kind: shared
+  path: shared/activity/view.tsx
+- kind: reference
+  path: docs/references/mink-performance.md
+- kind: reference
+  path: docs/references/agent-at-work.md
+- kind: reference
+  path: docs/references/example-mink-performance.yaml
+- kind: reference
+  path: docs/references/example-agent-at-work.yaml
+- kind: reference
+  path: docs/references/example-agent-cards.yaml
+- kind: skill
+  path: docs/skills/performing-with-astrid-mink/SKILL.md
+- kind: skill
+  path: docs/skills/creating-mink-animations/SKILL.md
+- kind: skill
+  path: docs/skills/showing-agent-work/SKILL.md

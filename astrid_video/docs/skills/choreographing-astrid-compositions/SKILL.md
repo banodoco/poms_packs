@@ -25,3 +25,7 @@ Study [the multi-pose journey](../../references/example-journey.yaml), [same-car
 ## Show how an edit was assembled
 
 When the creative intent is to explain the ingredients of an actual edit, choose the [timeline visualization primitives](../../references/timeline-visualizers.md) instead of recreating a timeline using generic card poses. Derive real track/time values from the project, use an actual rendered video for each player, and preserve independent assembly and playback clocks.
+
+## Combine existing primitives
+
+For an agent activity-to-timeline handoff use [showing agent work](../showing-agent-work/SKILL.md), which already reuses the timeline engine. For a mascot layer use [performing with the mink](../performing-with-astrid-mink/SKILL.md). Place ordinary outputs and overlays on the same authoritative timeline; preserve identities and source clocks at handoffs. No new effect is needed when these are sufficient.

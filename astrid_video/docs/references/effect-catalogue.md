@@ -1,10 +1,10 @@
 # Astrid Video — effect catalogue and integration
 
-A reusable visual language for Astrid demos, creative experiments and technical explainers. Version 0.8.0 is a review prototype, not an admitted production pack.
+A reusable visual language for Astrid demos, creative experiments and technical explainers. Version 0.14.0 is a review candidate, not an admitted production pack.
 
 ## Style and themes
 
-See [visual language](visual-language.md), [motion language](motion-language.md) and the [one-page visual grammar](visual-grammar.png) for the visual system. `theme: day` is the default for all four effects; `night` is optional. Use per-element explicit colour overrides only when the material calls for them. Palette constants and font stacks live in `../../shared/style.ts`. No font binaries are bundled by this pack. Use Astrid's existing local fonts where available and check actual rendering.
+See [visual language](visual-language.md), [motion language](motion-language.md) and the [one-page visual grammar](visual-grammar.png) for the visual system. `theme: day` is the default for all nine effects; `night` is optional. Use per-element explicit colour overrides only when the material calls for them. Palette constants and font stacks live in `../../shared/style.ts`. No font binaries are bundled by this pack. Use Astrid's existing local fonts where available and check actual rendering.
 
 ## Implemented elements
 
@@ -108,13 +108,13 @@ This source uses the V3 pack manifest, schema-declared effects, ordinary TSX ent
 2. Run `python3 -m astrid.core.pack.cli validate <pack-root> --json`, then use the documented project-pack admission command with the real realm/project and collection. Do not invent an admitted revision or edit derived registries.
 3. Use the owner-qualified admitted element refs and exact expected head to place or update a generated hold effect with the documented host route. Author the parameters separately; inspect the saved timeline. First project-pack placement was restricted to an `am-discord` occurrence clip in the inspected Agent source. Existing generated hold effects have the same-placement update path.
 4. For production decks, use the [native integration contract](native-integration.md). Astrid injects `__astridAssets` for immutable declared pack assets during render preparation; never author that map by hand. Generic managed-media slots are implemented at the pack consumer boundary, but require native host projection. Do not repackage production footage to bypass missing host support. The existing fixed six-card resolver is not a general mechanism and should not be copied or extended one effect at a time.
-5. Smoke-test all four effects (including classic, carry, hold and arm display) through the real editor and Remotion render, including image→video→image, per-transition timing, seeks, portrait and landscape, export/reopen and two simultaneous effect occurrences. Verify that source video decoding, freeze, SVG clipping, font rendering, parameter validation and injected asset binding agree in preview and export.
+5. Smoke-test the selected effects and the relevant existing regression cases through the real editor and Remotion render, including image→video→image, per-transition timing, seeks, portrait and landscape, export/reopen and two simultaneous effect occurrences. Verify that source video decoding, freeze, SVG clipping, font rendering, parameter validation and injected asset binding agree in preview and export.
 
 See [project-owned effects](https://github.com/banodoco/astrid-agent/blob/c0ad6b54aadd21630d98bb5039613e37efe92a8f/astrid/packs/rendering/docs/references/generated-elements-authoring.md) and [Pack Builder](https://github.com/banodoco/astrid-agent/blob/c0ad6b54aadd21630d98bb5039613e37efe92a8f/astrid/packs/_core/docs/pack-builder/SKILL.md) for the inspected contract. Verify against the installed release before adopting.
 
 ## Roadmap, not implemented
 
-Window expansion; source/mask/result comparison; timeline assembly; and mascot-led transitions using approved Astrid mink assets. Add one independently configurable element at a time, reuse existing capabilities, and validate the real render rather than inventing special-case renderer branches. For frictionless decks, add a general, bounded, revision-aware binding for a list of managed media handles, then test the same editor/render/cache path for every effect. Keep creative assets in the project media system wherever the supported host binding allows.
+Dedicated source/mask/result comparison and additional mascot performances beyond the current cue library. Add one independently configurable element at a time, reuse existing capabilities, and validate the real render rather than inventing special-case renderer branches. For frictionless decks, add a general, bounded, revision-aware binding for a list of managed media handles, then test the same editor/render/cache path for every effect. Keep creative assets in the project media system wherever the supported host binding allows.
 
 ## Living Composition (v0.10)
 
@@ -123,3 +123,8 @@ Use `living-composition` for several timed destinations with retained item ident
 ## Timeline assembly and player visualizer
 
 `timeline-assembly` transports media into proportional track blocks, then plays supplied video(s). `timeline-player-visualizer` begins with the completed edit and synchronizes players with its track clock. Both share the timeline model and existing managed-media adapter. See [timeline-visualizers.md](timeline-visualizers.md) for the structured parameters, scope and supported usage.
+
+## Agent activity and mascot performance (v0.13)
+
+- `agent-at-work`: bounded terminal replay with actual artifact reveals and flexible card or existing timeline output. See [contract](agent-at-work.md).
+- `mink-performer`: transparent frame-driven run/settle/wave/idle performer, with named movement anchors. See [guide](mink-performance.md).

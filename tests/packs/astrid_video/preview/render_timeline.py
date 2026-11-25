@@ -3,8 +3,10 @@ from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont
 from functools import lru_cache
 import cv2,numpy as np,json,subprocess,sys
-P=Path(__file__).resolve().parent;A=P/'timeline-media';source=Path(sys.argv[1]);output=Path(sys.argv[2]);w,h,fps=map(int,sys.argv[3:6]) if len(sys.argv)>3 else (1280,720,24);cv2.setNumThreads(1)
-proc=subprocess.Popen(['node',str(P/'timeline-plan.cjs'),str(source),str(w),str(h),str(fps)],stdout=subprocess.PIPE,text=True);c=json.loads(proc.stdout.readline());s=c['style'];k=c['scale'];tracks=c['tracks'];timeline=c['timeline'];fontroot=Path('/usr/share/fonts/truetype/dejavu')
+P=Path(__file__).resolve().parent;A=P/'timeline-media';fontroot=Path('/usr/share/fonts/truetype/dejavu');cv2.setNumThreads(1)
+def configure(compiled,rate):
+ global c,s,k,tracks,timeline,w,h,fps
+ c=compiled;s=c['style'];k=c['scale'];tracks=c['tracks'];timeline=c['timeline'];w=c['width'];h=c['height'];fps=rate
 @lru_cache(None)
 def font(size,kind='sans'):return ImageFont.truetype(str(fontroot/({'serif':'DejaVuSerif.ttf','sans':'DejaVuSans.ttf','bold':'DejaVuSans-Bold.ttf','mono':'DejaVuSansMono.ttf'}[kind])),max(8,round(size)))
 def ft(size,kind='sans'):return font(max(8,round(size*k)),kind)
@@ -42,7 +44,7 @@ def draw_block(im,b):
  if title:d.text((start,max(0,baseline)),title,font=face,fill='#25241F')
  d.rectangle((0,0,bw-1,bh-1),outline=s['accent'] if b['active'] else s['border'],width=2 if b['active'] else 1)
  im.paste(card,(x,y))
-def draw(f):
+def draw(f,visible_ids=None):
  im=Image.new('RGB',(w,h),s['background']);d=ImageDraw.Draw(im);margin=c['margin'];titleY=c['titleY'];sysfont=ft(11,'mono');small=ft(14);titlefont=font(min(35*k,w*.065),'serif')
  d.text((margin,titleY),c['eyebrow'],font=sysfont,fill=s['accentText']);d.text((margin,titleY+19*k),c['title'],font=titlefont,fill=s['foreground']);v=f"{f['assembled']} / {len(c['clips'])} placed" if c['mode']=='assemble' and not f['playing'] else f"{timecode(f['timelineTime'])} / {timecode(c['duration'])}";d.text((w-margin-d.textlength(v,font=sysfont),titleY+22*k),v,font=sysfont,fill=s['muted'])
  if f['playerOpacity']>0:
@@ -65,19 +67,25 @@ def draw(f):
   if c['showTimecodes']:
    label=f"{t['at']:g}s";tx=min(tx+4*k,c['x1']-6*k-d.textlength(label,font=sysfont));d.text((tx,timeline['y']+4*k),label,font=sysfont,fill=s['muted'])
  for cell in f['cells']:d.rectangle(box(cell),fill={'body':s['accent'],'shadow':s['accentText'],'light':'#FFBE79'}[cell['tone']])
- for b in f['blocks']:draw_block(im,b)
+ for b in f['blocks']:
+  if visible_ids is None or b['id'] in visible_ids:draw_block(im,b)
  d=ImageDraw.Draw(im)
  if f['playing']:
   x=f['playhead'];line(d,[(x,timeline['y']),(x,timeline['y']+timeline['height'])],s['accent'],1.7*k);d.polygon([(x-4*k,timeline['y']-4*k),(x+4*k,timeline['y']-4*k),(x,timeline['y']+2*k)],fill=s['accent'])
  return im
-enc=subprocess.Popen(['ffmpeg','-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{w}x{h}','-r',str(fps),'-i','-','-an','-c:v','libx264','-crf','18','-preset','fast','-threads','2','-pix_fmt','yuv420p','-movflags','+faststart',str(output)],stdin=subprocess.PIPE)
-samples=[0,round(c['frames']*.15),round(c['frames']*.30),min(c['frames']-1,round(c['playbackAt']*fps)+5),round(c['frames']*.75),c['frames']-1] if c['mode']=='assemble' else [0,round(c['frames']*.15),round(c['frames']*.32),round(c['frames']*.5),round(c['frames']*.73),c['frames']-1];stills={}
-for i,raw in enumerate(proc.stdout):
- f=json.loads(raw);im=draw(f);enc.stdin.write(im.tobytes());
- if i in samples:stills[i]=im.copy()
-enc.stdin.close();assert enc.wait()==0 and proc.wait()==0 and i+1==c['frames']
-W=1280;pad=20;tw=(W-3*pad)//2;th=round(tw*h/w);H=(th+34)*((len(stills)+1)//2)+pad+48;sheet=Image.new('RGB',(W,H),'#F7F4ED');d=ImageDraw.Draw(sheet);d.text((pad,12),'ASTRID / '+('TIMELINE ASSEMBLY' if c['mode']=='assemble' else 'SYNCHRONIZED PLAYERS'),font=font(20,'mono'),fill='#A94714')
-for j,(f,im) in enumerate(stills.items()):
- x=pad+(j%2)*(tw+pad);y=48+(j//2)*(th+34);d.text((x,y),f'{f/fps:.2f}s',font=font(16,'mono'),fill='#615E55');sheet.paste(im.resize((tw,th),Image.Resampling.LANCZOS),(x,y+24))
-sheet.save(output.with_name(output.stem+'-contact.jpg'),quality=94)
-print(f'{output.name}: {c["frames"]} frames, {len(tracks)} tracks, {len(c["clips"])} clips, {len(c["panels"])} player(s)')
+def main():
+ source=Path(sys.argv[1]);output=Path(sys.argv[2]);width,height,rate=map(int,sys.argv[3:6]) if len(sys.argv)>3 else (1280,720,24)
+ proc=subprocess.Popen(['node',str(P/'timeline-plan.cjs'),str(source),str(width),str(height),str(rate)],stdout=subprocess.PIPE,text=True);configure(json.loads(proc.stdout.readline()),rate)
+ enc=subprocess.Popen(['ffmpeg','-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{w}x{h}','-r',str(fps),'-i','-','-an','-c:v','libx264','-crf','18','-preset','fast','-threads','2','-pix_fmt','yuv420p','-movflags','+faststart',str(output)],stdin=subprocess.PIPE)
+ samples=[0,round(c['frames']*.15),round(c['frames']*.30),min(c['frames']-1,round(c['playbackAt']*fps)+5),round(c['frames']*.75),c['frames']-1] if c['mode']=='assemble' else [0,round(c['frames']*.15),round(c['frames']*.32),round(c['frames']*.5),round(c['frames']*.73),c['frames']-1];stills={}
+ for i,raw in enumerate(proc.stdout):
+  f=json.loads(raw);im=draw(f);enc.stdin.write(im.tobytes());
+  if i in samples:stills[i]=im.copy()
+ enc.stdin.close();assert enc.wait()==0 and proc.wait()==0 and i+1==c['frames']
+ W=1280;pad=20;tw=(W-3*pad)//2;th=round(tw*h/w);H=(th+34)*((len(stills)+1)//2)+pad+48;sheet=Image.new('RGB',(W,H),'#F7F4ED');d=ImageDraw.Draw(sheet);d.text((pad,12),'ASTRID / '+('TIMELINE ASSEMBLY' if c['mode']=='assemble' else 'SYNCHRONIZED PLAYERS'),font=font(20,'mono'),fill='#A94714')
+ for j,(f,im) in enumerate(stills.items()):
+  x=pad+(j%2)*(tw+pad);y=48+(j//2)*(th+34);d.text((x,y),f'{f/fps:.2f}s',font=font(16,'mono'),fill='#615E55');sheet.paste(im.resize((tw,th),Image.Resampling.LANCZOS),(x,y+24))
+ sheet.save(output.with_name(output.stem+'-contact.jpg'),quality=94)
+ print(f'{output.name}: {c["frames"]} frames, {len(tracks)} tracks, {len(c["clips"])} clips, {len(c["panels"])} player(s)')
+
+if __name__=='__main__':main()

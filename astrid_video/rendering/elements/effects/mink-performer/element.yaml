@@ -1,0 +1,148 @@
+schema_version: 1
+id: mink-performer
+kind: effect
+pack_id: astrid_video
+short_description: Mink Performer
+description: Frame-driven mascot cues using aligned run, idle, wave and settle sheets;
+  named anchors and independent travel, pose timing, facing and depth.
+keywords:
+- astrid-video
+- editorial
+- motion
+- mink
+metadata:
+  label: Mink Performer
+  whenToUse: Frame-driven mascot cues using aligned run, idle, wave and settle sheets;
+    named anchors and independent travel, pose timing, facing and depth.
+  geometry:
+    full_frame: true
+  sourceClosureSha256: sha256:947056d93050ee5f64d263d2386436ae3ac2c045b8ab2f6517e76f38b45285cd
+defaults:
+  theme: day
+  transparent: true
+  size: 0.25
+  start:
+    x: -0.09
+    y: 0.78
+  anchors:
+    mark:
+      x: 0.44
+      y: 0.78
+  cues:
+  - at: 0
+    action: run
+    to: mark
+    duration: 1.3
+  - at: 1.3
+    action: settle
+    duration: 0.27
+  - at: 1.57
+    action: wave
+    duration: 1
+schema:
+  type: object
+  additionalProperties: false
+  properties:
+    start: &id001
+      type: object
+      additionalProperties: false
+      properties:
+        x:
+          type: number
+          minimum: -0.5
+          maximum: 1.5
+        y:
+          type: number
+          minimum: -0.5
+          maximum: 1.5
+      required:
+      - x
+      - y
+    size:
+      type: number
+      minimum: 0.03
+      maximum: 0.65
+    rate:
+      type: number
+      minimum: 0.25
+      maximum: 3
+    anchors:
+      type: object
+      propertyNames: &id002
+        type: string
+        pattern: ^[A-Za-z0-9_-]{1,64}$
+      additionalProperties: *id001
+      maxProperties: 32
+    cues:
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          at:
+            type: number
+            minimum: 0
+            maximum: 120
+          action:
+            type: string
+            enum:
+            - run
+            - idle
+            - wave
+            - settle
+            - jump
+            - peek
+            - hide
+          to:
+            oneOf:
+            - *id002
+            - *id001
+          duration:
+            type: number
+            minimum: 0.001
+            maximum: 120
+          facing:
+            type: string
+            enum:
+            - left
+            - right
+          depth:
+            type: string
+            enum:
+            - front
+            - behind
+          size:
+            type: number
+            minimum: 0.03
+            maximum: 0.65
+          rate:
+            type: number
+            minimum: 0.25
+            maximum: 3
+        required:
+        - at
+        - action
+      minItems: 1
+      maxItems: 64
+    theme:
+      type: string
+      enum:
+      - day
+      - night
+    transparent:
+      type: boolean
+    background: &id003
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    foreground: *id003
+    accent: *id003
+  required:
+  - cues
+runtime:
+  adapter: remotion
+dependencies: {}
+assets:
+  mink-run: assets/run.png
+  mink-idle: assets/idle.png
+  mink-wave: assets/wave.png
+  mink-settle: assets/settle.png

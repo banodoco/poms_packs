@@ -1,0 +1,178 @@
+duration: 17
+params:
+  theme: day
+  title: From direction to first cut.
+  request: Put together a short portal sequence.
+  panelRatio: 0.36
+  typeRate: 40
+  mediaBindings:
+    room: demo-room
+    opening: demo-opening
+    portal: demo-portal
+    mink: demo-mink
+    ascent: demo-ascent
+    ending: demo-ending
+    final-cut: demo-final-cut
+  events:
+  - id: source
+    at: 0.45
+    duration: 1.35
+    text: Gather source footage
+    detail: Opening image
+    reveals:
+    - room
+  - id: design
+    at: 2
+    duration: 1.3
+    text: Prepare titles and insert
+    detail: Two graphic components
+    reveals:
+    - opening
+    - mink
+  - id: motion
+    at: 3.5
+    duration: 1.35
+    text: Prepare moving shots
+    detail: Portal and ascent
+    reveals:
+    - portal
+    - ascent
+  - id: close
+    at: 5
+    duration: 0.95
+    text: Prepare closing title
+    reveals:
+    - ending
+  - id: assemble
+    at: 6.1
+    duration: 4.2
+    text: Assemble the edit
+    detail: Six clips across three tracks
+  - id: result
+    at: 10.3
+    duration: 0.4
+    text: First cut ready
+    detail: Preview the actual composed result
+  output:
+    kind: timeline
+    timeline:
+      theme: day
+      eyebrow: ASTRID / ASSEMBLY
+      timelineDuration: 6
+      tracks:
+      - id: inset
+        label: Inset
+        kind: graphics
+        color: '#D7BDB2'
+      - id: graphics
+        label: Titles
+        kind: graphics
+        color: '#DFC29B'
+      - id: picture
+        label: Picture
+        kind: picture
+        color: '#B6C9B0'
+      clips:
+      - id: room
+        track: picture
+        at: 0
+        duration: 1.75
+        label: Opening shot
+        kind: image
+        asset: room
+      - id: opening
+        track: graphics
+        at: 0
+        duration: 1.75
+        label: Opening title
+        kind: image
+        asset: opening
+      - id: portal
+        track: picture
+        at: 1.75
+        duration: 2.125
+        label: Portal
+        kind: video
+        asset: portal
+      - id: mink
+        track: inset
+        at: 2.5
+        duration: 1.375
+        label: Mink inset
+        kind: image
+        asset: mink
+      - id: ascent
+        track: picture
+        at: 3.875
+        duration: 2.125
+        label: Ascent
+        kind: video
+        asset: ascent
+      - id: ending
+        track: graphics
+        at: 3.875
+        duration: 2.125
+        label: Closing title
+        kind: image
+        asset: ending
+      playbackRate: 1
+      pixelSize: 2.4
+      organismIntensity: 0.82
+      organismFlow: 1.1
+      organismSpread: 0.65
+      seed: 47
+      showTimecodes: true
+      title: The first cut.
+      assemblySeconds: 4.2
+      travelSeconds: 0.8
+      players:
+      - id: final
+        label: Final cut
+        asset: final-cut
+        tracks:
+        - inset
+        - graphics
+        - picture
+    assembleAt: 6.1
+    expandAt: 10.7
+    expandSeconds: 0.8
+  mink:
+    start:
+      x: -0.08
+      y: 0.93
+    size: 0.17
+    anchors:
+      terminal:
+        x: 0.23
+        y: 0.94
+      edge:
+        x: 0.43
+        y: 0.94
+      outside:
+        x: 1.12
+        y: 0.94
+    cues:
+    - at: 0
+      action: run
+      to: terminal
+      duration: 1.1
+    - at: 1.1
+      action: settle
+      duration: 0.27
+    - at: 1.37
+      action: wave
+      duration: 1
+    - at: 3
+      action: run
+      to: edge
+      duration: 0.8
+    - at: 3.8
+      action: settle
+      duration: 0.27
+    - at: 5.5
+      action: run
+      to: outside
+      duration: 1.25
+    - at: 6.75
+      action: hide
+      duration: 0.1

@@ -40,3 +40,7 @@ Author destinations, not fixed animations. For a sequence, use [the choreography
 ## Native extension check
 
 Keep every relative source import declared. Recompute `metadata.sourceClosureSha256` using the distribution's `tools/source_closure.py --write` after shared implementation changes; native element revision must change when its transitive shared source changes. Do not invent new global asset staging, duplicate the editor, or place user media in executable pack snapshots. Reuse the [native integration contract](../../references/native-integration.md), the existing host's managed media authority, and actual exact-head publication.
+
+## Specialized asset authoring
+
+If the gap is a mink gesture rather than a visual capability, use [creating mink animations](../creating-mink-animations/SKILL.md) and reuse the existing performer and immutable sprite declaration. If a layout can be composed from the existing output modes in [showing agent work](../showing-agent-work/SKILL.md), prefer that over another terminal renderer.

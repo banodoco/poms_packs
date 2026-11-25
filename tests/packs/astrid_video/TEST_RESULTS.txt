@@ -1,18 +1,3 @@
-Astrid Video v0.12 — local verification
-
-PASS strict TypeScript compile of shared timeline engine.
-PASS test-timeline.cjs: exact docking, deterministic square-cell swarm, independent travel/playback, synchronized source frames, active rows, invalid input refusals; 1/3/8 tracks, 3 players, three aspect ratios.
-PASS prior composition/living/deck motion regression suites.
-PASS pack structure, 7 effect schemas, 4 skills, actual example params, resource/import closure; source fingerprints; syntactic TSX transpilation.
-PASS six native-install/preparation reference unit tests (including seven-element receipt inventory) and 11 shared Python/TS media-projection fixtures.
-Rendered standalone 1280x720 24 fps samples: assembly 259 frames; synchronized players 144 frames; reviewed contact sheets. Source videos are generated from the six depicted components.
-Not verified: real React/Remotion dependency compile, Astrid native admission/editor/export, arbitrary project media (requires #1870). No actual project editing or audio mixing performed.
-
-Prior v0.11 evidence follows:
-
-v0.11: native integration candidate (local evidence only)
----
-PASS: strict pure TypeScript compilation
 PASS: 1–65 cards, weighted scheduling, short holds, 4 aspect ratios, monotonic tile reveal, 5 directions, per-transition direction override, seeded geometry, complete endpoints.
 PASS: per-transition timing/style precedence, four distinct textures, straight edge at zero, seed variation, monotonic masks at maximum randomness, deterministic responsive companion geometry.
 PASS: shared day/night tokens, explicit override and editorial type across all three effects.
@@ -20,13 +5,27 @@ PASS: living layouts, exact end states, all directions, variable count, determin
 PASS: complete dense body, populated interior quadrants, apron on all four sides, deterministic internal swimming and pause, hidden-cell culling.
 PASS: mask-free transport from/to all four edges, exact departure continuity, shared arm preset with 1/3/5/8 loads, bounded deterministic rest jitter, zero-jitter lock and exact final placement.
 PASS: three authored compositions; 1→3→3→5→1; exact destinations, retained IDs/seeds/source clocks, same-carrier masks, timing/scale controls, zero jitter and flow, square tissue, strict input errors, recipe and multi-aspect layout checks.
-PASS: 5 effect descriptors, 4 supporting skills, defaults, theme settings, example parameters, resource paths and import closure.
+PASS: real six-clip assembly; exact docking, source windows, deterministic swarm and square cells, independent motion/play speed, dual synchronized player clocks, active tracks, 1/3/8 tracks, three players, three aspect ratios, invalid inputs refused.
+PASS: deterministic sprite clocks at 24/30/60, anchor continuity, settle/wave and final idle, event reveal ordering, bounded status and source clocks, reused timeline frames and continuous expanded viewport, card mode and invalid inputs.
+PASS: 9 effect descriptors, 7 supporting skills, defaults, theme settings, example parameters, resource paths and import closure.
 PASS: TS/TSX syntactic transpilation; not dependency-aware compilation.
 pixel-card-shuffle sha256:1e628ecbe485a0e2e0fd9712583326f4db63df161cc0469d37f226cacc5de8f3 7 sources
 chapter-card sha256:84b7a2ef5af5c5e75d36a36ced09bfa9483630cd78fcb72067cbedd7af9379b3 4 sources
 pixel-network sha256:3d9528b3a34afc20c6cb10f03d549e140a9fcce380448e0b4a8f5678e4457bed 4 sources
 pixel-arm-display sha256:9aca6879180cf17021026226d8e2068d19fcfec078beb8eba5db38ad1abd0364 8 sources
 living-composition sha256:9b4c26f14df94caf9d8b356c392438a19a197917675502efe8d41b35a6442583 12 sources
+timeline-assembly sha256:d7b6f776e038417c8b35eec51ad12310abef2cd1d987a0dc8cb39ec43e028201 6 sources
+timeline-player-visualizer sha256:b4b7963fa0f45152713fd6178256f2ce4f4147ed4ca3c6b2e65bd15bf50b9e0b 6 sources
+mink-performer sha256:947056d93050ee5f64d263d2386436ae3ac2c045b8ab2f6517e76f38b45285cd 6 sources
+agent-at-work sha256:fc251ac0d066175b9415c176fbaeac1ef098567987e823e7e73225e757488bf5 10 sources
+test_exact_source_and_frame_alignment (__main__.Assets.test_exact_source_and_frame_alignment) ... ok
+test_regular_grid_and_refusals (__main__.Assets.test_regular_grid_and_refusals) ... ok
+test_wave_retains_both_forepaws_and_fixed_body (__main__.Assets.test_wave_retains_both_forepaws_and_fixed_body) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.020s
+
+OK
 test_actual_shared_import_revises_dependent_element (__main__.SourceTests.test_actual_shared_import_revises_dependent_element) ... ok
 test_prepare_rejects_unbound_media (__main__.SourceTests.test_prepare_rejects_unbound_media) ... ok
 test_receipt_scope_and_completeness (__main__.SourceTests.test_receipt_scope_and_completeness) ... ok
@@ -35,15 +34,15 @@ test_rejected_validation_preserves_old_source (__main__.SourceTests.test_rejecte
 test_shared_import_changes_fingerprint (__main__.SourceTests.test_shared_import_changes_fingerprint) ... ok
 
 ----------------------------------------------------------------------
-Ran 6 tests in 2.956s
+Ran 6 tests in 1.884s
 
 OK
 .
 ----------------------------------------------------------------------
-Ran 1 test in 2.172s
+Ran 1 test in 0.988s
 
 OK
 PASS: Python worker/browser TypeScript projection parity across 11 positive/negative fixtures
-PASS: four example compositions prepared with zero geometry warnings
-codec_name=h264|width=960|height=540|r_frame_rate=24/1|duration=6.000000|nb_frames=144
-Native Astrid admission, receiving compiler, actual timeline placement, inspector, media authorization/retention and native rendering NOT executed. No native runtime in sandbox.
+
+Rendered 168 frames (mink) and 408 frames (Agent at Work) at 1280×720 / 24 fps via standalone raster preview of the pure TypeScript model. Inspected the wave contact sheet and performer storyboard.
+Scope: no native Remotion dependency build, Astrid admission, editor or export test. No claim of creator approval. Corrected sprite is a hand-refined candidate; generated infographic not used.
