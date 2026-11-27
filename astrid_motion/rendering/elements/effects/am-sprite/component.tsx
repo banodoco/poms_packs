@@ -1,6 +1,6 @@
 import type {CSSProperties, ReactElement} from 'react';
 import {Img, useCurrentFrame} from 'remotion';
-import type {ComponentCapabilityContext, PreparedComponentCapability} from '@banodoco/timeline-composition/evaluation';
+import type {ComponentCapabilityContext, PreparedComponentCapability} from '@astrid-rendering/shared/element_contracts';
 import {
   LOGICAL_PX,
   elementSource,

@@ -221,6 +221,10 @@
         },
         {
           "kind": "implementation",
+          "path": "rendering/elements/effects/am-footage/volume.ts"
+        },
+        {
+          "kind": "implementation",
           "path": "rendering/elements/effects/am-footage/element.yaml"
         }
       ]
@@ -402,6 +406,14 @@
         {
           "kind": "implementation",
           "path": "rendering/elements/effects/am-snap-plate/motion.ts"
+        },
+        {
+          "kind": "implementation",
+          "path": "rendering/elements/effects/am-snap-plate/surface.ts"
+        },
+        {
+          "kind": "implementation",
+          "path": "rendering/elements/effects/am-snap-plate/scene.ts"
         }
       ]
     },
