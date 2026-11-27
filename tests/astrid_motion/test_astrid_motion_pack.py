@@ -11,8 +11,10 @@ import yaml
 from astrid.core.element.registry import load_default_registry
 from astrid.core.pack.validate import validate_pack
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
-PACK_ROOT = REPO_ROOT / "astrid" / "packs" / "astrid_motion"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+PACK_ROOT = REPO_ROOT / "astrid_motion"
+# The rendering pack belongs to the real Agent selected by the test environment.
+RENDERING_ROOT = Path(registry_module.__file__).resolve().parents[2] / "packs" / "rendering"
 EXPECTED_EFFECTS = {
     "am-burst",
     "am-callout",
@@ -56,8 +58,8 @@ def test_motion_pack_and_rendering_elements_validate_statically() -> None:
 
 
 def test_motion_effects_are_discoverable_from_the_pack_registry(tmp_path: Path) -> None:
-    admitted = tuple(load_pack_manifest(REPO_ROOT / "astrid" / "packs" / name / "pack.yaml")
-                     for name in ("astrid_motion", "rendering"))
+    admitted = tuple(load_pack_manifest(root / "pack.yaml")
+                     for root in (PACK_ROOT, RENDERING_ROOT))
     with mock.patch.object(registry_module, "discover_packs", return_value=admitted):
         registry = load_default_registry(project_root=tmp_path / "empty-project")
     discovered = {
