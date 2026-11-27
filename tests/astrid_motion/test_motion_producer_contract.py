@@ -250,11 +250,49 @@ def test_real_pack_release_group_admission(tmp_path):
     packages = {"pillow": importlib.metadata.version("Pillow")}
     result = install_release_manifest(manifest=manifest, packs_root=collection, python_packages=packages)
     snapshot = read_group(collection)
-    assert snapshot.revision == result.revision
+    assert snapshot.revision == result.revision == 1
+    assert snapshot.transaction_id == result.transaction_id
+    assert snapshot.paths == result.paths
+    assert result.changed_ids == ("astrid_motion",)
+    assert snapshot.removals == ()
     assert set(snapshot.paths) == {"astrid_motion"}
     selected = snapshot.paths["astrid_motion"]
     pin = read_pin(selected / "PIN")
-    assert pin["commit"] == commit and pin["digest"] == digest and pin["origin"] == "default"
+    repository = REPO_ROOT.as_uri()
+    assert pin == {
+        "version": 1, "source": repository, "commit": commit,
+        "digest_rule": "pack-tree-v1", "digest": digest, "origin": "default",
+    }
     assert pack_digest(selected) == digest
-    assert {p: h for p, h in _source_inventory(selected).items() if p != "PIN"} == before
+
+    # The transaction writes definition metadata even for a rendering-only
+    # pack. Allow precisely these two installer-owned files, not an entire
+    # ignored directory; every original source byte must still match.
+    generated = {"PIN", ".build/definitions.json"}
+    assert len(before) == 64 and not generated.intersection(before)
+    installed = _source_inventory(selected)
+    assert set(installed) == set(before) | generated
+    assert {p: installed[p] for p in before} == before
+
+    tree = subprocess.check_output(
+        ["git", "rev-parse", f"{commit}:astrid_motion"], cwd=REPO_ROOT, text=True,
+    ).strip()
+    assert len(tree) == 40
+    metadata = selected / ".build" / "definitions.json"
+    assert metadata.is_file() and not metadata.is_symlink()
+    expected = {
+        "version": 1, "repository": repository, "revision": commit,
+        "tree": tree, "subpath": "astrid_motion",
+        "source": {"kind": "git", "repository": repository, "revision": commit, "tree": tree},
+        "definitions": [],
+    }
+    encoded = metadata.read_bytes()
+    assert encoded == json.dumps(
+        expected, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False,
+    ).encode("utf-8")
+    assert snapshot.admissions == {"astrid_motion": {
+        "packId": "astrid_motion", "sourceDigest": digest,
+        "committedRevision": result.revision, "transactionId": result.transaction_id,
+        "definitionsDigest": hashlib.sha256(encoded).hexdigest(),
+    }}
     assert _source_inventory(PACK_ROOT) == before
