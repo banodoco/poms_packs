@@ -260,7 +260,7 @@ def test_real_pack_release_group_admission(tmp_path):
     pin = read_pin(selected / "PIN")
     repository = REPO_ROOT.as_uri()
     assert pin == {
-        "version": 1, "source": repository, "commit": commit,
+        "version": 1, "source": repository + "#astrid_motion", "commit": commit,
         "digest_rule": "pack-tree-v1", "digest": digest, "origin": "default",
     }
     assert pack_digest(selected) == digest
