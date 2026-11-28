@@ -1,7 +1,7 @@
 schema_version: 3
 id: astrid_video
 name: Astrid Video
-version: 0.18.0
+version: 0.19.0
 status: active
 domain: media
 stability: experimental
@@ -134,6 +134,10 @@ rendering:
     - kind: asset
       path: rendering/elements/effects/continuous-sequence/assets/settle.png
 resources:
+- kind: shared
+  path: extensions/reply-reveal.ts
+- kind: reference
+  path: docs/references/agent-reply-reveal.md
 - kind: shared
   path: shared/style.ts
 - kind: shared

@@ -6,7 +6,7 @@ import jsonschema
 
 root=Path(__file__).resolve().parents[1]/'astrid_video'
 pack=yaml.safe_load((root/'pack.yaml').read_text())
-assert pack['schema_version']==3 and pack['id']==root.name and pack['version']=='0.18.0'
+assert pack['schema_version']==3 and pack['id']==root.name and pack['version']=='0.19.0'
 assert pack['documentation']['kind']=='skill' and (root/pack['documentation']['path']).is_file()
 resources={r['path'] for r in pack.get('resources',[])}
 for d in pack['rendering'].values():

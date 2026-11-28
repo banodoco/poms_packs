@@ -38,3 +38,5 @@ Read [native integration](references/native-integration.md) before the first use
 2. Select a restrained palette and type hierarchy. Animate the change, not the entire canvas; preserve the fidelity of media, interface and main copy.
 3. Create a low-fidelity edit, get feedback, then refine real shots and motions. Use deterministic clip-relative settings, actual admitted element refs, and Astrid's supported timeline/media tools.
 4. Review the settled and transitional frames, sound, small-screen readability and export. Only claim saved edits, admission or render results when the actual host confirms them.
+
+For a chat reply that reveals agent capabilities without leaving the conversation, use [Agent reply reveal](references/agent-reply-reveal.md) (authoring recipe for Living Composition).

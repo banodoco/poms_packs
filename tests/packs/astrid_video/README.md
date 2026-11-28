@@ -1,4 +1,8 @@
-# Astrid Video v0.18 — process choreography and image handoff
+# Astrid Video v0.19 — agent reply reveal
+
+Adds an author-time `replyRevealRecipe` with fixed agent identity and optional model badge; animated thinking/loading states become capability cards then final reply using Living Composition. No renderer changes. See `astrid_video/docs/references/agent-reply-reveal.md`. Compile the pure TS recipe with `tsc --target es2020 --module commonjs --strict --rootDir astrid_video --outDir preview astrid_video/extensions/reply-reveal.ts` and run `node preview/test-reply.cjs`.
+
+## v0.18 — process choreography and image handoff
 
 Extends v0.17 with optional `pixel-link.route.bend` (0.05–0.95) for persistent horizontal–vertical–horizontal routing, `processStages` to author ordinary Living Composition poses and links from explicit input/process/result rows, and `handoffToTimeline` to resolve fully revealed image geometry at the composition boundary and verify the destination clip ID and asset binding. Timeline Assembly accepts normalized `entryRect` on incoming image clips, plus `entryChromeSeconds` for a short chrome fade while incoming cards hold. Existing rough tracks remain docked. Current bridge is image/contain-only, uses the same canvas dimensions in the authored demo, and is an author-time helper, not native runtime object sharing. Video source-clock and actual audio handoffs are not implemented. The graph is illustrative, not a scheduler. See `preview/test-handoff.cjs` for the model regression. Native install/export and real Remotion dependency compilation remain unverified.
 
