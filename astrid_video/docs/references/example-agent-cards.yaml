@@ -1,0 +1,50 @@
+duration: 5
+params:
+  theme: day
+  request: Collect the reference material.
+  title: Collecting creative references.
+  events:
+  - id: a
+    at: 0.2
+    duration: 0.7
+    text: Gather reference
+    reveals:
+    - room
+  - id: b
+    at: 1.1
+    duration: 0.8
+    text: Prepare motion sample
+    reveals:
+    - portal
+  - id: c
+    at: 2.1
+    duration: 0.8
+    text: Prepare creative note
+    reveals:
+    - note
+  - id: d
+    at: 3.1
+    duration: 0.8
+    text: Review later
+    status: waiting
+  mediaBindings:
+    room: demo-room
+    portal: demo-portal
+  output:
+    kind: cards
+    title: References and tests
+    cards:
+    - id: room
+      kind: image
+      label: Opening reference
+      asset: room
+    - id: portal
+      kind: video
+      label: Motion test
+      asset: portal
+      sourceStart: 0
+      sourceEnd: 2
+    - id: note
+      kind: text
+      label: Direction
+      text: Keep the entrance clear and deliberate.

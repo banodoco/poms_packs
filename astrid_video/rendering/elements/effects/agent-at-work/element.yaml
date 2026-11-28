@@ -1,0 +1,564 @@
+schema_version: 1
+id: agent-at-work
+kind: effect
+pack_id: astrid_video
+short_description: Agent At Work
+description: Terminal-style editorial activity replay with timed status, real media/text
+  artifacts, optional mascot cues and continuous handoff to the existing timeline
+  visualizer.
+keywords:
+- astrid-video
+- editorial
+- motion
+- agent
+metadata:
+  label: Agent At Work
+  whenToUse: Terminal-style editorial activity replay with timed status, real media/text
+    artifacts, optional mascot cues and continuous handoff to the existing timeline
+    visualizer.
+  geometry:
+    full_frame: true
+  sourceClosureSha256: sha256:f5b16e8b0d32003c6d58f112cb785364e8327d74479a510375c74fbb1d5b55ca
+defaults:
+  theme: day
+  title: Astrid at work.
+  request: Put the idea into a first draft.
+  events:
+  - id: plan
+    at: 0.2
+    duration: 0.8
+    text: Outline the sequence
+    reveals:
+    - plan
+  - id: draft
+    at: 1.2
+    duration: 0.8
+    text: Prepare the first draft
+    reveals:
+    - draft
+  output:
+    kind: cards
+    title: Creative output
+    cards:
+    - id: plan
+      kind: text
+      label: Plan
+      text: Opening · Development · Reveal
+    - id: draft
+      kind: text
+      label: First draft
+      text: Ready for creative feedback.
+  panelRatio: 0.36
+  typeRate: 45
+  mediaBindings: {}
+schema:
+  type: object
+  additionalProperties: false
+  properties:
+    theme:
+      type: string
+      enum:
+      - day
+      - night
+    title:
+      type: string
+      minLength: 1
+      maxLength: 100
+    request:
+      type: string
+      minLength: 1
+      maxLength: 240
+    events:
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          id: &id001
+            type: string
+            pattern: ^[A-Za-z0-9_-]{1,64}$
+          at:
+            type: number
+            minimum: 0
+            maximum: 120
+          duration:
+            type: number
+            minimum: 0.001
+            maximum: 120
+          text:
+            type: string
+            minLength: 1
+            maxLength: 96
+          detail:
+            type: string
+            minLength: 1
+            maxLength: 110
+          status:
+            type: string
+            enum:
+            - done
+            - failed
+            - waiting
+          reveals:
+            type: array
+            items: *id001
+            minItems: 0
+            maxItems: 16
+        required:
+        - id
+        - at
+        - duration
+        - text
+      minItems: 1
+      maxItems: 20
+    output:
+      oneOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          kind:
+            const: cards
+          title:
+            type: string
+            minLength: 1
+            maxLength: 100
+          cards:
+            type: array
+            items:
+              type: object
+              additionalProperties: false
+              properties:
+                id: *id001
+                kind:
+                  type: string
+                  enum:
+                  - image
+                  - video
+                  - text
+                label:
+                  type: string
+                  minLength: 1
+                  maxLength: 72
+                asset: *id001
+                text:
+                  type: string
+                  minLength: 1
+                  maxLength: 240
+                sourceStart:
+                  type: number
+                  minimum: 0
+                  maximum: 3600
+                sourceEnd:
+                  type: number
+                  minimum: 0.001
+                  maximum: 3600
+              required:
+              - id
+              - kind
+              - label
+              allOf:
+              - if:
+                  properties:
+                    kind:
+                      const: text
+                then:
+                  required:
+                  - text
+              - if:
+                  properties:
+                    kind:
+                      enum:
+                      - image
+                      - video
+                then:
+                  required:
+                  - asset
+              - if:
+                  properties:
+                    kind:
+                      const: video
+                then:
+                  required:
+                  - sourceEnd
+            minItems: 1
+            maxItems: 8
+        required:
+        - kind
+        - cards
+      - type: object
+        additionalProperties: false
+        properties:
+          kind:
+            const: timeline
+          timeline:
+            type: object
+            additionalProperties: false
+            properties:
+              theme:
+                type: string
+                enum:
+                - day
+                - night
+              title: &id002
+                type: string
+                minLength: 1
+                maxLength: 100
+              eyebrow: *id002
+              timelineDuration:
+                type: number
+                minimum: 0.25
+                maximum: 3600
+                description: Length of the depicted source timeline in seconds, independent
+                  of effect duration.
+              tracks:
+                type: array
+                minItems: 1
+                maxItems: 8
+                items:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    id: &id003
+                      type: string
+                      pattern: ^[A-Za-z0-9_-]{1,64}$
+                    label: *id002
+                    kind:
+                      type: string
+                      enum:
+                      - picture
+                      - graphics
+                      - audio
+                      - other
+                    color: &id004
+                      type: string
+                      pattern: ^#[0-9a-fA-F]{6}$
+                  required:
+                  - id
+                  - label
+              clips:
+                type: array
+                minItems: 1
+                maxItems: 16
+                items:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    id: *id003
+                    track: *id003
+                    at:
+                      type: number
+                      minimum: 0
+                      maximum: 3600
+                    duration:
+                      type: number
+                      minimum: 0.001
+                      maximum: 3600
+                    label: *id002
+                    kind:
+                      type: string
+                      enum:
+                      - image
+                      - video
+                      - label
+                    asset: *id003
+                    sourceStart:
+                      type: number
+                      minimum: 0
+                      maximum: 3600
+                    arrival:
+                      type: number
+                      minimum: 0
+                      maximum: 120
+                    color: *id004
+                    initiallyDocked:
+                      type: boolean
+                    entryRect:
+                      type: object
+                      additionalProperties: false
+                      required:
+                      - x
+                      - y
+                      - width
+                      - height
+                      properties:
+                        x:
+                          type: number
+                          minimum: 0
+                          maximum: 1
+                        y:
+                          type: number
+                          minimum: 0
+                          maximum: 1
+                        width:
+                          type: number
+                          minimum: 0
+                          maximum: 1
+                        height:
+                          type: number
+                          minimum: 0
+                          maximum: 1
+                  required:
+                  - id
+                  - track
+                  - at
+                  - duration
+                  - label
+                  - kind
+                  allOf:
+                  - if:
+                      properties:
+                        kind:
+                          enum:
+                          - image
+                          - video
+                    then:
+                      required:
+                      - asset
+              players:
+                type: array
+                maxItems: 3
+                items:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    id: *id003
+                    label: *id002
+                    asset: *id003
+                    sourceStart:
+                      type: number
+                      minimum: 0
+                      maximum: 3600
+                    tracks:
+                      type: array
+                      uniqueItems: true
+                      maxItems: 8
+                      items: *id003
+                  required:
+                  - id
+                  - label
+                  - asset
+              playbackRate:
+                type: number
+                minimum: 0.1
+                maximum: 4
+                description: Source timeline seconds per effect second.
+              pixelSize:
+                type: number
+                minimum: 1
+                maximum: 12
+                description: Square cell size at 1280×720, scaled to canvas.
+              organismIntensity:
+                type: number
+                minimum: 0
+                maximum: 1
+              organismFlow:
+                type: number
+                minimum: 0
+                maximum: 3
+              organismSpread:
+                type: number
+                minimum: 0
+                maximum: 1
+              seed:
+                type: integer
+                minimum: -2147483648
+                maximum: 2147483647
+              showTimecodes:
+                type: boolean
+              foreground: *id004
+              accent: *id004
+              frameColor: *id004
+              background: *id004
+              assemblySeconds:
+                type: number
+                minimum: 0.3
+                maximum: 120
+                description: Last automatic arrival, in effect-local seconds.
+              travelSeconds:
+                type: number
+                minimum: 0.1
+                maximum: 10
+                description: Duration of each card transfer.
+              revision:
+                type: object
+                additionalProperties: false
+                required:
+                - at
+                - duration
+                - clips
+                properties:
+                  at:
+                    type: number
+                    minimum: 0
+                  duration:
+                    type: number
+                    exclusiveMinimum: 0
+                  clips:
+                    type: array
+                    minItems: 1
+                    maxItems: 16
+                    items:
+                      type: object
+                      additionalProperties: false
+                      required:
+                      - id
+                      properties:
+                        id:
+                          type: string
+                          pattern: ^[A-Za-z0-9_-]{1,64}$
+                        at:
+                          type: number
+                          minimum: 0
+                        duration:
+                          type: number
+                          exclusiveMinimum: 0
+                        asset:
+                          type: string
+                          pattern: ^[A-Za-z0-9_-]{1,64}$
+                        label:
+                          type: string
+                          minLength: 1
+                          maxLength: 100
+              entryChromeSeconds:
+                type: number
+                minimum: 0
+                maximum: 3
+            required:
+            - timelineDuration
+            - tracks
+            - clips
+          assembleAt:
+            type: number
+            minimum: 0
+            maximum: 120
+          expandAt:
+            type: number
+            minimum: 0
+            maximum: 120
+          expandSeconds:
+            type: number
+            minimum: 0.1
+            maximum: 10
+        required:
+        - kind
+        - timeline
+        - assembleAt
+        - expandAt
+    mink:
+      type: object
+      additionalProperties: false
+      properties:
+        start: &id005
+          type: object
+          additionalProperties: false
+          properties:
+            x:
+              type: number
+              minimum: -0.5
+              maximum: 1.5
+            y:
+              type: number
+              minimum: -0.5
+              maximum: 1.5
+          required:
+          - x
+          - y
+        size:
+          type: number
+          minimum: 0.03
+          maximum: 0.65
+        rate:
+          type: number
+          minimum: 0.25
+          maximum: 3
+        anchors:
+          type: object
+          propertyNames: *id001
+          additionalProperties: *id005
+          maxProperties: 32
+        cues:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              at:
+                type: number
+                minimum: 0
+                maximum: 120
+              action:
+                type: string
+                enum:
+                - run
+                - idle
+                - wave
+                - settle
+                - jump
+                - peek
+                - hide
+              to:
+                oneOf:
+                - *id001
+                - *id005
+              duration:
+                type: number
+                minimum: 0.001
+                maximum: 120
+              facing:
+                type: string
+                enum:
+                - left
+                - right
+              depth:
+                type: string
+                enum:
+                - front
+                - behind
+              size:
+                type: number
+                minimum: 0.03
+                maximum: 0.65
+              rate:
+                type: number
+                minimum: 0.25
+                maximum: 3
+            required:
+            - at
+            - action
+          minItems: 1
+          maxItems: 64
+      required:
+      - cues
+    panelRatio:
+      type: number
+      minimum: 0.27
+      maximum: 0.48
+    typeRate:
+      type: number
+      minimum: 8
+      maximum: 120
+    mediaBindings:
+      type: object
+      maxProperties: 32
+      propertyNames: *id001
+      additionalProperties:
+        type: string
+        minLength: 1
+        maxLength: 512
+    background: &id006
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    foreground: *id006
+    accent: *id006
+  required:
+  - request
+  - events
+  - output
+runtime:
+  adapter: remotion
+dependencies: {}
+assets:
+  mink-run: assets/run.png
+  mink-idle: assets/idle.png
+  mink-wave: assets/wave.png
+  mink-settle: assets/settle.png

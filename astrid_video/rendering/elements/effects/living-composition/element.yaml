@@ -1,0 +1,516 @@
+schema_version: 1
+id: living-composition
+kind: effect
+pack_id: astrid_video
+short_description: Compose successive visual destinations with living pixel choreography.
+description: Frame-pure visual destinations, persistent objects, living carriers and
+  accents. Use verified managed-media slots when the host implements the binding contract;
+  immutable pack assets remain available for demo renders. Top-level controls are
+  native inspector parameters.
+keywords:
+- choreography
+- montage
+- pixel
+- remotion
+- astrid-video
+metadata:
+  label: Living Composition
+  whenToUse: Author a continuous explainer composition with several timed destinations,
+    rather than a series of disconnected effects.
+  clipTypeAliases:
+  - living-composition
+  role: x-composition
+  geometry:
+    full_frame: true
+  presets:
+    Quiet:
+      restJitter: 0
+      organismFlow: 0.5
+    Energetic:
+      transitionSpeed: 1.5
+      restJitter: 0.2
+      organismFlow: 1.5
+  sourceClosureSha256: sha256:ab1f8cb772d1709c318b9fb7537e1754e6e6d02d142c6d3bd70a840d5f31f2be
+defaults:
+  version: 1
+  theme: day
+  items:
+    intro:
+      kind: text
+      text: Creative direction.
+      subtitle: A living composition, ready to configure.
+  poses:
+  - at: 0
+    layout: hero
+    items:
+    - intro
+  behaviour: carry
+  transitionDuration: 0.8
+  transitionSpeed: 1
+  stagger: 0.1
+  restJitter: 0.12
+  restSpeed: 0.55
+  organismFlow: 1
+  organismIntensity: 0.86
+  organismSpread: 0.62
+  organismPixelSize: 3
+  edgeReveal: false
+  randomness: 0.7
+  pixelSize: 16
+  crawlStyle: ragged
+  seed: 17
+  direction: bottom-to-top
+  compositionScale: 1
+schema:
+  type: object
+  additionalProperties: false
+  properties:
+    version:
+      const: 1
+    items:
+      type: object
+      additionalProperties:
+        type: object
+        additionalProperties: false
+        properties:
+          kind:
+            type: string
+            enum:
+            - image
+            - video
+            - text
+          asset: &id001
+            type: string
+            minLength: 1
+          text: *id001
+          subtitle:
+            type: string
+          fit:
+            type: string
+            enum:
+            - cover
+            - contain
+          sourceStart:
+            type: number
+            minimum: 0
+          sourceEnd:
+            type: number
+            exclusiveMinimum: 0
+          aspect:
+            type: number
+            minimum: 0.2
+            maximum: 5
+          scale:
+            type: number
+            minimum: 0.2
+            maximum: 1.5
+        required:
+        - kind
+        allOf:
+        - if:
+            properties:
+              kind:
+                const: text
+          then:
+            required:
+            - text
+          else:
+            required:
+            - asset
+        - if:
+            properties:
+              kind:
+                const: video
+          then:
+            required:
+            - sourceEnd
+      minProperties: 1
+    defaults:
+      type: object
+      additionalProperties: false
+      properties:
+        transitionDuration: &id006
+          type: number
+          minimum: 0
+          maximum: 5
+        transitionSpeed: &id007
+          type: number
+          minimum: 0.1
+          maximum: 4
+        stagger: &id008
+          type: number
+          minimum: 0
+          maximum: 1
+        restJitter: &id009
+          type: number
+          minimum: 0
+          maximum: 1
+        restSpeed: &id010
+          type: number
+          minimum: 0
+          maximum: 3
+        organismFlow:
+          type: number
+          minimum: 0
+          maximum: 3
+        organismIntensity: &id011
+          type: number
+          minimum: 0
+          maximum: 1
+        organismSpread: &id012
+          type: number
+          minimum: 0
+          maximum: 1
+        organismPixelSize:
+          type: number
+          minimum: 3
+          maximum: 18
+        edgeReveal: &id013
+          type: boolean
+        randomness: &id014
+          type: number
+          minimum: 0
+          maximum: 1.5
+        pixelSize: &id015
+          type: number
+          minimum: 8
+          maximum: 100
+        crawlStyle: &id016
+          type: string
+          enum:
+          - clean
+          - ragged
+          - noisy
+          - chunky
+        seed:
+          type: integer
+        direction: &id005
+          type: string
+          enum:
+          - left-to-right
+          - right-to-left
+          - top-to-bottom
+          - bottom-to-top
+        compositionScale: &id017
+          type: number
+          minimum: 0.2
+          maximum: 1.5
+        behaviour: &id003
+          type: string
+          enum:
+          - carry
+          - present
+          - none
+      description: Legacy v0.10 scene defaults; canonical new compositions use top-level
+        scalar controls. Explicit top-level values win.
+    safeArea: &id002
+      type: object
+      additionalProperties: false
+      properties:
+        x:
+          type: number
+          minimum: 0
+          maximum: 1
+        y:
+          type: number
+          minimum: 0
+          maximum: 1
+        width:
+          type: number
+          minimum: 0.025
+          maximum: 1
+        height:
+          type: number
+          minimum: 0.025
+          maximum: 1
+      required:
+      - x
+      - y
+      - width
+      - height
+    poses:
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          at:
+            type: number
+            minimum: 0
+          name: *id001
+          layout:
+            type: string
+            enum:
+            - hero
+            - columns
+            - grid
+            - centre-emphasis
+            - comparison
+            - timeline
+            - diagonal
+            - custom
+          items:
+            type: array
+            items:
+              oneOf:
+              - *id001
+              - type: object
+                additionalProperties: false
+                properties:
+                  id: *id001
+                  media: *id001
+                  rect: *id002
+                  scale:
+                    type: number
+                    minimum: 0.2
+                    maximum: 1.5
+                required:
+                - id
+            maxItems: 20
+          behaviour: *id003
+          scale:
+            type: number
+            minimum: 0.2
+            maximum: 1.5
+          transition:
+            oneOf:
+            - &id004
+              type: string
+              enum:
+              - auto
+              - exchange
+              - rearrange
+              - replace
+              - cut
+            - type: object
+              additionalProperties: false
+              properties:
+                type: *id004
+                duration:
+                  type: number
+                  minimum: 0
+                  maximum: 5
+                speed:
+                  type: number
+                  minimum: 0.1
+                  maximum: 4
+                stagger:
+                  type: number
+                  minimum: 0
+                  maximum: 1
+                direction: *id005
+                edgeReveal:
+                  type: boolean
+          motion:
+            type: object
+            additionalProperties: false
+            properties:
+              transitionDuration: *id006
+              transitionSpeed: *id007
+              stagger: *id008
+              restJitter: *id009
+              restSpeed: *id010
+              organismIntensity: *id011
+              organismSpread: *id012
+              edgeReveal: *id013
+              randomness: *id014
+              pixelSize: *id015
+              crawlStyle: *id016
+              direction: *id005
+              compositionScale: *id017
+        required:
+        - at
+        - layout
+        - items
+      minItems: 1
+    accents:
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          at:
+            type: number
+            minimum: 0
+          duration:
+            type: number
+            minimum: 0.04
+            maximum: 30
+          effect:
+            type: string
+            enum:
+            - pixel-pulse
+            - pixel-underline
+            - pixel-connect
+            - pixel-link
+          target: *id001
+          to: *id001
+          intensity:
+            type: number
+            minimum: 0
+            maximum: 1
+          route:
+            type: object
+            additionalProperties: false
+            required:
+            - bend
+            properties:
+              bend:
+                type: number
+                minimum: 0.05
+                maximum: 0.95
+        allOf:
+        - if:
+            properties:
+              effect:
+                const: pixel-link
+          then:
+            required:
+            - to
+          else:
+            properties:
+              duration:
+                maximum: 5
+              route: false
+        required:
+        - at
+        - effect
+        - target
+    theme:
+      type: string
+      enum:
+      - day
+      - night
+    background: &id018
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    foreground: *id018
+    accent: *id018
+    frameColor: *id018
+    mediaBindings:
+      type: object
+      maxProperties: 128
+      description: Logical media slot to existing authorized timeline registry key.
+        Requires native managed-element-media host support. No paths, URLs or bytes.
+      propertyNames:
+        pattern: ^[A-Za-z0-9][A-Za-z0-9_.-]{0,95}$
+      additionalProperties:
+        type: string
+        minLength: 1
+        maxLength: 256
+    transitionDuration:
+      type: number
+      minimum: 0
+      maximum: 5
+      description: Default transition seconds before the authored arrival.
+      multipleOf: 0.01
+    transitionSpeed:
+      type: number
+      minimum: 0.1
+      maximum: 4
+      description: Choreography speed multiplier; destination arrival times do not
+        change.
+      multipleOf: 0.01
+    stagger:
+      type: number
+      minimum: 0
+      maximum: 1
+      description: Default arrival delay between objects.
+      multipleOf: 0.01
+    restJitter:
+      type: number
+      minimum: 0
+      maximum: 1
+      description: Amount of resting cargo movement; zero keeps cards fixed.
+      multipleOf: 0.01
+    restSpeed:
+      type: number
+      minimum: 0
+      maximum: 3
+      description: Resting cargo drift speed, independent of transition speed.
+      multipleOf: 0.01
+    organismFlow:
+      type: number
+      minimum: 0
+      maximum: 3
+      description: Swimming speed of the organism, independent of cargo motion.
+      multipleOf: 0.01
+    organismIntensity:
+      type: number
+      minimum: 0
+      maximum: 1
+      description: Amount of living tissue.
+      multipleOf: 0.01
+    organismSpread:
+      type: number
+      minimum: 0
+      maximum: 1
+      description: Visible spread around each load.
+      multipleOf: 0.01
+    organismPixelSize:
+      type: number
+      minimum: 3
+      maximum: 18
+      description: Scene-wide living-cell size at reference resolution.
+      multipleOf: 1
+    edgeReveal:
+      type: boolean
+      description: Use a pixel membrane rather than intact transport.
+    randomness:
+      type: number
+      minimum: 0
+      maximum: 1.5
+      description: Irregularity of the pixel frontier.
+      multipleOf: 0.01
+    pixelSize:
+      type: number
+      minimum: 8
+      maximum: 100
+      description: Default pixelSize for the composition.
+      multipleOf: 1
+    crawlStyle:
+      type: string
+      enum:
+      - clean
+      - ragged
+      - noisy
+      - chunky
+      description: Default crawlStyle for the composition.
+    seed:
+      type: integer
+      description: Default seed for the composition.
+    direction:
+      type: string
+      enum:
+      - left-to-right
+      - right-to-left
+      - top-to-bottom
+      - bottom-to-top
+      description: Default direction for the composition.
+    compositionScale:
+      type: number
+      minimum: 0.2
+      maximum: 1.5
+      description: Scale the entire destination around its centre.
+      multipleOf: 0.01
+    behaviour:
+      type: string
+      enum:
+      - carry
+      - present
+      - none
+      description: Default behaviour for the composition.
+  required:
+  - version
+  - items
+  - poses
+assets:
+  ascent: assets/ascent.mp4
+  mink: assets/mink.png
+  room: assets/room.png
+  landscape: assets/landscape.png
+  storyboard: assets/storyboard.png
+  portal: assets/portal.mp4
+runtime:
+  adapter: remotion
+dependencies: {}

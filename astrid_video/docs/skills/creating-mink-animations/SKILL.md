@@ -1,0 +1,16 @@
+---
+name: creating-mink-animations
+description: Extend the canonical Astrid mink sprite library with reviewed, aligned static poses, loops and transitions; use when an existing performer cue cannot express a needed gesture.
+---
+
+# Creating mink animations
+
+Use the [canonical character sheet](../../references/mink-character-guide.jpg), [identity rules](../../references/mink-character.md) and [source/provenance and sprite contract](../../references/mink-performance.md). Match the long low body and slender neck, cream throat/belly, orange coat, dark tail tip, small ears, simple eye and one-pixel outline. The approved upright pose is still the same elongated animal. Do not redesign it into a stock chibi otter. Keep front and rear limbs plausible: in a wave the near forepaw gestures, the other remains visibly attached/resting. A genuine occlusion should read as occlusion, not missing anatomy. Preserve head size, ground contact and palette across frames.
+
+## Small creation loop
+
+1. Check [performing with Astrid's mink](../performing-with-astrid-mink/SKILL.md) first. Name the missing gesture and its purpose; decide static (one frame), repeatable loop, one-shot, or transition with specified entry/exit poses. Start with 4–12 meaningful frames, not a long asset library.
+2. Use the original sprite strips and character guide as references. For image generation, request **only** a transparent equal-cell grid of the one action, consistent camera angle, exact scale and ground anchor, full silhouette in every cell, no labels, UI, captions, backgrounds or extra decoration. Keep the original generation separate. If it returns a poster, wrong character or inconsistent anatomy, reject it. Hand-correct the pixels on the candidate as necessary; record the source and what changed.
+3. Normalize the candidate into the common 96×88 transparent cells with anchor (48,80), nearest-neighbour. Use the [import command](../../references/mink-performance.md#import-a-generated-sheet-for-review) in the pack's development tests. Never crop/recenter individual poses independently; body landmarks must remain registered as paws move. Inspect all cells for extra/missing limbs, ghost pixels, edge clipping, differing scales, palette drift and transparent background. Keep consistent resting paws even in profile; compare a larger pixel-grid view and the actual use size.
+4. Make a review GIF and an enlarged contact sheet. Check the first/last/peak frames, loop seam and transition from/to the existing pose. Ask for creator judgment where silhouette or style changes materially. The GIF is a review asset only; deterministic sprite sheets are the runtime source. Retain provenance and original source bytes.
+5. Promote only reviewed candidates using the [registration contract](../../references/mink-performance.md#register-a-reviewed-animation). Update the exact registry, declared immutable assets in every consumer, action schema/dispatch only as required and revision fingerprints. Reuse the movement engine. Run the focused asset and timing tests and the actual animation preview; when a real host is available, check admitted preview/export alpha and frame selection. Do not claim creator approval or native qualification from an offline preview. Return to the performance skill to apply the gesture to the real scene.

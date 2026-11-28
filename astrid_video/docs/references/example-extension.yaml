@@ -1,0 +1,91 @@
+duration: 8
+composition:
+  version: 1
+  theme: night
+  items:
+    room:
+      kind: image
+      asset: room
+    story:
+      kind: image
+      asset: storyboard
+    mink:
+      kind: image
+      asset: mink
+    portal:
+      kind: video
+      asset: portal
+      sourceEnd: 2.4
+    land:
+      kind: image
+      asset: landscape
+    ascent:
+      kind: video
+      asset: ascent
+      sourceEnd: 2.4
+    label:
+      kind: text
+      text: A world of possibilities.
+      subtitle: Open models, working together.
+      aspect: 1.6
+    script:
+      kind: text
+      text: Story & script
+      subtitle: Find the sequence first.
+      aspect: 1.55
+  poses:
+  - at: 0
+    name: Editorial opening
+    layout: comparison
+    items:
+    - label
+    - room
+    behaviour: none
+  - at: 2.7
+    name: Diagonal study
+    layout: diagonal
+    items:
+    - label
+    - room
+    - story
+    behaviour: carry
+    transition:
+      duration: 0.8
+      direction: right-to-left
+    motion:
+      restJitter: 0
+  - at: 5.0
+    name: Three raised examples
+    layout: centre-emphasis
+    items:
+    - room
+    - story
+    - land
+    behaviour: present
+    scale: 0.92
+    transition:
+      duration: 0.7
+      speed: 1.5
+  - at: 7.2
+    name: Final reference
+    layout: hero
+    items:
+    - land
+    behaviour: carry
+    transition:
+      duration: 0.9
+  accents:
+  - at: 2.85
+    effect: pixel-underline
+    target: label
+    duration: 0.7
+  - at: 5.1
+    effect: pixel-pulse
+    target: story
+    duration: 0.7
+  behaviour: carry
+  direction: bottom-to-top
+  transitionDuration: 0.85
+  restJitter: 0.3
+  restSpeed: 0.9
+  organismFlow: 0.85

@@ -1,0 +1,73 @@
+{
+  "transitionSeconds": 0.42,
+  "inset": 0.055,
+  "drift": 1,
+  "pixelSize": 16,
+  "seed": 17,
+  "showCounter": false,
+  "fit": "cover",
+  "direction": "left-to-right",
+  "directions": [
+    "left-to-right",
+    "top-to-bottom",
+    "right-to-left",
+    "bottom-to-top",
+    "left-to-right"
+  ],
+  "sparkDensity": 0.1,
+  "randomness": 0.82,
+  "cards": [
+    {
+      "asset": "room",
+      "kind": "image",
+      "weight": 1.1,
+      "label": "SCENE REFERENCE"
+    },
+    {
+      "asset": "storyboard",
+      "kind": "image",
+      "weight": 0.9,
+      "label": "ROUGH SEQUENCE"
+    },
+    {
+      "asset": "mink",
+      "kind": "image",
+      "weight": 1.0,
+      "label": "CHARACTER STUDY"
+    },
+    {
+      "asset": "portal",
+      "kind": "video",
+      "weight": 0.9,
+      "label": "MOTION STUDY"
+    },
+    {
+      "asset": "landscape",
+      "kind": "image",
+      "weight": 1.0,
+      "label": "WORLD STUDY"
+    },
+    {
+      "asset": "ascent",
+      "kind": "video",
+      "weight": 1.5,
+      "label": "CONTINUATION"
+    }
+  ],
+  "crawlStyle": "ragged",
+  "crawlStyles": [
+    "ragged",
+    "clean",
+    "noisy",
+    "chunky",
+    "ragged"
+  ],
+  "transitionDurations": [
+    0.42,
+    0.24,
+    0.52,
+    0.37,
+    0.6
+  ],
+  "theme": "day"
+}

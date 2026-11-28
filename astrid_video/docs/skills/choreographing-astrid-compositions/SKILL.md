@@ -1,0 +1,33 @@
+---
+name: choreographing-astrid-compositions
+description: Turn the creator's instructions, narration and media into inspectable timed destinations, using Living Composition without writing animation code.
+---
+
+# Choreographing Astrid compositions
+
+**Author destinations, not animations.** The creator directs; the program choreographs. Respect explicit instructions and approved creative decisions over pack defaults. Read the [visual grammar](../../references/visual-grammar.png), [living pixels](../../references/living-pixels.md) and [composition contract](../../references/composition-contract.md). Discover what is actually available; do not promise unimplemented effects or host features.
+
+## Normal workflow
+
+1. Read the user's instructions, existing timeline and narration; inspect actual media and the spoken beats. Decide what the viewer should see, understand or feel. Ask for a consequential taste decision only when necessary; make low-risk layout and timing choices independently. Don't turn a request for a small edit into a redesign.
+2. List the content with stable, meaningful identities and source ranges. Preserve an identity when the same object moves or is enlarged; override its `media` only when the *same carrier* should reveal different content. Use real, permitted source assets. Do not invent asset keys, generation results or logs. Use [native integration](../../references/native-integration.md). Bind stable slots to verified registry keys only on a host that supports generic managed-media projection; otherwise use the asset-free native smoke or existing immutable pack media for a demo, and report the missing host capability. Never copy project footage into the pack or invent a URL to bypass custody.
+3. Choose a few meaningful destinations, with `at` in seconds specifying the **arrival**, not the start of movement. Align these to the narration or the user's specified timing. Use the smallest appropriate preset (`hero`, `columns`, `comparison`, `grid`, `centre-emphasis`, `timeline`, `diagonal`). Adjust group or item scale and, only where required, normalized rectangles. Protect safe areas, relative prominence, aspect ratios and small-screen readability. Empty poses are allowed to clear the composition. Preserve previously approved beats.
+4. Choose the behaviour that fits the intent: `carry` (whole hidden swimming colony), `present` (porous streams pooling behind loads), or `none` (plain composition). Default transitions infer entries, exits, moves, resizes and replacements. Choose an intact exchange or a pixel reveal when it communicates something. Add a brief item-attached accent only where it serves a beat. Prefer the shared controls to new code. Keep resting jitter, its speed, transition speed and organism flow independent. The pixels act; pristine content remains the focus. Do not introduce literal hands or decorative particle noise.
+5. Validate and compile. Inspect the actual destination storyboard, resolved rectangles, timing sheet, warnings and a low-resolution motion preview from that same input. Fix timing conflicts, unreadable cards, unintended overlaps, excessive motion and missing support. In this prototype the offline inspection commands are in the root README; inside Astrid use the supported render/visualize paths once admitted. Do not treat a diagram as a successful host render.
+6. Show the creator a compact review of the sequence and the actual preview. If feedback concerns scale, speed, positions or rest, change only the matching settings. If they ask to exchange media, change the media or identity as intended. Keep unrelated placements and timing intact. Iterate with concrete evidence; don't ask the creator to approve implementation trivia.
+7. If a genuine capability is missing, consult [Designing Astrid effects](../designing-astrid-effects/SKILL.md) and [extension contract](../../references/extension-contract.md). Prefer a recipe before adding code, then add the smallest missing layout, behaviour or accent. Reuse the engine. Do not create a parallel renderer or hand-keyframe the organism for one edit.
+8. Deliver through the actual supported Astrid workflow: resolve media, validate, admit, place using exact revisions and expected head, inspect saved timeline and render. Retain the source spec and review outputs. Verify the editor/export result; disclose limitations and blockers. Never claim a saved timeline or host verification from a standalone preview.
+
+## Quick start
+
+Study [the multi-pose journey](../../references/example-journey.yaml), [same-carrier exchange](../../references/example-exchange.yaml) and [extension example](../../references/example-extension.yaml). Use the top-level scalar controls for inspector-compatible settings; prepare legacy nested `defaults` with the supplied preparation tool. The `composition` object is the Living Composition parameter payload; the outer `duration` is the effect clip hold in seconds. Use JSON for the actual element parameters, YAML for readable direction.
+
+## Show how an edit was assembled
+
+When the creative intent is to explain the ingredients of an actual edit, choose the [timeline visualization primitives](../../references/timeline-visualizers.md) instead of recreating a timeline using generic card poses. Derive real track/time values from the project, use an actual rendered video for each player, and preserve independent assembly and playback clocks.
+
+## Combine existing primitives
+
+For an agent activity-to-timeline handoff use [showing agent work](../showing-agent-work/SKILL.md), which already reuses the timeline engine. For a mascot layer use [performing with the mink](../performing-with-astrid-mink/SKILL.md). Place ordinary outputs and overlays on the same authoritative timeline; preserve identities and source clocks at handoffs. No new effect is needed when these are sufficient.
+
+For input → workflow → result sequences use `processStages` and `pixel-link.route` from the [composition contract](../../references/composition-contract.md). Retain each real output ID, clear intermediate cards and use `handoffToTimeline` to carry the final image bounds into the [timeline visualizer](../../references/timeline-visualizers.md). Preserve real media bindings and initially docked tracks; do not fabricate graph or execution evidence.

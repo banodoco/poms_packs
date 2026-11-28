@@ -1,0 +1,114 @@
+duration: 9
+composition:
+  version: 1
+  theme: day
+  items:
+    room:
+      kind: image
+      asset: room
+    story:
+      kind: image
+      asset: storyboard
+    mink:
+      kind: image
+      asset: mink
+    portal:
+      kind: video
+      asset: portal
+      sourceEnd: 2.4
+    land:
+      kind: image
+      asset: landscape
+    ascent:
+      kind: video
+      asset: ascent
+      sourceEnd: 2.4
+    label:
+      kind: text
+      text: A world of possibilities.
+      subtitle: Open models, working together.
+      aspect: 1.6
+    script:
+      kind: text
+      text: Story & script
+      subtitle: Find the sequence first.
+      aspect: 1.55
+  poses:
+  - at: 1.05
+    name: Three held inputs
+    layout: centre-emphasis
+    items:
+    - room
+    - story
+    - mink
+  - at: 3.5
+    name: New payloads, same carriers
+    layout: centre-emphasis
+    items:
+    - id: room
+      media: land
+    - id: story
+      media: portal
+    - id: mink
+      media: ascent
+    transition:
+      type: replace
+      duration: 0.85
+      edgeReveal: true
+      direction: left-to-right
+  - at: 5.8
+    name: Rearrange the same three
+    layout: custom
+    items:
+    - id: room
+      media: land
+      rect:
+        x: 0.08
+        y: 0.14
+        width: 0.26
+        height: 0.3
+    - id: story
+      media: portal
+      rect:
+        x: 0.36
+        y: 0.45
+        width: 0.44
+        height: 0.39
+    - id: mink
+      media: ascent
+      rect:
+        x: 0.69
+        y: 0.07
+        width: 0.25
+        height: 0.27
+    transition:
+      type: rearrange
+      duration: 0.9
+      speed: 1.25
+  - at: 8.0
+    name: One remains
+    layout: hero
+    items:
+    - id: story
+      media: portal
+    transition:
+      duration: 0.85
+      direction: bottom-to-top
+  accents:
+  - at: 3.75
+    effect: pixel-pulse
+    target: story
+    duration: 0.7
+  - at: 6
+    effect: pixel-connect
+    target: room
+    to: mink
+    duration: 0.9
+  behaviour: present
+  direction: bottom-to-top
+  transitionDuration: 0.85
+  restJitter: 0.12
+  restSpeed: 0.6
+  organismFlow: 1.05
+  organismSpread: 0.72
+  randomness: 0.85

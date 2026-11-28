@@ -1,0 +1,274 @@
+schema_version: 3
+id: astrid_video
+name: Astrid Video
+version: 0.19.0
+status: active
+domain: media
+stability: experimental
+support: project
+visibility: visible
+description: Reusable editorial video elements, living-pixel choreography, agent activity
+  and frame-driven mascot performance for Astrid.
+permissions:
+- id: project_files
+  reason: Provides declared demo media and consumes project-owned media through Astrid
+    where supported.
+documentation:
+  kind: skill
+  path: docs/SKILL.md
+rendering:
+  effects/pixel-card-shuffle:
+    type: element
+    path: rendering/elements/effects/pixel-card-shuffle/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/pixel-card-shuffle/component.tsx
+    - kind: asset
+      path: rendering/elements/effects/pixel-card-shuffle/assets/room.png
+    - kind: asset
+      path: rendering/elements/effects/pixel-card-shuffle/assets/storyboard.png
+    - kind: asset
+      path: rendering/elements/effects/pixel-card-shuffle/assets/mink.png
+    - kind: asset
+      path: rendering/elements/effects/pixel-card-shuffle/assets/portal.mp4
+    - kind: asset
+      path: rendering/elements/effects/pixel-card-shuffle/assets/landscape.png
+    - kind: asset
+      path: rendering/elements/effects/pixel-card-shuffle/assets/ascent.mp4
+  effects/chapter-card:
+    type: element
+    path: rendering/elements/effects/chapter-card/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/chapter-card/component.tsx
+  effects/pixel-network:
+    type: element
+    path: rendering/elements/effects/pixel-network/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/pixel-network/component.tsx
+  effects/pixel-arm-display:
+    type: element
+    path: rendering/elements/effects/pixel-arm-display/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/pixel-arm-display/component.tsx
+    - kind: implementation
+      path: rendering/elements/effects/pixel-arm-display/preset.ts
+    - kind: asset
+      path: rendering/elements/effects/pixel-arm-display/assets/room.png
+    - kind: asset
+      path: rendering/elements/effects/pixel-arm-display/assets/storyboard.png
+    - kind: asset
+      path: rendering/elements/effects/pixel-arm-display/assets/landscape.png
+  effects/living-composition:
+    type: element
+    path: rendering/elements/effects/living-composition/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/living-composition/component.tsx
+    - kind: asset
+      path: rendering/elements/effects/living-composition/assets/ascent.mp4
+    - kind: asset
+      path: rendering/elements/effects/living-composition/assets/mink.png
+    - kind: asset
+      path: rendering/elements/effects/living-composition/assets/room.png
+    - kind: asset
+      path: rendering/elements/effects/living-composition/assets/landscape.png
+    - kind: asset
+      path: rendering/elements/effects/living-composition/assets/storyboard.png
+    - kind: asset
+      path: rendering/elements/effects/living-composition/assets/portal.mp4
+  effects/timeline-assembly:
+    type: element
+    path: rendering/elements/effects/timeline-assembly/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/timeline-assembly/component.tsx
+  effects/timeline-player-visualizer:
+    type: element
+    path: rendering/elements/effects/timeline-player-visualizer/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/timeline-player-visualizer/component.tsx
+  effects/mink-performer:
+    type: element
+    path: rendering/elements/effects/mink-performer/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/mink-performer/component.tsx
+    - kind: asset
+      path: rendering/elements/effects/mink-performer/assets/run.png
+    - kind: asset
+      path: rendering/elements/effects/mink-performer/assets/idle.png
+    - kind: asset
+      path: rendering/elements/effects/mink-performer/assets/wave.png
+    - kind: asset
+      path: rendering/elements/effects/mink-performer/assets/settle.png
+  effects/agent-at-work:
+    type: element
+    path: rendering/elements/effects/agent-at-work/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/agent-at-work/component.tsx
+    - kind: asset
+      path: rendering/elements/effects/agent-at-work/assets/run.png
+    - kind: asset
+      path: rendering/elements/effects/agent-at-work/assets/idle.png
+    - kind: asset
+      path: rendering/elements/effects/agent-at-work/assets/wave.png
+    - kind: asset
+      path: rendering/elements/effects/agent-at-work/assets/settle.png
+  effects/continuous-sequence:
+    type: element
+    path: rendering/elements/effects/continuous-sequence/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/continuous-sequence/component.tsx
+    - kind: asset
+      path: rendering/elements/effects/continuous-sequence/assets/run.png
+    - kind: asset
+      path: rendering/elements/effects/continuous-sequence/assets/idle.png
+    - kind: asset
+      path: rendering/elements/effects/continuous-sequence/assets/wave.png
+    - kind: asset
+      path: rendering/elements/effects/continuous-sequence/assets/settle.png
+resources:
+- kind: shared
+  path: extensions/reply-reveal.ts
+- kind: reference
+  path: docs/references/agent-reply-reveal.md
+- kind: shared
+  path: shared/style.ts
+- kind: shared
+  path: shared/organism.ts
+- kind: reference
+  path: docs/references/living-pixels.md
+- kind: reference
+  path: docs/references/living-colony.jpg
+- kind: reference
+  path: docs/references/living-limbs.jpg
+- kind: shared
+  path: shared/visuals.ts
+- kind: shared
+  path: shared/vector.tsx
+- kind: skill
+  path: docs/skills/directing-astrid-videos/SKILL.md
+- kind: skill
+  path: docs/skills/designing-astrid-effects/SKILL.md
+- kind: skill
+  path: docs/skills/reviewing-astrid-videos/SKILL.md
+- kind: reference
+  path: docs/references/visual-language.md
+- kind: reference
+  path: docs/references/motion-language.md
+- kind: reference
+  path: docs/references/mink-character.md
+- kind: reference
+  path: docs/references/effect-catalogue.md
+- kind: reference
+  path: docs/references/composition-recipes.md
+- kind: reference
+  path: docs/references/visual-grammar.png
+- kind: reference
+  path: docs/references/mink-character-guide.jpg
+- kind: shared
+  path: shared/deck/motion.ts
+- kind: shared
+  path: shared/deck/living-motion.ts
+- kind: shared
+  path: shared/deck/living-deck.tsx
+- kind: reference
+  path: docs/references/arm-display.md
+- kind: shared
+  path: shared/composition/types.ts
+- kind: shared
+  path: shared/composition/engine.ts
+- kind: shared
+  path: shared/composition/compile.ts
+- kind: shared
+  path: extensions/accents.ts
+- kind: shared
+  path: extensions/behaviours.ts
+- kind: shared
+  path: extensions/recipes.ts
+- kind: implementation
+  path: shared/composition/handoff.ts
+- kind: shared
+  path: extensions/layouts.ts
+- kind: reference
+  path: docs/references/composition-contract.md
+- kind: reference
+  path: docs/references/extension-contract.md
+- kind: reference
+  path: docs/references/example-journey.yaml
+- kind: reference
+  path: docs/references/example-exchange.yaml
+- kind: reference
+  path: docs/references/example-extension.yaml
+- kind: skill
+  path: docs/skills/choreographing-astrid-compositions/SKILL.md
+- kind: reference
+  path: docs/references/example-journey-storyboard.jpg
+- kind: reference
+  path: docs/references/example-exchange-storyboard.jpg
+- kind: reference
+  path: docs/references/example-extension-storyboard.jpg
+- kind: shared
+  path: shared/media.ts
+- kind: shared
+  path: shared/composition/defaults.ts
+- kind: reference
+  path: docs/references/native-smoke.yaml
+- kind: reference
+  path: docs/references/native-integration.md
+- kind: shared
+  path: shared/timeline/model.ts
+- kind: shared
+  path: shared/timeline/view.tsx
+- kind: reference
+  path: docs/references/timeline-visualizers.md
+- kind: reference
+  path: docs/references/example-timeline-assembly.yaml
+- kind: reference
+  path: docs/references/example-timeline-player.yaml
+- kind: reference
+  path: rendering/elements/effects/mink-performer/assets/runner-original.png
+- kind: reference
+  path: rendering/elements/effects/mink-performer/assets/juggler-original.png
+- kind: reference
+  path: rendering/elements/effects/mink-performer/assets/sprite-registry.json
+- kind: shared
+  path: shared/mink/model.ts
+- kind: shared
+  path: shared/mink/view.tsx
+- kind: shared
+  path: shared/activity/model.ts
+- kind: shared
+  path: shared/activity/view.tsx
+- kind: reference
+  path: docs/references/mink-performance.md
+- kind: reference
+  path: docs/references/agent-at-work.md
+- kind: reference
+  path: docs/references/example-mink-performance.yaml
+- kind: reference
+  path: docs/references/example-agent-at-work.yaml
+- kind: reference
+  path: docs/references/example-agent-cards.yaml
+- kind: skill
+  path: docs/skills/performing-with-astrid-mink/SKILL.md
+- kind: skill
+  path: docs/skills/creating-mink-animations/SKILL.md
+- kind: skill
+  path: docs/skills/showing-agent-work/SKILL.md
+- kind: shared
+  path: shared/sequence/model.ts
+- kind: shared
+  path: shared/sequence/view.tsx
+- kind: reference
+  path: docs/references/continuous-sequence.md
+- kind: reference
+  path: docs/references/example-continuous-sequence.json
+- kind: skill
+  path: docs/skills/choreographing-continuous-sequences/SKILL.md

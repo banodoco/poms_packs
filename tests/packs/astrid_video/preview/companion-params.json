@@ -1,0 +1,26 @@
+{
+  "chapter-card": {
+    "series": "ASTRID / FIELD NOTES",
+    "chapter": "01",
+    "titleLines": [
+      "The experiment."
+    ],
+    "subtitle": "Creative direction, meet implementation.",
+    "entranceSeconds": 0.5,
+    "seed": 17
+  },
+  "pixel-network": {
+    "heading": "The interconnected problems",
+    "nodes": [
+      "Story",
+      "Script",
+      "Characters",
+      "Video",
+      "Audio",
+      "Editing"
+    ],
+    "output": "One coherent scene",
+    "buildSeconds": 2.1,
+    "showGrid": false
+  }
+}

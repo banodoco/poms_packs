@@ -1,0 +1,66 @@
+{
+  "duration": 6.0,
+  "composition": {
+    "version": 1,
+    "theme": "day",
+    "behaviour": "present",
+    "transitionDuration": 0.7,
+    "transitionSpeed": 1,
+    "restJitter": 0.12,
+    "restSpeed": 0.55,
+    "organismFlow": 1,
+    "compositionScale": 1,
+    "items": {
+      "a": {
+        "kind": "text",
+        "text": "Story",
+        "subtitle": "Creative intention"
+      },
+      "b": {
+        "kind": "text",
+        "text": "Motion",
+        "subtitle": "Living pixels"
+      },
+      "c": {
+        "kind": "text",
+        "text": "Edit",
+        "subtitle": "One coherent scene"
+      }
+    },
+    "poses": [
+      {
+        "at": 0.7,
+        "layout": "centre-emphasis",
+        "items": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      {
+        "at": 3.3,
+        "layout": "hero",
+        "items": [
+          "b"
+        ]
+      },
+      {
+        "at": 5.1,
+        "layout": "grid",
+        "items": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    ],
+    "accents": [
+      {
+        "at": 3.5,
+        "target": "b",
+        "effect": "pixel-pulse",
+        "duration": 0.6
+      }
+    ]
+  }
+}
