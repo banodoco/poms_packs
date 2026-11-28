@@ -17,3 +17,5 @@ Read the [visual grammar](../../references/visual-grammar.png) and [composition 
 ## Route each beat to an existing capability
 
 For work in progress, use [showing agent work](../showing-agent-work/SKILL.md). For other media compositions use [choreographing compositions](../choreographing-astrid-compositions/SKILL.md). Where a mascot actually improves a beat, use [performing with the mink](../performing-with-astrid-mink/SKILL.md). Those skills decide timing and combination; only their missing capabilities trigger [designing effects](../designing-astrid-effects/SKILL.md) or [creating mink animations](../creating-mink-animations/SKILL.md). Do not load the implementation workflow just to choose a layout or gesture.
+
+For related beats that should feel like one place, use [choreographing continuous sequences](../choreographing-continuous-sequences/SKILL.md). Make only small islands continuous; keep hard cuts, comedy beats and uninterrupted footage where they serve the narrative. Generate replaceable scratch narration first, measure actual durations, review a moving rough cut with provisional Foley, then refine only the missing creative primitives.

@@ -14,3 +14,7 @@ Use these as small building blocks, not mandatory chapters. See the [visual gram
 | Final reveal | Uninterrupted full-screen creative result | Hard cut or short relevant ident; let the film dictate pacing |
 
 Window expansion, comparison, timeline assembly and mascot-led transitions are design targets unless a live pack catalogue shows their implementation. Prefer existing timeline tools and elements when a new reusable effect isn't necessary. For Into the Minkhole, preserve its project-specific narrative and rough-cut payoff rather than duplicating that script in this general pack.
+
+For a persistent hero with progressive inputs, keep its placement ID and rectangle constant, change `media` in each pose using `transition.type: replace`, and use `pixel-connect` accents from the relevant input card. For branching dispatch, arrange the source, destinations and returned media as ordinary stable objects; multiple `pixel-connect` accents can run concurrently. This is editorial choreography, not a workflow executor. For an edited timeline, use `initiallyDocked` and `revision` rather than redrawing a timeline or recreating all clips.
+
+For a readable dispatch diagram, use `pixel-link` rather than a dense organic `pixel-connect`: stable source IDs, destination IDs, and one accent from each source to its destination lasting until the editorial handoff.

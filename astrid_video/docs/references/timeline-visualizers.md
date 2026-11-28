@@ -20,3 +20,11 @@ Show a small number of meaningful tracks at once. Label real creative ingredient
 ## Examples
 
 See [assembly](example-timeline-assembly.yaml) and [two players](example-timeline-player.yaml). Both describe the same six-second generated demo edit, with three tracks and six clips. Slots in these examples must be bound to the corresponding real media; the preview generator creates matching picture-only/final-cut sources.
+
+## Evolve an existing edit (v0.16)
+
+In assembly mode, `initiallyDocked: true` keeps an earlier clip in its track from frame zero; do not also specify `arrival`. New clips travel into other tracks using ordinary `arrival` timing. To depict a targeted edit, supply one `revision: {at, duration, clips: [{id, at?, duration?, asset?, label?}]}`. The top-level `at`/`duration` are effect seconds, the patch timing is source-timeline seconds. Start after every new clip has docked; playback begins after the revision. Unchanged clips retain identity and geometry, moved/trimmed clips ease to their new intervals, and supplied replacement media/labels switch at completion. The model rejects crossing or overlapping endpoints, unknown/duplicate IDs and out-of-range intervals. This visualizes an authored edit; it does not perform media generation or alter a user's real timeline. A player, if supplied, must be the actual matching revised render.
+
+### Object-to-timeline entry (v0.18)
+
+An incoming image clip can specify `entryRect: {x,y,width,height}` in normalized canvas coordinates. Use the author-time `handoffToTimeline` helper rather than copying geometry by eye. It verifies the outgoing image and binding and supplies this rectangle. `entryChromeSeconds` optionally fades in timeline chrome while the incoming image cards keep their bounds; the clip then travels to its ordinary compiled timeline position. Retain existing `initiallyDocked` rough clips. Entry is assembly-only, image-only; waveform image proxies may depict sound, but are not audio assets. Keep the same canvas/theme, no covering layers at the cut, and inspect the actual last/first frames. Native integration remains unverified.

@@ -30,7 +30,7 @@ metadata:
       transitionSpeed: 1.5
       restJitter: 0.2
       organismFlow: 1.5
-  sourceClosureSha256: sha256:9b4c26f14df94caf9d8b356c392438a19a197917675502efe8d41b35a6442583
+  sourceClosureSha256: sha256:ab1f8cb772d1709c318b9fb7537e1754e6e6d02d142c6d3bd70a840d5f31f2be
 defaults:
   version: 1
   theme: day
@@ -266,7 +266,7 @@ schema:
                     maximum: 1.5
                 required:
                 - id
-            maxItems: 12
+            maxItems: 20
           behaviour: *id003
           scale:
             type: number
@@ -335,19 +335,43 @@ schema:
           duration:
             type: number
             minimum: 0.04
-            maximum: 5
+            maximum: 30
           effect:
             type: string
             enum:
             - pixel-pulse
             - pixel-underline
             - pixel-connect
+            - pixel-link
           target: *id001
           to: *id001
           intensity:
             type: number
             minimum: 0
             maximum: 1
+          route:
+            type: object
+            additionalProperties: false
+            required:
+            - bend
+            properties:
+              bend:
+                type: number
+                minimum: 0.05
+                maximum: 0.95
+        allOf:
+        - if:
+            properties:
+              effect:
+                const: pixel-link
+          then:
+            required:
+            - to
+          else:
+            properties:
+              duration:
+                maximum: 5
+              route: false
         required:
         - at
         - effect

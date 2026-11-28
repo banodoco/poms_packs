@@ -6,7 +6,7 @@ import jsonschema
 
 root=Path(__file__).resolve().parents[1]/'astrid_video'
 pack=yaml.safe_load((root/'pack.yaml').read_text())
-assert pack['schema_version']==3 and pack['id']==root.name and pack['version']=='0.14.0'
+assert pack['schema_version']==3 and pack['id']==root.name and pack['version']=='0.18.0'
 assert pack['documentation']['kind']=='skill' and (root/pack['documentation']['path']).is_file()
 resources={r['path'] for r in pack.get('resources',[])}
 for d in pack['rendering'].values():
@@ -22,7 +22,7 @@ for name,d in pack['rendering'].items():
  assert name=='effects/'+e['id'] and p.parent.name==e['id'] and e['runtime']['adapter']=='remotion'
  jsonschema.Draft202012Validator.check_schema(e['schema'])
  jsonschema.validate(e['defaults'],e['schema'])
- sample=json.loads((root.parent/'preview/demo-params.json').read_text()) if e['id']=='pixel-card-shuffle' else json.loads((root.parent/'preview/living-arms-params.json').read_text()) if e['id']=='pixel-arm-display' else json.loads((root.parent/'preview/examples/journey.json').read_text())['composition'] if e['id']=='living-composition' else json.loads((root.parent/'preview'/('timeline-assembly.json' if e['id']=='timeline-assembly' else 'timeline-player.json')).read_text())['params'] if e['id'] in ('timeline-assembly','timeline-player-visualizer') else json.loads((root.parent/'preview'/('mink-performance.json' if e['id']=='mink-performer' else 'agent-at-work.json')).read_text())['params'] if e['id'] in ('mink-performer','agent-at-work') else companions[e['id']]
+ sample=json.loads((root.parent/'preview/demo-params.json').read_text()) if e['id']=='pixel-card-shuffle' else json.loads((root.parent/'preview/living-arms-params.json').read_text()) if e['id']=='pixel-arm-display' else json.loads((root.parent/'preview/examples/journey.json').read_text())['composition'] if e['id']=='living-composition' else json.loads((root.parent/'preview'/('timeline-assembly.json' if e['id']=='timeline-assembly' else 'timeline-player.json')).read_text())['params'] if e['id'] in ('timeline-assembly','timeline-player-visualizer') else json.loads((root.parent/'preview'/('mink-performance.json' if e['id']=='mink-performer' else 'agent-at-work.json')).read_text())['params'] if e['id'] in ('mink-performer','agent-at-work') else json.loads((root.parent/'preview/sequence-demo.json').read_text())['params'] if e['id']=='continuous-sequence' else companions[e['id']]
  jsonschema.validate(sample,e['schema'])
  if e['id']=='living-composition':
   for example in (root.parent/'preview/examples').glob('*.json'):
@@ -43,11 +43,11 @@ for name,d in pack['rendering'].items():
    assert spec.startswith('.'),(r,spec)
    candidates=[(src.parent/spec).resolve(),(src.parent/(spec+'.ts')).resolve(),(src.parent/(spec+'.tsx')).resolve()]
    assert any(c.is_relative_to(root.resolve()) and c.is_file() and str(c.relative_to(root.resolve())) in resources for c in candidates),(r,spec)
-assert len([r for r in pack['resources'] if r['kind']=='skill'])==7
+assert len([r for r in pack['resources'] if r['kind']=='skill'])==8
 for r in pack['resources']:
  if r['kind']=='skill':
   s=(root/r['path']).read_text();assert s.startswith('---\n');meta=yaml.safe_load(s.split('---',2)[1]);assert meta['name'] and meta['description']
 for d in pack['rendering'].values():
  e=yaml.safe_load((root/d['path']).read_text());assert e['defaults']['theme']=='day';assert 'background' not in e['defaults']
  jsonschema.validate({**e['defaults'],'theme':'night'},e['schema'])
-print('PASS: 9 effect descriptors, 7 supporting skills, defaults, theme settings, example parameters, resource paths and import closure.')
+print('PASS: 10 effect descriptors, 8 supporting skills, defaults, theme settings, example parameters, resource paths and import closure.')

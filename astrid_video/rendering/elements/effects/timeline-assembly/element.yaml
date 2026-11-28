@@ -17,7 +17,7 @@ metadata:
     timeline tracks, then a supplied rendered video plays above the completed edit.
   geometry:
     full_frame: true
-  sourceClosureSha256: sha256:d7b6f776e038417c8b35eec51ad12310abef2cd1d987a0dc8cb39ec43e028201
+  sourceClosureSha256: sha256:6413e726ed62afc578d2082ac736df640c5d33d1963181b016c415d6b2cb18d6
 defaults:
   theme: day
   title: The edit takes shape.
@@ -149,6 +149,33 @@ schema:
             minimum: 0
             maximum: 120
           color: *id003
+          initiallyDocked:
+            type: boolean
+          entryRect:
+            type: object
+            additionalProperties: false
+            required:
+            - x
+            - y
+            - width
+            - height
+            properties:
+              x:
+                type: number
+                minimum: 0
+                maximum: 1
+              y:
+                type: number
+                minimum: 0
+                maximum: 1
+              width:
+                type: number
+                minimum: 0
+                maximum: 1
+              height:
+                type: number
+                minimum: 0
+                maximum: 1
         required:
         - id
         - track
@@ -239,6 +266,50 @@ schema:
       minimum: 0.1
       maximum: 10
       description: Duration of each card transfer.
+    revision:
+      type: object
+      additionalProperties: false
+      required:
+      - at
+      - duration
+      - clips
+      properties:
+        at:
+          type: number
+          minimum: 0
+        duration:
+          type: number
+          exclusiveMinimum: 0
+        clips:
+          type: array
+          minItems: 1
+          maxItems: 16
+          items:
+            type: object
+            additionalProperties: false
+            required:
+            - id
+            properties:
+              id:
+                type: string
+                pattern: ^[A-Za-z0-9_-]{1,64}$
+              at:
+                type: number
+                minimum: 0
+              duration:
+                type: number
+                exclusiveMinimum: 0
+              asset:
+                type: string
+                pattern: ^[A-Za-z0-9_-]{1,64}$
+              label:
+                type: string
+                minLength: 1
+                maxLength: 100
+    entryChromeSeconds:
+      type: number
+      minimum: 0
+      maximum: 3
   required:
   - timelineDuration
   - tracks

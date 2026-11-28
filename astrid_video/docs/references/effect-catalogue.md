@@ -1,10 +1,10 @@
 # Astrid Video — effect catalogue and integration
 
-A reusable visual language for Astrid demos, creative experiments and technical explainers. Version 0.14.0 is a review candidate, not an admitted production pack.
+A reusable visual language for Astrid demos, creative experiments and technical explainers. Version 0.15.0 is a review candidate, not an admitted production pack.
 
 ## Style and themes
 
-See [visual language](visual-language.md), [motion language](motion-language.md) and the [one-page visual grammar](visual-grammar.png) for the visual system. `theme: day` is the default for all nine effects; `night` is optional. Use per-element explicit colour overrides only when the material calls for them. Palette constants and font stacks live in `../../shared/style.ts`. No font binaries are bundled by this pack. Use Astrid's existing local fonts where available and check actual rendering.
+See [visual language](visual-language.md), [motion language](motion-language.md) and the [one-page visual grammar](visual-grammar.png) for the visual system. `theme: day` is the default for all ten effects; `night` is optional. Use per-element explicit colour overrides only when the material calls for them. Palette constants and font stacks live in `../../shared/style.ts`. No font binaries are bundled by this pack. Use Astrid's existing local fonts where available and check actual rendering.
 
 ## Implemented elements
 
@@ -128,3 +128,7 @@ Use `living-composition` for several timed destinations with retained item ident
 
 - `agent-at-work`: bounded terminal replay with actual artifact reveals and flexible card or existing timeline output. See [contract](agent-at-work.md).
 - `mink-performer`: transparent frame-driven run/settle/wave/idle performer, with named movement anchors. See [guide](mink-performance.md).
+
+## Continuous Sequence
+
+`continuous-sequence`: optional camera/actor choreography over title or media panels, with `world`, `panels`, `camera`, `actor` and logical `mediaBindings`. See [contract](continuous-sequence.md), [skill](../skills/choreographing-continuous-sequences/SKILL.md) and [asset-free example](example-continuous-sequence.json). Use original editable effect outputs as managed media and ordinary cuts between islands. Native integration remains unverified.

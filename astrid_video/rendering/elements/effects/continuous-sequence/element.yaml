@@ -1,0 +1,361 @@
+schema_version: 1
+id: continuous-sequence
+kind: effect
+pack_id: astrid_video
+short_description: Continuous Sequence
+description: 'Optional continuous editorial island: camera choreography, persistent
+  media panels and independent mink actor.'
+keywords:
+- astrid-video
+- camera
+- continuity
+- choreography
+metadata:
+  label: Continuous Sequence
+  whenToUse: When camera movement or a persistent actor helps connect editorial beats.
+    Ordinary cuts remain available.
+  geometry:
+    full_frame: true
+  sourceClosureSha256: sha256:25b50a3a5fa8f421e61bbf897cade90d3d59403cc386be63ca7844cd66bae4cf
+defaults:
+  theme: day
+  world:
+    width: 2.04
+    height: 1
+  panels:
+  - id: a
+    kind: title
+    rect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    eyebrow: 01 / INTRODUCTION
+    title: An idea.
+    subtitle: One clear starting point.
+  - id: b
+    kind: title
+    rect:
+      x: 1.04
+      y: 0
+      width: 1
+      height: 1
+    eyebrow: 02 / DETAIL
+    title: A closer look.
+    subtitle: Move the camera, not the content.
+  camera:
+  - at: 0
+    target: a
+    mode: cut
+  - at: 1.8
+    target: b
+    mode: move
+    duration: 1.0
+schema:
+  type: object
+  additionalProperties: false
+  properties:
+    theme:
+      type: string
+      enum:
+      - day
+      - night
+    world:
+      type: object
+      additionalProperties: false
+      properties:
+        width:
+          type: number
+          minimum: 1
+          maximum: 12
+        height:
+          type: number
+          minimum: 1
+          maximum: 12
+      required:
+      - width
+      - height
+    panels:
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          id: &id005
+            type: string
+            pattern: ^[A-Za-z0-9_-]{1,64}$
+          kind:
+            type: string
+            enum:
+            - title
+            - image
+            - video
+          rect:
+            type: object
+            additionalProperties: false
+            properties:
+              x: &id001
+                type: number
+                minimum: -16
+                maximum: 16
+              y: &id002
+                type: number
+                minimum: -16
+                maximum: 16
+              width: &id003
+                type: number
+                minimum: 0.02
+                maximum: 16
+              height: &id004
+                type: number
+                minimum: 0.02
+                maximum: 16
+            required:
+            - x
+            - y
+            - width
+            - height
+          poses:
+            type: array
+            items:
+              type: object
+              additionalProperties: false
+              properties:
+                x: *id001
+                y: *id002
+                width: *id003
+                height: *id004
+                at:
+                  type: number
+                  minimum: 0
+                  maximum: 1500
+              required:
+              - x
+              - y
+              - width
+              - height
+              - at
+            minItems: 0
+            maxItems: 32
+          title:
+            type: string
+            minLength: 1
+            maxLength: 120
+          eyebrow:
+            type: string
+            minLength: 1
+            maxLength: 80
+          subtitle:
+            type: string
+            minLength: 1
+            maxLength: 200
+          asset: *id005
+          playAt:
+            type: number
+            minimum: 0
+            maximum: 1500
+          sourceStart:
+            type: number
+            minimum: 0
+            maximum: 3600
+          sourceEnd:
+            type: number
+            minimum: 0
+            maximum: 3600
+          fit:
+            type: string
+            enum:
+            - contain
+            - cover
+          z:
+            type: number
+            minimum: -50
+            maximum: 50
+          visibleAt:
+            type: number
+            minimum: 0
+            maximum: 1500
+          hideAt:
+            type: number
+            minimum: 0
+            maximum: 1500
+          frame:
+            type: boolean
+        required:
+        - id
+        - kind
+        - rect
+      minItems: 1
+      maxItems: 24
+    camera:
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          at:
+            type: number
+            minimum: 0
+            maximum: 1500
+          center: &id006
+            type: object
+            additionalProperties: false
+            properties:
+              x:
+                type: number
+                minimum: -16
+                maximum: 16
+              y:
+                type: number
+                minimum: -16
+                maximum: 16
+            required:
+            - x
+            - y
+          target: *id005
+          zoom:
+            type: number
+            minimum: 0.2
+            maximum: 4
+          mode:
+            type: string
+            enum:
+            - move
+            - follow
+            - cut
+            - hold
+          duration:
+            type: number
+            minimum: 0
+            maximum: 1500
+          lead: *id006
+        required:
+        - at
+      minItems: 1
+      maxItems: 64
+    actor:
+      type: object
+      additionalProperties: false
+      properties:
+        space:
+          type: string
+          enum:
+          - world
+          - screen
+        start: *id006
+        size:
+          type: number
+          minimum: 0.03
+          maximum: 0.65
+        anchors:
+          type: object
+          propertyNames: *id005
+          additionalProperties:
+            oneOf:
+            - *id006
+            - type: object
+              additionalProperties: false
+              properties:
+                panel: *id005
+                u:
+                  type: number
+                  minimum: -1
+                  maximum: 2
+                v:
+                  type: number
+                  minimum: -1
+                  maximum: 2
+              required:
+              - panel
+              - u
+              - v
+          maxProperties: 32
+        cues:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              at:
+                type: number
+                minimum: 0
+                maximum: 1500
+              duration:
+                type: number
+                minimum: 0.001
+                maximum: 1500
+              action:
+                type: string
+                enum:
+                - run
+                - wave
+                - idle
+                - settle
+                - depart
+                - present
+                - jump
+                - peek
+                - hide
+              to:
+                oneOf:
+                - *id005
+                - *id006
+              size:
+                type: number
+                minimum: 0.03
+                maximum: 0.65
+              rate:
+                type: number
+                minimum: 0.25
+                maximum: 3
+              facing:
+                type: string
+                enum:
+                - left
+                - right
+              depth:
+                type: string
+                enum:
+                - front
+                - behind
+              behind: *id005
+            required:
+            - at
+            - action
+          minItems: 1
+          maxItems: 64
+      required:
+      - start
+      - cues
+    mediaBindings:
+      type: object
+      propertyNames: *id005
+      additionalProperties:
+        type: string
+        minLength: 1
+        maxLength: 256
+      maxProperties: 48
+    background:
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    foreground:
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    accent:
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+    frameColor:
+      type: string
+      pattern: ^#[0-9a-fA-F]{6}$
+  required:
+  - world
+  - panels
+  - camera
+runtime:
+  adapter: remotion
+dependencies: {}
+assets:
+  mink-run: assets/run.png
+  mink-idle: assets/idle.png
+  mink-wave: assets/wave.png
+  mink-settle: assets/settle.png

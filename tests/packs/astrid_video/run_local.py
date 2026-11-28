@@ -11,8 +11,8 @@ with tempfile.TemporaryDirectory(prefix="astrid-video-") as tmp:
     for name in ("preview","tools","integration"):
         shutil.copytree(HERE/name,root/name)
     def run(*argv): subprocess.run(argv,cwd=root,check=True)
-    run("tsc","--target","es2020","--module","commonjs","--strict","--rootDir","astrid_video","--outDir","preview","astrid_video/shared/timeline/model.ts","astrid_video/shared/activity/model.ts","astrid_video/shared/mink/model.ts","astrid_video/shared/media.ts","astrid_video/shared/composition/engine.ts","astrid_video/extensions/recipes.ts","astrid_video/shared/deck/living-motion.ts","astrid_video/shared/visuals.ts","astrid_video/rendering/elements/effects/pixel-arm-display/preset.ts")
-    for name in ("motion","living","composition","timeline","activity"):
+    run("tsc","--target","es2020","--module","commonjs","--strict","--rootDir","astrid_video","--outDir","preview","astrid_video/shared/composition/handoff.ts","astrid_video/shared/sequence/model.ts","astrid_video/shared/timeline/model.ts","astrid_video/shared/activity/model.ts","astrid_video/shared/mink/model.ts","astrid_video/shared/media.ts","astrid_video/shared/composition/engine.ts","astrid_video/extensions/recipes.ts","astrid_video/shared/deck/living-motion.ts","astrid_video/shared/visuals.ts","astrid_video/rendering/elements/effects/pixel-arm-display/preset.ts")
+    for name in ("motion","living","composition","timeline","activity","revision","sequence","link","handoff"):
         run("node",f"preview/test-{name}.cjs")
     run("python","preview/validate_pack.py")
     run("node","preview/check-source.cjs")

@@ -25,6 +25,7 @@ class Assets(unittest.TestCase):
     self.assertEqual(f.crop(box).tobytes(),idle.crop(box).tobytes())
    self.assertEqual(f.getpixel((61,51)),(255,122,46,255))
    self.assertEqual(f.getbbox()[3],80)
+   for xy in ((52,19),(53,19),(54,19),(55,19),(56,20)):self.assertEqual(f.getpixel(xy),(21,19,17,255))
   for i in (3,4,5,6):
    self.assertTrue(poses[i].crop((32,29,44,43)).getbbox(),'Raised near paw is visible')
   self.assertGreater(len({f.tobytes() for f in poses}),4)

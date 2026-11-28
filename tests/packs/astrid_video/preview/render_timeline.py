@@ -37,12 +37,12 @@ def shorten(d,text,face,limit):
  return text+'…' if text else ''
 def draw_block(im,b):
  x,y,bw,bh=(b['box'][v] for v in ('x','y','width','height'));p=b['p'];strip=p>.8;placed=p==1
- card=Image.new('RGB',(bw,bh),b['color']);d=ImageDraw.Draw(card);dp=max(0,min(1,(p-.78)/.22));dock=dp*dp*(3-2*dp);thumb=bw+(min(bw*.4,bh*1.65)-bw)*dock;thumb=max(1,round(thumb));ih=max(1,round(bh-20*k*(1-dock)))
+ card=Image.new('RGB',(bw,bh),b['color']);d=ImageDraw.Draw(card);dp=max(0,min(1,(p-.78)/.22));dock=dp*dp*(3-2*dp);thumb=bw+(min(bw*.4,bh*1.65)-bw)*dock;thumb=max(1,round(thumb));ih=max(1,round(bh-20*k*(1-dock)*(min(1,p*4) if b.get('entry') else 1)))
  if b['kind']!='label':card.paste(source_image(b['asset'],b['kind'],b['sourceFrame'],thumb,ih,'contain'),(0,0))
  start=round(thumb+5*k) if strip and b['kind']!='label' else round(6*k);face=ft(12,'bold');baseline=bh/2-face.size*.56 if strip else bh-face.size-3*k
  title=shorten(d,b['label'],face,bw-start-4*k)
- if title:d.text((start,max(0,baseline)),title,font=face,fill='#25241F')
- d.rectangle((0,0,bw-1,bh-1),outline=s['accent'] if b['active'] else s['border'],width=2 if b['active'] else 1)
+ if title and (not b.get('entry') or p>=.25):d.text((start,max(0,baseline)),title,font=face,fill='#25241F')
+ d.rectangle((0,0,bw-1,bh-1),outline=s['accent'] if b['active'] else (s['frameColor'] if b.get('entry') and p==0 else s['border']),width=2 if b['active'] else 1)
  im.paste(card,(x,y))
 def draw(f,visible_ids=None):
  im=Image.new('RGB',(w,h),s['background']);d=ImageDraw.Draw(im);margin=c['margin'];titleY=c['titleY'];sysfont=ft(11,'mono');small=ft(14);titlefont=font(min(35*k,w*.065),'serif')
@@ -66,14 +66,20 @@ def draw(f,visible_ids=None):
   tx=t['x'];line(d,[(tx,timeline['y']),(tx,timeline['y']+timeline['height'])],s['border']);
   if c['showTimecodes']:
    label=f"{t['at']:g}s";tx=min(tx+4*k,c['x1']-6*k-d.textlength(label,font=sysfont));d.text((tx,timeline['y']+4*k),label,font=sysfont,fill=s['muted'])
+ if f.get('chromeOpacity',1)<1:im=Image.blend(Image.new('RGB',(w,h),s['background']),im,f['chromeOpacity']);d=ImageDraw.Draw(im)
  for cell in f['cells']:d.rectangle(box(cell),fill={'body':s['accent'],'shadow':s['accentText'],'light':'#FFBE79'}[cell['tone']])
  for b in f['blocks']:
-  if visible_ids is None or b['id'] in visible_ids:draw_block(im,b)
+  if visible_ids is None or b['id'] in visible_ids:
+   if b.get('entry') or f.get('chromeOpacity',1)==1:draw_block(im,b)
+   elif f['chromeOpacity']>0:
+    layer=im.copy();draw_block(layer,b);im=Image.blend(im,layer,f['chromeOpacity'])
  d=ImageDraw.Draw(im)
  if f['playing']:
   x=f['playhead'];line(d,[(x,timeline['y']),(x,timeline['y']+timeline['height'])],s['accent'],1.7*k);d.polygon([(x-4*k,timeline['y']-4*k),(x+4*k,timeline['y']-4*k),(x,timeline['y']+2*k)],fill=s['accent'])
  return im
 def main():
+ global A
+ if len(sys.argv)>6:A=Path(sys.argv[6]).resolve()
  source=Path(sys.argv[1]);output=Path(sys.argv[2]);width,height,rate=map(int,sys.argv[3:6]) if len(sys.argv)>3 else (1280,720,24)
  proc=subprocess.Popen(['node',str(P/'timeline-plan.cjs'),str(source),str(width),str(height),str(rate)],stdout=subprocess.PIPE,text=True);configure(json.loads(proc.stdout.readline()),rate)
  enc=subprocess.Popen(['ffmpeg','-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{w}x{h}','-r',str(fps),'-i','-','-an','-c:v','libx264','-crf','18','-preset','fast','-threads','2','-pix_fmt','yuv420p','-movflags','+faststart',str(output)],stdin=subprocess.PIPE)

@@ -62,6 +62,11 @@ def main():
     # Three stepped settling poses: original run endpoint, compressed sit, planted sit.
     compact=idle.crop(idle.getbbox());low=compact.resize((round(compact.width*1.22),round(compact.height*.72)),Image.Resampling.NEAREST)
     mid=normalize(low);settle=[runner[-1],mid,idle]
+    # v0.15 hand-retouched crown contour, identical across all upright poses.
+    crown=[(52,19),(53,19),(54,19),(55,19),(56,20)]
+    for frame in [idle,*raised]:
+        for xy in crown: frame.putpixel(xy,INK)
+    for xy in [(44,40),(45,40),(50,37),(51,37),(54,36),(55,36),(56,36),(57,36),(58,36),(59,37)]:mid.putpixel(xy,INK)
     files={'run':runner,'idle':[idle],'wave':waving,'settle':settle}
     for name,frames in files.items():sheet(name,frames)
     manifest={'cellWidth':W,'cellHeight':H,'anchorX':48,'anchorY':80,'clips':{n:{'frames':len(f),'frameMs':70 if n=='run' else 100 if n=='wave' else 90 if n=='settle' else 1000,'loop':n in ('run','idle','wave')} for n,f in files.items()}}

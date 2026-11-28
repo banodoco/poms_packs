@@ -15,13 +15,14 @@ Use a skill waterfall: decide the creative job first, then choose a composition,
 
 - Directing a video or revising a sequence: [Directing Astrid videos](skills/directing-astrid-videos/SKILL.md).
 - Authoring timed destinations with existing layouts, behaviours and accents: [Choreographing Astrid compositions](skills/choreographing-astrid-compositions/SKILL.md).
+- Linking related beats through camera and performer continuity: [Choreographing continuous sequences](skills/choreographing-continuous-sequences/SKILL.md).
 - Showing real agent activity and its evolving outputs: [Showing agent work](skills/showing-agent-work/SKILL.md).
 - Adding a purposeful mascot appearance: [Performing with Astrid’s mink](skills/performing-with-astrid-mink/SKILL.md).
 - A missing mascot gesture, after checking existing cues: [Creating mink animations](skills/creating-mink-animations/SKILL.md).
 - Building or refining a reusable effect: [Designing Astrid effects](skills/designing-astrid-effects/SKILL.md).
 - Reviewing a rough cut, effect or finished edit: [Reviewing Astrid videos](skills/reviewing-astrid-videos/SKILL.md).
 
-Use [composition recipes](references/composition-recipes.md) to pick layouts and the [effect catalogue](references/effect-catalogue.md) for actual parameters and admission. Prefer composing existing elements over writing another effect. Read the [mink reference](references/mink-character.md) before any mascot use. This pack currently declares `pixel-card-shuffle`, `pixel-arm-display`, `chapter-card`, `pixel-network`, `living-composition`, `timeline-assembly`, and `timeline-player-visualizer`, `mink-performer`, and `agent-at-work`; other recipes are design targets, not installed effects.
+Use [composition recipes](references/composition-recipes.md) to pick layouts and the [effect catalogue](references/effect-catalogue.md) for actual parameters and admission. Prefer composing existing elements over writing another effect. Read the [mink reference](references/mink-character.md) before any mascot use. This pack currently declares `pixel-card-shuffle`, `pixel-arm-display`, `chapter-card`, `pixel-network`, `living-composition`, `timeline-assembly`, and `timeline-player-visualizer`, `mink-performer`, `agent-at-work`, and `continuous-sequence`; other recipes are design targets, not installed effects.
 
 For an edit explanation, choose [timeline assembly or player visualization](references/timeline-visualizers.md): moving source cards settle into their true time ranges, or synchronized actual video outputs play above their component tracks.
 

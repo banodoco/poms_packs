@@ -85,7 +85,7 @@ export function framePlan(c:Compiled,frame:number):FramePlan{
   }
  }
  if(rootStrength>0)nest(back,root,frame,fps,rootStrength,c.input.defaults?.seed??17,m.organismFlow);
- for(const a of c.accents){if(frame<a.start||frame>=a.end)continue;const target=positions.get(a.target),to=a.to?positions.get(a.to):undefined;if(!target||(a.to&&!to))continue;ACCENTS[a.effect]({tissue:overlay,target,to,progress:(frame-a.start)/Math.max(1,a.end-a.start-1),frame,fps,seed:(c.input.defaults?.seed??17)^a.start,intensity:a.intensity??1});}
+ for(const a of c.accents){if(frame<a.start||frame>=a.end)continue;const target=positions.get(a.target),to=a.to?positions.get(a.to):undefined;if(!target||(a.to&&!to))continue;ACCENTS[a.effect]({tissue:overlay,target,to,progress:(frame-a.start)/Math.max(1,a.end-a.start-1),frame,fps,seed:(c.input.defaults?.seed??17)^a.start,intensity:a.intensity??1,route:a.route});}
  layers.sort((a,b)=>a.z-b.z);
  // Cull only pixels fully obscured by opaque revealed content; the organism is built first.
  const cols=Math.ceil(w/tile),rows=Math.ceil(h/tile),hidden=new Uint8Array(cols*rows);

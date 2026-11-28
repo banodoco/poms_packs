@@ -10,7 +10,7 @@ from pathlib import Path
 
 SOURCE=Path(__file__).resolve().parents[1]/'astrid_video'
 PACK='astrid_video'
-EFFECTS={'chapter-card','pixel-network','pixel-card-shuffle','pixel-arm-display','living-composition','timeline-assembly','timeline-player-visualizer','mink-performer','agent-at-work'}
+EFFECTS={'chapter-card','pixel-network','pixel-card-shuffle','pixel-arm-display','living-composition','timeline-assembly','timeline-player-visualizer','mink-performer','agent-at-work', 'continuous-sequence'}
 
 def run_json(argv):
     result=subprocess.run(argv,check=False,capture_output=True,text=True)

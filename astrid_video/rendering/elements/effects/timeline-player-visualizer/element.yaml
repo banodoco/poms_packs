@@ -17,7 +17,7 @@ metadata:
     tracks, with a shared source clock and active clip highlights.
   geometry:
     full_frame: true
-  sourceClosureSha256: sha256:b4b7963fa0f45152713fd6178256f2ce4f4147ed4ca3c6b2e65bd15bf50b9e0b
+  sourceClosureSha256: sha256:2ae6d4db176665ff3125162f981e4774a18749b23160e99ec7421f748bee35b4
 defaults:
   theme: day
   title: Inside the edit.
@@ -147,6 +147,33 @@ schema:
             minimum: 0
             maximum: 120
           color: *id003
+          initiallyDocked:
+            type: boolean
+          entryRect:
+            type: object
+            additionalProperties: false
+            required:
+            - x
+            - y
+            - width
+            - height
+            properties:
+              x:
+                type: number
+                minimum: 0
+                maximum: 1
+              y:
+                type: number
+                minimum: 0
+                maximum: 1
+              width:
+                type: number
+                minimum: 0
+                maximum: 1
+              height:
+                type: number
+                minimum: 0
+                maximum: 1
         required:
         - id
         - track
@@ -227,6 +254,10 @@ schema:
     accent: *id003
     frameColor: *id003
     background: *id003
+    entryChromeSeconds:
+      type: number
+      minimum: 0
+      maximum: 3
   required:
   - timelineDuration
   - tracks

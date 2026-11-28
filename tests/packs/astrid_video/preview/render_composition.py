@@ -6,6 +6,7 @@ import cv2, numpy as np, yaml
 from PIL import Image, ImageDraw, ImageFont
 R=Path(__file__).resolve().parents[1];PRE=R/'preview';AS=R/'astrid_video/rendering/elements/effects/living-composition/assets'
 file=Path(sys.argv[1]);output=Path(sys.argv[2]);w,h,fps=(map(int,sys.argv[3:6]) if len(sys.argv)>=6 else (960,540,24));cv2.setNumThreads(1)
+AS=Path(sys.argv[6]).resolve() if len(sys.argv)>6 else AS
 ex=yaml.safe_load(file.read_text());output.parent.mkdir(parents=True,exist_ok=True)
 with tempfile.NamedTemporaryFile(suffix='.json',mode='w',delete=False) as tmp:
  json.dump(ex,tmp);tmpfile=tmp.name

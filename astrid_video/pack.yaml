@@ -1,7 +1,7 @@
 schema_version: 3
 id: astrid_video
 name: Astrid Video
-version: 0.14.0
+version: 0.18.0
 status: active
 domain: media
 stability: experimental
@@ -119,6 +119,20 @@ rendering:
       path: rendering/elements/effects/agent-at-work/assets/wave.png
     - kind: asset
       path: rendering/elements/effects/agent-at-work/assets/settle.png
+  effects/continuous-sequence:
+    type: element
+    path: rendering/elements/effects/continuous-sequence/element.yaml
+    resources:
+    - kind: implementation
+      path: rendering/elements/effects/continuous-sequence/component.tsx
+    - kind: asset
+      path: rendering/elements/effects/continuous-sequence/assets/run.png
+    - kind: asset
+      path: rendering/elements/effects/continuous-sequence/assets/idle.png
+    - kind: asset
+      path: rendering/elements/effects/continuous-sequence/assets/wave.png
+    - kind: asset
+      path: rendering/elements/effects/continuous-sequence/assets/settle.png
 resources:
 - kind: shared
   path: shared/style.ts
@@ -174,6 +188,8 @@ resources:
   path: extensions/behaviours.ts
 - kind: shared
   path: extensions/recipes.ts
+- kind: implementation
+  path: shared/composition/handoff.ts
 - kind: shared
   path: extensions/layouts.ts
 - kind: reference
@@ -242,3 +258,13 @@ resources:
   path: docs/skills/creating-mink-animations/SKILL.md
 - kind: skill
   path: docs/skills/showing-agent-work/SKILL.md
+- kind: shared
+  path: shared/sequence/model.ts
+- kind: shared
+  path: shared/sequence/view.tsx
+- kind: reference
+  path: docs/references/continuous-sequence.md
+- kind: reference
+  path: docs/references/example-continuous-sequence.json
+- kind: skill
+  path: docs/skills/choreographing-continuous-sequences/SKILL.md

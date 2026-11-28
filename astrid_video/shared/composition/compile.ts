@@ -51,7 +51,7 @@ export function compile(input:Composition,fps:number,width:number,height:number,
   const start=Math.max(0,at-length);
   if(prev&&start<prev.at)throw Error(`Transition to pose ${i+1} overlaps preceding arrival; shorten duration or move arrival`);
   const behaviour=p.behaviour??input.defaults?.behaviour??'carry';if(!known(BEHAVIOURS,behaviour))throw Error(`Unknown behaviour ${behaviour}`);
-  if(!Array.isArray(p.items)||p.items.length>12)throw Error('Pose supports 0..12 items');
+  if(!Array.isArray(p.items)||p.items.length>20)throw Error('Pose supports 0..20 items');
   const placements:Placement[]=p.items.map(v=>typeof v==='string'?{id:v}:v);
   if(new Set(placements.map(x=>x.id)).size!==placements.length)throw Error(`Duplicate item identity in pose ${i+1}`);
   const data=placements.map(x=>{if(!known(input.items,x.id)||!known(input.items,x.media??x.id))throw Error(`Unknown item/media ${x.id}/${x.media??x.id}`);return {id:x.id,aspect:input.items[x.media??x.id].aspect??(input.items[x.media??x.id].kind==='text'?1.55:16/9)};});
@@ -67,6 +67,6 @@ export function compile(input:Composition,fps:number,width:number,height:number,
   if(prev&&transition==='rearrange'&&items.some(x=>!prev.items.some(v=>v.id===x.id)))warnings.push(`Pose ${i+1}: rearrange includes new objects; entrances inferred`);
   poses.push({at,start,name:p.name??`Pose ${i+1}`,items,behaviour,motion,transition,index:i});
  }
- const accents=(input.accents??[]).map(a=>{if(!known(ACCENTS,a.effect)||!known(input.items,a.target)||(a.to!==undefined&&!known(input.items,a.to))||(a.effect==='pixel-connect'&&!a.to))throw Error(`Invalid accent ${a.effect}/${a.target}`);const start=Math.round(finite(a.at,0,(frames-1)/fps,'accent time')*fps),end=start+Math.max(1,Math.round(finite(a.duration??.65,.04,5,'accent duration')*fps));if(end>frames)throw Error('Accent extends past composition');finite(a.intensity??1,0,1,'accent intensity');return {...a,start,end};});
+ const accents=(input.accents??[]).map(a=>{if(!known(ACCENTS,a.effect)||!known(input.items,a.target)||(a.to!==undefined&&!known(input.items,a.to))||(['pixel-connect','pixel-link'].includes(a.effect)&&!a.to))throw Error(`Invalid accent ${a.effect}/${a.target}`);const start=Math.round(finite(a.at,0,(frames-1)/fps,'accent time')*fps),end=start+Math.max(1,Math.round(finite(a.duration??.65,.04,a.effect==='pixel-link'?30:5,'accent duration')*fps));if(end>frames)throw Error('Accent extends past composition');finite(a.intensity??1,0,1,'accent intensity');if(a.route!==undefined){if(a.effect!=='pixel-link'||!a.route||Object.keys(a.route).length!==1)throw Error('Invalid link route');finite(a.route.bend,.05,.95,'link bend');}return {...a,start,end};});
  return {input,fps,width,height,frames,poses,accents,warnings};
 }

@@ -7,7 +7,7 @@ export type Motion={transitionDuration?:number;transitionSpeed?:number;restJitte
 export type Item={kind:'image'|'video'|'text';asset?:string;text?:string;subtitle?:string;fit?:'cover'|'contain';sourceStart?:number;sourceEnd?:number;aspect?:number;scale?:number};
 export type Placement={id:string;media?:string;rect?:Rect;scale?:number};
 export type Pose={at:number;name?:string;layout:string;items:(string|Placement)[];behaviour?:string;scale?:number;transition?:string|{type?:string;duration?:number;speed?:number;stagger?:number;direction?:Motion['direction'];edgeReveal?:boolean};motion?:Motion};
-export type Accent={at:number;duration?:number;effect:string;target:string;to?:string;intensity?:number};
+export type Accent={at:number;duration?:number;effect:string;target:string;to?:string;intensity?:number;route?:{bend:number}};
 export type Composition=ColorSettings&MediaSettings&Motion&{version:1;items:Record<string,Item>;behaviour?:string;defaults?:Motion&{behaviour?:string};safeArea?:Rect;poses:Pose[];accents?:Accent[]};
 export type LayoutContext={items:{id:string;aspect:number}[];area:Rect;canvasAspect:number};
 export type LayoutFn=(ctx:LayoutContext)=>Rect[];
@@ -18,5 +18,5 @@ export type Layer={id:string;key:string;content:Item;box:Bounds;sourceFrame:numb
 export type FramePlan={frame:number;layers:Layer[];back:Cell[];overlay:Cell[];palette:ReturnType<typeof resolveStyle>;tile:number};
 export type BehaviourContext={tissue:Tissue;box:Bounds;root:Point;frame:number;fps:number;seed:number;idSeed:number;effort:number;strength:number;movement:Point;growth:number;flow:number;spread:number};
 export type Behaviour={draw:(c:BehaviourContext)=>void;root?:boolean};
-export type AccentContext={tissue:Tissue;target:Bounds;to?:Bounds;progress:number;frame:number;fps:number;seed:number;intensity:number};
+export type AccentContext={tissue:Tissue;target:Bounds;to?:Bounds;progress:number;frame:number;fps:number;seed:number;intensity:number;route?:{bend:number}};
 export type AccentFn=(c:AccentContext)=>void;

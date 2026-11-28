@@ -1,29 +1,25 @@
-PASS: 1–65 cards, weighted scheduling, short holds, 4 aspect ratios, monotonic tile reveal, 5 directions, per-transition direction override, seeded geometry, complete endpoints.
-PASS: per-transition timing/style precedence, four distinct textures, straight edge at zero, seed variation, monotonic masks at maximum randomness, deterministic responsive companion geometry.
-PASS: shared day/night tokens, explicit override and editorial type across all three effects.
+PASS: deterministic sprite clocks at 24/30/60, anchor continuity, settle/wave and final idle, event reveal ordering, bounded status and source clocks, reused timeline frames and continuous expanded viewport, card mode and invalid inputs.
+PASS: three authored compositions; 1→3→3→5→1; exact destinations, retained IDs/seeds/source clocks, same-carrier masks, timing/scale controls, zero jitter and flow, square tissue, strict input errors, recipe and multi-aspect layout checks.
+PASS: process stages, routed links, exact outgoing/incoming geometry and asset identity, docking and retained rough edit, deterministic seek, fail-closed mismatch and invalid route.
+PASS: persistent pixel link, exact horizontal grid, holds and follows moved geometry, stops at boundary, deterministic seek, missing destination and legacy duration guard.
 PASS: living layouts, exact end states, all directions, variable count, deterministic seek, square clipped organism cells, zero intensity, one-frame holds, held source time and short stagger.
 PASS: complete dense body, populated interior quadrants, apron on all four sides, deterministic internal swimming and pause, hidden-cell culling.
 PASS: mask-free transport from/to all four edges, exact departure continuity, shared arm preset with 1/3/5/8 loads, bounded deterministic rest jitter, zero-jitter lock and exact final placement.
-PASS: three authored compositions; 1→3→3→5→1; exact destinations, retained IDs/seeds/source clocks, same-carrier masks, timing/scale controls, zero jitter and flow, square tissue, strict input errors, recipe and multi-aspect layout checks.
+PASS: 1–65 cards, weighted scheduling, short holds, 4 aspect ratios, monotonic tile reveal, 5 directions, per-transition direction override, seeded geometry, complete endpoints.
+PASS: per-transition timing/style precedence, four distinct textures, straight edge at zero, seed variation, monotonic masks at maximum randomness, deterministic responsive companion geometry.
+PASS: shared day/night tokens, explicit override and editorial type across all three effects.
+PASS: initially docked rough edit retained; new cards dock; targeted move, trim and replacement preserve other clips, deterministic seek, paused playback and rejected invalid revisions.
+PASS: no-performer pan, zoom, hold, hard cut, random seek
+PASS: actor anchor, follow endpoint, separate clocks, source freeze, screen actor, timed footstep suggestions and invalid input refusal
 PASS: real six-clip assembly; exact docking, source windows, deterministic swarm and square cells, independent motion/play speed, dual synchronized player clocks, active tracks, 1/3/8 tracks, three players, three aspect ratios, invalid inputs refused.
-PASS: deterministic sprite clocks at 24/30/60, anchor continuity, settle/wave and final idle, event reveal ordering, bounded status and source clocks, reused timeline frames and continuous expanded viewport, card mode and invalid inputs.
-PASS: 9 effect descriptors, 7 supporting skills, defaults, theme settings, example parameters, resource paths and import closure.
+PASS: 10 effect descriptors, 8 supporting skills, defaults, theme settings, example parameters, resource paths and import closure.
 PASS: TS/TSX syntactic transpilation; not dependency-aware compilation.
-pixel-card-shuffle sha256:1e628ecbe485a0e2e0fd9712583326f4db63df161cc0469d37f226cacc5de8f3 7 sources
-chapter-card sha256:84b7a2ef5af5c5e75d36a36ced09bfa9483630cd78fcb72067cbedd7af9379b3 4 sources
-pixel-network sha256:3d9528b3a34afc20c6cb10f03d549e140a9fcce380448e0b4a8f5678e4457bed 4 sources
-pixel-arm-display sha256:9aca6879180cf17021026226d8e2068d19fcfec078beb8eba5db38ad1abd0364 8 sources
-living-composition sha256:9b4c26f14df94caf9d8b356c392438a19a197917675502efe8d41b35a6442583 12 sources
-timeline-assembly sha256:d7b6f776e038417c8b35eec51ad12310abef2cd1d987a0dc8cb39ec43e028201 6 sources
-timeline-player-visualizer sha256:b4b7963fa0f45152713fd6178256f2ce4f4147ed4ca3c6b2e65bd15bf50b9e0b 6 sources
-mink-performer sha256:947056d93050ee5f64d263d2386436ae3ac2c045b8ab2f6517e76f38b45285cd 6 sources
-agent-at-work sha256:fc251ac0d066175b9415c176fbaeac1ef098567987e823e7e73225e757488bf5 10 sources
 test_exact_source_and_frame_alignment (__main__.Assets.test_exact_source_and_frame_alignment) ... ok
 test_regular_grid_and_refusals (__main__.Assets.test_regular_grid_and_refusals) ... ok
 test_wave_retains_both_forepaws_and_fixed_body (__main__.Assets.test_wave_retains_both_forepaws_and_fixed_body) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.020s
+Ran 3 tests in 0.030s
 
 OK
 test_actual_shared_import_revises_dependent_element (__main__.SourceTests.test_actual_shared_import_revises_dependent_element) ... ok
@@ -34,15 +30,16 @@ test_rejected_validation_preserves_old_source (__main__.SourceTests.test_rejecte
 test_shared_import_changes_fingerprint (__main__.SourceTests.test_shared_import_changes_fingerprint) ... ok
 
 ----------------------------------------------------------------------
-Ran 6 tests in 1.884s
+Ran 6 tests in 1.737s
 
 OK
-.
-----------------------------------------------------------------------
-Ran 1 test in 0.988s
-
-OK
-PASS: Python worker/browser TypeScript projection parity across 11 positive/negative fixtures
-
-Rendered 168 frames (mink) and 408 frames (Agent at Work) at 1280×720 / 24 fps via standalone raster preview of the pure TypeScript model. Inspected the wave contact sheet and performer storyboard.
-Scope: no native Remotion dependency build, Astrid admission, editor or export test. No claim of creator approval. Corrected sprite is a hand-refined candidate; generated infographic not used.
+pixel-card-shuffle sha256:1e628ecbe485a0e2e0fd9712583326f4db63df161cc0469d37f226cacc5de8f3 7 sources
+chapter-card sha256:84b7a2ef5af5c5e75d36a36ced09bfa9483630cd78fcb72067cbedd7af9379b3 4 sources
+pixel-network sha256:3d9528b3a34afc20c6cb10f03d549e140a9fcce380448e0b4a8f5678e4457bed 4 sources
+pixel-arm-display sha256:9aca6879180cf17021026226d8e2068d19fcfec078beb8eba5db38ad1abd0364 8 sources
+living-composition sha256:ab1f8cb772d1709c318b9fb7537e1754e6e6d02d142c6d3bd70a840d5f31f2be 12 sources
+timeline-assembly sha256:6413e726ed62afc578d2082ac736df640c5d33d1963181b016c415d6b2cb18d6 6 sources
+timeline-player-visualizer sha256:2ae6d4db176665ff3125162f981e4774a18749b23160e99ec7421f748bee35b4 6 sources
+mink-performer sha256:947056d93050ee5f64d263d2386436ae3ac2c045b8ab2f6517e76f38b45285cd 6 sources
+agent-at-work sha256:f5b16e8b0d32003c6d58f112cb785364e8327d74479a510375c74fbb1d5b55ca 10 sources
+continuous-sequence sha256:25b50a3a5fa8f421e61bbf897cade90d3d59403cc386be63ca7844cd66bae4cf 8 sources

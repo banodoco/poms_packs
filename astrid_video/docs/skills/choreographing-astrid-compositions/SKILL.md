@@ -29,3 +29,5 @@ When the creative intent is to explain the ingredients of an actual edit, choose
 ## Combine existing primitives
 
 For an agent activity-to-timeline handoff use [showing agent work](../showing-agent-work/SKILL.md), which already reuses the timeline engine. For a mascot layer use [performing with the mink](../performing-with-astrid-mink/SKILL.md). Place ordinary outputs and overlays on the same authoritative timeline; preserve identities and source clocks at handoffs. No new effect is needed when these are sufficient.
+
+For input → workflow → result sequences use `processStages` and `pixel-link.route` from the [composition contract](../../references/composition-contract.md). Retain each real output ID, clear intermediate cards and use `handoffToTimeline` to carry the final image bounds into the [timeline visualizer](../../references/timeline-visualizers.md). Preserve real media bindings and initially docked tracks; do not fabricate graph or execution evidence.

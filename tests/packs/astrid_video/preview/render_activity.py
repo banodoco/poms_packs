@@ -4,7 +4,7 @@ import json,subprocess,sys,math
 from PIL import Image,ImageDraw,ImageOps
 import render_timeline as tl
 P=Path(__file__).resolve().parent;ROOT=P.parent;A=ROOT/'astrid_video/rendering/elements/effects/mink-performer/assets'
-source=Path(sys.argv[1]);output=Path(sys.argv[2]);w,h,fps=map(int,sys.argv[3:6]) if len(sys.argv)>3 else (1280,720,24);mink_only='mink' in source.stem and 'agent' not in source.stem
+source=Path(sys.argv[1]);output=Path(sys.argv[2]);w,h,fps=map(int,sys.argv[3:6]) if len(sys.argv)>3 else (1280,720,24);tl.A=Path(sys.argv[6]).resolve() if len(sys.argv)>6 else tl.A;mink_only='mink' in source.stem and 'agent' not in source.stem
 p=subprocess.Popen(['node',str(P/'activity-plan.cjs'),str(source),str(w),str(h),str(fps),'mink' if mink_only else 'activity'],stdout=subprocess.PIPE,text=True);c=json.loads(p.stdout.readline());k=min(w/1280,h/720);style=c.get('style',{'background':'#F7F4ED','foreground':'#25241F','panel':'#FFFEFA','muted':'#615E55','border':'#D5D0C5','accent':'#ED6B23','accentText':'#A94714'});sheet={n:Image.open(A/(n+'.png')).convert('RGBA') for n in ['run','wave','idle','settle']}
 if c.get('timeline'):tl.configure(c['timeline'],fps)
 else:tl.fps=fps;tl.s=style
